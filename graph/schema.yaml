@@ -1,0 +1,97 @@
+# CONTRACT 0 - the fixed graph schema (Document 2, section 8.4).
+# The curator agent fills the graph but cannot add new node labels or relationship types:
+# graph/store.py refuses anything that is not listed here.
+#
+# Every node and relationship also gets, automatically:
+#   source      where the fact came from (CMR, file header, DOI, seed.yaml, engine run...)
+#   created_by  curator | code | investigator | human
+#   status      verified | from_paper | hypothesis
+#   confidence  0..1
+#   created_at  UTC timestamp
+
+nodes:
+  # ---------------- Layer A: knowledge
+  Mission:
+    id_prefix: "mission:"
+    required: [name]
+    description: A satellite mission or a model (e.g. Terra, GPM, MERRA-2, GLDAS).
+  Instrument:
+    id_prefix: "instrument:"
+    required: [name]
+    description: An instrument carried by a mission (e.g. MODIS).
+  Dataset:
+    id_prefix: "dataset:"
+    required: [short_name, version, title, cmr_concept_id, provider, time_start]
+    description: A NASA collection, exactly as registered in CMR.
+  Variable:
+    id_prefix: "var:"
+    required: [code_id, display_name, definition_for_students, name_in_file, unit_native,
+               unit_target, conversion, kind]
+    description: One measured quantity inside a dataset, with its recipe.
+  Concept:
+    id_prefix: "concept:"
+    required: [name, synonyms]
+    description: An everyday idea a student might ask about (drought, surface heating...).
+  Region:
+    id_prefix: "region:"
+    required: [code_id, name, bbox, n_land_cells]
+    description: Our study region or one of its sub-regions (a box of 1-degree cells).
+  Method:
+    id_prefix: "method:"
+    required: [name, order, stage, description]
+    description: One step of the investigation strategy (from strategy.yaml).
+  ChartStyle:
+    id_prefix: "chart:"
+    required: [chart_type, colormap, label_template]
+    description: How a result must be drawn (from strategy.yaml).
+  Paper:
+    id_prefix: "paper:"
+    required: [doi, title, year, abstract, read_by]
+    description: A publication a team member has read.
+  HypothesisPattern:
+    id_prefix: "pattern:"
+    required: [name, description, cypher]
+    description: A rule that turns evidence + literature into a candidate hypothesis.
+  # ---------------- Layer B: evidence (written by code, never typed by the LLM)
+  Analysis:
+    id_prefix: "analysis:"
+    required: [run_id, region, period, methods]
+    description: One run of the statistics engine.
+  Finding:
+    id_prefix: "finding:"
+    required: [kind, region, period, summary]
+    description: A significant result (trend or cluster) with full provenance.
+  Hypothesis:
+    id_prefix: "hypothesis:"
+    required: [text, pattern]
+    description: An unproven idea proposed by the investigator. Always status=hypothesis.
+  Investigation:
+    id_prefix: "investigation:"
+    required: [question, region, period]
+    description: One user question and what was done to answer it.
+
+relationships:
+  CARRIES:        {from: [Mission], to: [Instrument]}
+  PROVIDES:       {from: [Mission, Instrument], to: [Dataset]}
+  HAS_VARIABLE:   {from: [Dataset], to: [Variable]}
+  IN_DATASET:     {from: [Variable], to: [Dataset]}
+  INDICATOR_OF:   {from: [Variable], to: [Concept], required: [reason]}
+  INFLUENCES:     {from: [Variable], to: [Variable], required: [sign, paper_id, quote]}
+  SUPPORTED_BY:   {from: [Variable], to: [Paper], required: [about]}
+  PART_OF:        {from: [Region], to: [Region]}
+  NEXT:           {from: [Method], to: [Method]}
+  DRAWN_AS:       {from: [Variable], to: [ChartStyle]}
+  ABOUT:          {from: [Finding, Hypothesis], to: [Variable]}
+  IN_REGION:      {from: [Finding, Investigation, Analysis], to: [Region]}
+  FROM_ANALYSIS:  {from: [Finding], to: [Analysis]}
+  OPPOSITE_OF:    {from: [Finding], to: [Finding]}
+  CO_OCCURS_WITH: {from: [Finding], to: [Finding], required: [shared_cells, overlap]}
+  SUGGESTS:       {from: [Finding], to: [Hypothesis]}
+  VIA_PATTERN:    {from: [Hypothesis], to: [HypothesisPattern]}
+  ASKED_ABOUT:    {from: [Investigation], to: [Concept]}
+  PRODUCED:       {from: [Investigation], to: [Finding]}
+  PROPOSED:       {from: [Investigation], to: [Hypothesis]}
+  USED_METHOD:    {from: [Investigation, Analysis], to: [Method]}
+
+statuses: [verified, from_paper, hypothesis]
+creators: [curator, code, investigator, human]

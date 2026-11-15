@@ -1,0 +1,116 @@
+# The investigation strategy, written by the team (Document 2, section 8.5).
+# The curator agent may only create Method / ChartStyle / HypothesisPattern nodes from this file,
+# and connects them to the rest of the graph. The investigator follows them.
+
+methods:
+  # ---- statistics (stage: statistics), followed in `order` through NEXT edges
+  - id: anomalies
+    name: Remove the seasons (monthly anomalies)
+    order: 1
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {}
+    description: Subtract the average of each calendar month so summer/winter is not mistaken for a trend.
+  - id: theil_sen
+    name: Theil-Sen slope with 95% confidence interval
+    order: 2
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {per: decade, ci: 0.95}
+    description: A robust slope - the median of the slopes between all pairs of months.
+  - id: mk_hamed_rao
+    name: Mann-Kendall test with Hamed-Rao correction
+    order: 3
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {}
+    description: Is the trend real or luck? Corrected because each month resembles the previous one.
+  - id: bh_fdr
+    name: Benjamini-Hochberg false discovery rate
+    order: 4
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {q: 0.10}
+    description: Testing hundreds of cells makes some look significant by chance; FDR corrects for it.
+  - id: regional_mean
+    name: Regional average weighted by cos(latitude)
+    order: 5
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {}
+    description: One series for the whole area, then the same slope and test.
+  - id: years_needed
+    name: Years needed to detect the trend (Weatherhead 1998)
+    order: 6
+    stage: statistics
+    applies_to_kind: [state, flux, index]
+    parameters: {}
+    description: For non-significant trends, how many years of data would be needed to be sure.
+  # ---- discovery (stage: discovery)
+  - id: radar_ranking
+    name: Rank variables by significant area
+    order: 7
+    stage: discovery
+    applies_to_kind: [state, flux, index]
+    parameters: {}
+    description: Which variable changes over the largest share of the area.
+  - id: opposite_trends
+    name: Opposite-trend map and sub-region contrasts
+    order: 8
+    stage: discovery
+    applies_to_kind: [state, flux, index]
+    parameters: {min_area_percent: 10}
+    description: Find places moving in opposite directions that a regional average would hide.
+  - id: kmeans_clusters
+    name: Trend-signature clusters (k-means, silhouette)
+    order: 9
+    stage: discovery
+    applies_to_kind: [state, flux, index]
+    parameters: {k_min: 3, k_max: 6}
+    description: Group cells that changed in a similar way. Clusters suggest, statistics decide.
+
+chart_styles:
+  - id: diverging_trend_map
+    chart_type: map
+    colormap: "blue (decrease) - white - red (increase); grey = not significant"
+    label_template: "{unit} per decade"
+  - id: anomaly_timeseries
+    chart_type: line
+    colormap: "grey anomalies, red Theil-Sen line, shaded slope uncertainty"
+    label_template: "{display_name} anomaly ({unit})"
+  - id: ranking_bars
+    chart_type: bar
+    colormap: "red = % area increasing, blue = % area decreasing"
+    label_template: "% of land area with a significant trend"
+  - id: cluster_map
+    chart_type: map
+    colormap: "one qualitative colour per cluster"
+    label_template: "trend-signature cluster"
+
+hypothesis_patterns:
+  - id: co_trend_literature
+    name: Co-trend + literature link
+    description: >
+      Two findings in the same region whose variables are linked by a literature INFLUENCES
+      edge, with directions consistent with the sign of that link -> "A may be contributing
+      to the change in B here". Status: unverified.
+    cypher: >
+      MATCH (fa:Finding)-[:ABOUT]->(a:Variable)-[i:INFLUENCES]->(b:Variable)<-[:ABOUT]-(fb:Finding)
+      WHERE fa.region = fb.region AND fa.period = fb.period
+      RETURN fa, fb, i
+  - id: opposite_regions
+    name: Opposite trends between sub-regions
+    description: >
+      The same variable goes up in one sub-region and down in another -> the regional average
+      hides two different stories; different processes may dominate in each place.
+    cypher: >
+      MATCH (f1:Finding)-[:OPPOSITE_OF]-(f2:Finding)-[:ABOUT]->(v:Variable) RETURN f1, f2, v
+  - id: compound_cluster
+    name: Compound warming-drying cluster
+    description: >
+      A cluster where air temperature rises while water variables fall -> a possible compound
+      heat-and-drought hot spot worth watching.
+    cypher: >
+      MATCH (f:Finding {kind: 'cluster'})
+      WHERE f.cluster_label CONTAINS 'warming' AND f.cluster_label CONTAINS 'drying'
+      RETURN f

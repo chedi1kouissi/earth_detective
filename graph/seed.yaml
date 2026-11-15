@@ -1,0 +1,117 @@
+# HAND-WRITTEN BACKUP of Layer A, same schema as the curator's graph (Document 2, section 8.7).
+# Load it with `python run.py load_seed` if the curator agent is late or broken.
+# Values below were checked by hand against NASA CMR on 2026-11-14.
+# Methods / chart styles / hypothesis patterns are taken from strategy.yaml by id.
+
+datasets:
+  - short_name: M2TMNXSLV
+    version: 5.12.4
+    title: "MERRA-2 tavgM_2d_slv_Nx: 2d,Monthly mean,Time-Averaged,Single-Level,Assimilation,Single-Level Diagnostics 0.625 x 0.5 degree V5.12.4 (M2TMNXSLV)"
+    cmr_concept_id: C1276812859-GES_DISC
+    doi: 10.5067/AP1B0BA5PD2K
+    provider: GES_DISC
+    time_start: "1980-01-01"
+    local_key: merra2
+    missions: [{name: MERRA-2, instruments: []}]
+  - short_name: GPM_3IMERGM
+    version: "07"
+    title: "GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07 (GPM_3IMERGM)"
+    cmr_concept_id: C2723754851-GES_DISC
+    doi: 10.5067/GPM/IMERG/3B-MONTH/07
+    provider: GES_DISC
+    time_start: "1998-01-01"
+    local_key: imerg
+    missions: [{name: IMERG, instruments: []}]
+  - short_name: GLDAS_NOAH025_M
+    version: "2.1"
+    title: "GLDAS Noah Land Surface Model L4 monthly 0.25 x 0.25 degree V2.1 (GLDAS_NOAH025_M)"
+    cmr_concept_id: C1342986036-GES_DISC
+    doi: 10.5067/SXAVCZFAQLNO
+    provider: GES_DISC
+    time_start: "2000-01-01"
+    local_key: gldas
+    missions: [{name: Noah-LSM, instruments: []}]
+  - short_name: MOD13C2
+    version: "061"
+    title: "MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061"
+    cmr_concept_id: C2565788914-LPCLOUD
+    doi: 10.5067/MODIS/MOD13C2.061
+    provider: LPCLOUD
+    time_start: "2000-02-01"
+    local_key: modis_ndvi
+    missions: [{name: Terra, instruments: [MODIS]}]
+
+# recipes: unit_native / fill_value / scale_factor from CMR UMM-Var; target unit and conversion
+# from the team's reference table (common/variables.py)
+variables:
+  - dataset: M2TMNXSLV
+    name_in_file: T2M
+    unit_native: K
+    fill_value: 999999986991104
+    kind: state
+    chart: diverging_trend_map
+    concepts:
+      surface heating: "Air temperature directly measures how hot the near-surface air is."
+      evaporative demand: "Warmer air can hold more water vapour, so it pulls more water from soils and plants."
+  - dataset: GPM_3IMERGM
+    name_in_file: precipitation
+    unit_native: mm/hr
+    fill_value: -9999.900390625
+    kind: flux
+    chart: diverging_trend_map
+    concepts:
+      water availability: "Rain and snow are the main way water arrives on land."
+      water cycle: "Precipitation is the step of the water cycle where water falls back to the ground."
+  - dataset: GLDAS_NOAH025_M
+    name_in_file: SoilMoi0_10cm_inst
+    unit_native: kg m-2
+    fill_value: -9999
+    scale_factor: 1
+    add_offset: 0
+    kind: state
+    chart: diverging_trend_map
+    concepts:
+      drought: "Dry soil is the most direct sign of agricultural drought."
+      water availability: "Soil moisture is the water that plants can actually use."
+  - dataset: GLDAS_NOAH025_M
+    name_in_file: Evap_tavg
+    unit_native: kg m-2 s-1
+    fill_value: -9999
+    scale_factor: 1
+    add_offset: 0
+    kind: flux
+    chart: diverging_trend_map
+    concepts:
+      evaporative demand: "Evapotranspiration is the water actually leaving the land into the air."
+      water cycle: "Evapotranspiration returns water from land and plants to the atmosphere."
+  - dataset: MOD13C2
+    name_in_file: CMG 0.05 Deg Monthly NDVI
+    unit_native: NDVI
+    fill_value: -3000
+    scale_factor: 0.0001
+    kind: index
+    chart: diverging_trend_map
+    concepts:
+      vegetation health: "NDVI measures how green and active the plants are."
+      drought: "Plants turn brown when the soil stays dry for long periods."
+
+concepts:
+  surface heating: [hotter, warmer, warming, heat, temperature, hot]
+  water availability: [water, wetter, drier, dry, water scarcity, scarcer, rainfall]
+  drought: [droughts, drying, water stress, aridity, arid, dry spell]
+  vegetation health: [green, greenness, plants, vegetation, crops, greening, browning]
+  evaporative demand: [evaporation, thirsty air, evapotranspiration]
+  water cycle: [hydrological cycle, rain, precipitation]
+
+regions:
+  - {code_id: mediterranean_north_africa, name: Mediterranean + North Africa, bbox: [-10, 25, 40, 47]}
+  - {code_id: iberia, name: Iberian Peninsula, bbox: [-10, 36, 3, 44], parent: mediterranean_north_africa}
+  - {code_id: maghreb, name: Maghreb, bbox: [-10, 28, 12, 37], parent: mediterranean_north_africa}
+  - {code_id: tunisia, name: Tunisia, bbox: [7, 30, 12, 38], parent: maghreb}
+  - {code_id: nile_delta, name: Nile Delta and Lower Egypt, bbox: [28, 27, 34, 32], parent: mediterranean_north_africa}
+  - {code_id: levant, name: Levant, bbox: [34, 29, 40, 37], parent: mediterranean_north_africa}
+  - {code_id: sahara_margin, name: Sahara margin, bbox: [-10, 25, 30, 30], parent: mediterranean_north_africa}
+  - {code_id: italy_balkans, name: Italy and the Balkans, bbox: [7, 37, 28, 47], parent: mediterranean_north_africa}
+  - {code_id: anatolia, name: Anatolia, bbox: [26, 36, 40, 42], parent: mediterranean_north_africa}
+
+strategy: all   # every method, chart style and hypothesis pattern of strategy.yaml

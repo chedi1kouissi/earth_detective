@@ -1,0 +1,3460 @@
+{
+ "exported_at": "2026-11-15T04:25:51+00:00",
+ "backend": "neo4j",
+ "nodes": [
+  {
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "data_version": "42df9ed",
+   "methods": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "synthetic": false,
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "id": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "label": "Analysis"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:05+00:00",
+   "chart_type": "line",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:05+00:00",
+   "id": "chart:anomaly_timeseries",
+   "source": "graph/strategy.yaml (team)",
+   "label_template": "{display_name} anomaly ({unit})",
+   "colormap": "grey anomalies, red Theil-Sen line, shaded slope uncertainty",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "ChartStyle"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:05+00:00",
+   "chart_type": "map",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:05+00:00",
+   "id": "chart:cluster_map",
+   "source": "graph/strategy.yaml (team)",
+   "label_template": "trend-signature cluster",
+   "colormap": "one qualitative colour per cluster",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "ChartStyle"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:05+00:00",
+   "chart_type": "map",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:05+00:00",
+   "id": "chart:diverging_trend_map",
+   "source": "graph/strategy.yaml (team)",
+   "label_template": "{unit} per decade",
+   "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "ChartStyle"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:05+00:00",
+   "chart_type": "bar",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:05+00:00",
+   "id": "chart:ranking_bars",
+   "source": "graph/strategy.yaml (team)",
+   "label_template": "% of land area with a significant trend",
+   "colormap": "red = % area increasing, blue = % area decreasing",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "ChartStyle"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "arid",
+    "drier",
+    "dryness"
+   ],
+   "confidence": 0.9,
+   "name": "drought",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:drought",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "drying power",
+    "evaporation",
+    "thirst of the atmosphere"
+   ],
+   "confidence": 0.9,
+   "name": "evaporative demand",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:evaporative_demand",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "heat",
+    "hotter",
+    "warming"
+   ],
+   "confidence": 0.9,
+   "name": "surface heating",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:surface_heating",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "crops",
+    "greenness",
+    "plants"
+   ],
+   "confidence": 0.9,
+   "name": "vegetation health",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:vegetation_health",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "moisture",
+    "water",
+    "wetness"
+   ],
+   "confidence": 0.9,
+   "name": "water availability",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:water_availability",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:29+00:00",
+   "synonyms": [
+    "rain",
+    "rainfall",
+    "storms"
+   ],
+   "confidence": 0.9,
+   "name": "water cycle",
+   "created_at": "2026-11-15T04:24:29+00:00",
+   "id": "concept:water_cycle",
+   "source": "curator (concept vocabulary)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Concept"
+  },
+  {
+   "time_start": "2000-01-01T00:00:00.000Z",
+   "local_key": "gldas",
+   "processing_level": "4",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "source": "NASA CMR C1342986036-GES_DISC",
+   "title": "GLDAS Noah Land Surface Model L4 monthly 0.25 x 0.25 degree V2.1 (GLDAS_NOAH025_M)",
+   "version": "2.1",
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "provider": "GES_DISC",
+   "native_resolution": "0.25 deg",
+   "cmr_concept_id": "C1342986036-GES_DISC",
+   "short_name": "GLDAS_NOAH025_M",
+   "id": "dataset:GLDAS_NOAH025_M_v2.1",
+   "file_format": "netCDF4",
+   "doi": "10.5067/SXAVCZFAQLNO",
+   "status": "verified",
+   "label": "Dataset"
+  },
+  {
+   "time_start": "1998-01-01T00:00:00.000Z",
+   "local_key": "imerg",
+   "processing_level": "3",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "source": "NASA CMR C2723754851-GES_DISC",
+   "title": "GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07 (GPM_3IMERGM)",
+   "version": "07",
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "provider": "GES_DISC",
+   "native_resolution": "0.1 deg",
+   "cmr_concept_id": "C2723754851-GES_DISC",
+   "short_name": "GPM_3IMERGM",
+   "id": "dataset:GPM_3IMERGM_v07",
+   "time_end": "2025-09-30T23:59:59.999Z",
+   "file_format": "HDF5",
+   "doi": "10.5067/GPM/IMERG/3B-MONTH/07",
+   "status": "verified",
+   "label": "Dataset"
+  },
+  {
+   "time_start": "1980-01-01T00:00:00.000Z",
+   "local_key": "merra2",
+   "processing_level": "4",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "source": "NASA CMR C1276812859-GES_DISC",
+   "title": "MERRA-2 tavgM_2d_slv_Nx: 2d,Monthly mean,Time-Averaged,Single-Level,Assimilation,Single-Level Diagnostics 0.625 x 0.5 degree V5.12.4 (M2TMNXSLV) ",
+   "version": "5.12.4",
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "provider": "GES_DISC",
+   "native_resolution": "0.5 x 0.625 deg",
+   "cmr_concept_id": "C1276812859-GES_DISC",
+   "short_name": "M2TMNXSLV",
+   "id": "dataset:M2TMNXSLV_v5.12.4",
+   "file_format": "netCDF4",
+   "doi": "10.5067/AP1B0BA5PD2K",
+   "status": "verified",
+   "label": "Dataset"
+  },
+  {
+   "time_start": "2000-02-01T00:00:00.000Z",
+   "local_key": "modis_ndvi",
+   "processing_level": "3",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "source": "NASA CMR C2565788914-LPCLOUD",
+   "title": "MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061",
+   "version": "061",
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "provider": "LPCLOUD",
+   "native_resolution": "0.05 deg",
+   "cmr_concept_id": "C2565788914-LPCLOUD",
+   "short_name": "MOD13C2",
+   "id": "dataset:MOD13C2_v061",
+   "file_format": "HDF4",
+   "doi": "10.5067/MODIS/MOD13C2.061",
+   "status": "verified",
+   "label": "Dataset"
+  },
+  {
+   "summary": "Cluster 'warming + drying' (346 cells): Air temperature at 2 m ↑, Soil moisture ↓",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "signature": "Air temperature at 2 m ↑, Soil moisture ↓",
+   "kind": "cluster",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "k": 3,
+   "n_cells": 346,
+   "created_by": "code",
+   "cluster_label": "warming + drying",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "directions": "{\"t2m\": \"up\", \"soil_moisture\": \"down\"}",
+   "mean_slope_per_decade": "{\"t2m\": 0.2719, \"precip\": -0.1141, \"soil_moisture\": -0.259, \"et\": -0.0045, \"ndvi\": 0.0007}",
+   "silhouette": 0.385,
+   "id": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "label": "Finding"
+  },
+  {
+   "summary": "Cluster 'warming + drying' (168 cells): Air temperature at 2 m ↑, Soil moisture ↓",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "signature": "Air temperature at 2 m ↑, Soil moisture ↓",
+   "kind": "cluster",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "k": 3,
+   "n_cells": 168,
+   "created_by": "code",
+   "cluster_label": "warming + drying",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "directions": "{\"t2m\": \"up\", \"soil_moisture\": \"down\"}",
+   "mean_slope_per_decade": "{\"t2m\": 0.595, \"precip\": -2.9482, \"soil_moisture\": -1.2272, \"et\": -0.0528, \"ndvi\": 0.0033}",
+   "silhouette": 0.385,
+   "id": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "label": "Finding"
+  },
+  {
+   "summary": "Cluster 'warming + drying + greening' (228 cells): Air temperature at 2 m ↑, Soil moisture ↓, Evapotranspiration ↑, Vegetation greenness ↑",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "signature": "Air temperature at 2 m ↑, Soil moisture ↓, Evapotranspiration ↑, Vegetation greenness ↑",
+   "kind": "cluster",
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "k": 3,
+   "n_cells": 228,
+   "created_by": "code",
+   "cluster_label": "warming + drying + greening",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "directions": "{\"t2m\": \"up\", \"soil_moisture\": \"down\", \"et\": \"up\", \"ndvi\": \"up\"}",
+   "mean_slope_per_decade": "{\"t2m\": 0.7059, \"precip\": -0.0166, \"soil_moisture\": -0.5569, \"et\": 0.0416, \"ndvi\": 0.0176}",
+   "silhouette": 0.385,
+   "id": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "label": "Finding"
+  },
+  {
+   "summary": "Evapotranspiration increased by 0.0115 mm/day per decade over 2001-01..2024-12 (p = 0.000343)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 80.2,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    0.006204036717922523,
+    0.017881532690442327
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.0003434487068016967,
+   "synthetic": false,
+   "unit": "mm/day per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.011531039472767736,
+   "variable": "et",
+   "id": "finding:et:nile_delta:2001-01_2024-12",
+   "region": "nile_delta",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.0218 NDVI units per decade over 2001-01..2024-12 (p = 8.5e-06)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 92.4,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.01772647873861162,
+    0.025811647325843276
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 8.495684566289796e-06,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.021752125964207357,
+   "variable": "ndvi",
+   "id": "finding:ndvi:anatolia:2001-01_2024-12",
+   "region": "anatolia",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.014 NDVI units per decade over 2001-01..2024-12 (p = 1.38e-11)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 83.5,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.010581723267087258,
+    0.01772732951226733
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 1.3800960374510396e-11,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.01398792365163314,
+   "variable": "ndvi",
+   "id": "finding:ndvi:iberia:2001-01_2024-12",
+   "region": "iberia",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.0164 NDVI units per decade over 2001-01..2024-12 (p = 3.68e-07)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 86.2,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.012409023590029752,
+    0.02075597156123976
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 3.6820610005428023e-07,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.01640202335761422,
+   "variable": "ndvi",
+   "id": "finding:ndvi:italy_balkans:2001-01_2024-12",
+   "region": "italy_balkans",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.00456 NDVI units per decade over 2001-01..2024-12 (p = 0.0241)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 65.3,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.002842693449596761,
+    0.006276463045107232
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.02414898780546948,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.004560777830581089,
+   "variable": "ndvi",
+   "id": "finding:ndvi:levant:2001-01_2024-12",
+   "region": "levant",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.00617 NDVI units per decade over 2001-01..2024-12 (p = 5.86e-06)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 42.5,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.004885680665652849,
+    0.007446286494724324
+   ],
+   "pct_sig_down_area": 7.6,
+   "created_by": "code",
+   "p": 5.860667132040476e-06,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.00616674573960305,
+   "variable": "ndvi",
+   "id": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Vegetation greenness (NDVI) increased by 0.00205 NDVI units per decade over 2001-01..2024-12 (p = 4.39e-08)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 48.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "ci95": [
+    0.0015738575469767574,
+    0.0025287806781734866
+   ],
+   "pct_sig_down_area": 28.1,
+   "created_by": "code",
+   "p": 4.388396224186408e-08,
+   "synthetic": false,
+   "unit": "NDVI units per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.0020497075014386237,
+   "variable": "ndvi",
+   "id": "finding:ndvi:nile_delta:2001-01_2024-12",
+   "region": "nile_delta",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Precipitation decreased by 2 mm/month per decade over 2001-01..2024-12 (p = 0.0233)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 0.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GPM_3IMERGM v07"
+   ],
+   "ci95": [
+    -3.3082372155050876,
+    -0.7483383828844725
+   ],
+   "pct_sig_down_area": 39.1,
+   "created_by": "code",
+   "p": 0.023325621457927825,
+   "synthetic": false,
+   "unit": "mm/month per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -1.997147655637959,
+   "variable": "precip",
+   "id": "finding:precip:maghreb:2001-01_2024-12",
+   "region": "maghreb",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Precipitation decreased by 1.89 mm/month per decade over 2001-01..2024-12 (p = 0.00824)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 0.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GPM_3IMERGM v07"
+   ],
+   "ci95": [
+    -3.6383869578797605,
+    -0.23747256559350421
+   ],
+   "pct_sig_down_area": 44.5,
+   "created_by": "code",
+   "p": 0.008239479079193313,
+   "synthetic": false,
+   "unit": "mm/month per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -1.8900313515202916,
+   "variable": "precip",
+   "id": "finding:precip:tunisia:2001-01_2024-12",
+   "region": "tunisia",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.755 kg m-2 per decade over 2001-01..2024-12 (p = 0.000165)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 2.7,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -1.0351144807914263,
+    -0.4613205106096485
+   ],
+   "pct_sig_down_area": 65.2,
+   "created_by": "code",
+   "p": 0.0001652074510778423,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.7550647764886824,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "region": "iberia",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.732 kg m-2 per decade over 2001-01..2024-12 (p = 0.00671)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 0.8,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -1.0622304838577348,
+    -0.41468846784309094
+   ],
+   "pct_sig_down_area": 53.4,
+   "created_by": "code",
+   "p": 0.006709514302899455,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.7317179392763047,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "region": "italy_balkans",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.174 kg m-2 per decade over 2001-01..2024-12 (p = 0.0445)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 7.7,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -0.39248997863125634,
+    0.019779646634246396
+   ],
+   "pct_sig_down_area": 39.1,
+   "created_by": "code",
+   "p": 0.04451086253086323,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.17355699100391608,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:levant:2001-01_2024-12",
+   "region": "levant",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 1.07 kg m-2 per decade over 2001-01..2024-12 (p = 0.000449)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 0.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -1.315096761122332,
+    -0.8078352414423239
+   ],
+   "pct_sig_down_area": 91.1,
+   "created_by": "code",
+   "p": 0.0004486715709017819,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -1.072836426282488,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "region": "maghreb",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.585 kg m-2 per decade over 2001-01..2024-12 (p = 5.47e-06)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 8.9,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -0.7332858433339058,
+    -0.44487261234559794
+   ],
+   "pct_sig_down_area": 58.3,
+   "created_by": "code",
+   "p": 5.465251202263488e-06,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.5847745682218568,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) increased by 0.0773 kg m-2 per decade over 2001-01..2024-12 (p = 0.0158)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 40.3,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -0.006288914400696279,
+    0.17309574671036254
+   ],
+   "pct_sig_down_area": 3.9,
+   "created_by": "code",
+   "p": 0.015847924806098757,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.07729277626602299,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "region": "nile_delta",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.301 kg m-2 per decade over 2001-01..2024-12 (p = 0.000529)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 14.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -0.4198627511838079,
+    -0.18342839357147048
+   ],
+   "pct_sig_down_area": 59.7,
+   "created_by": "code",
+   "p": 0.0005287136665099723,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.30069693971247996,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "region": "sahara_margin",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Soil moisture (0-10 cm) decreased by 0.936 kg m-2 per decade over 2001-01..2024-12 (p = 0.000419)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 0.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "ci95": [
+    -1.2107943479544188,
+    -0.665918302927654
+   ],
+   "pct_sig_down_area": 83.5,
+   "created_by": "code",
+   "p": 0.00041916105718731167,
+   "synthetic": false,
+   "unit": "kg m-2 per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": -0.9358660265381148,
+   "variable": "soil_moisture",
+   "id": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "region": "tunisia",
+   "status": "verified",
+   "direction": "down",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.602 degC per decade over 2001-01..2024-12 (p = 8.11e-05)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 100.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.3630889600078646,
+    0.8571689398936835
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 8.106416516562298e-05,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.6022998629815355,
+   "variable": "t2m",
+   "id": "finding:t2m:anatolia:2001-01_2024-12",
+   "region": "anatolia",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.587 degC per decade over 2001-01..2024-12 (p = 0)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 100.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.3835903179439788,
+    0.7892770456040425
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.0,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.5866101923991905,
+   "variable": "t2m",
+   "id": "finding:t2m:iberia:2001-01_2024-12",
+   "region": "iberia",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.782 degC per decade over 2001-01..2024-12 (p = 6.87e-07)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 100.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.5594445166570955,
+    0.9984054454683526
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 6.869519617591635e-07,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.7819378377193273,
+   "variable": "t2m",
+   "id": "finding:t2m:italy_balkans:2001-01_2024-12",
+   "region": "italy_balkans",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.453 degC per decade over 2001-01..2024-12 (p = 9.2e-05)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 100.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.26442774855031104,
+    0.641846914193332
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 9.197359858492682e-05,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.4533652915915192,
+   "variable": "t2m",
+   "id": "finding:t2m:levant:2001-01_2024-12",
+   "region": "levant",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.444 degC per decade over 2001-01..2024-12 (p = 0.0227)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 85.6,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.2535002708914539,
+    0.6341380032508577
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.022718524221531977,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.4444066521838875,
+   "variable": "t2m",
+   "id": "finding:t2m:maghreb:2001-01_2024-12",
+   "region": "maghreb",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.488 degC per decade over 2001-01..2024-12 (p = 1.16e-06)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 81.8,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.36873532705691725,
+    0.6087019464876052
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 1.1572786509095323e-06,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.48761659660261386,
+   "variable": "t2m",
+   "id": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "region": "mediterranean_north_africa",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.297 degC per decade over 2001-01..2024-12 (p = 0.00234)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 100.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.11618053344284444,
+    0.47391784240437484
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.0023444348479353394,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.2972312727112561,
+   "variable": "t2m",
+   "id": "finding:t2m:nile_delta:2001-01_2024-12",
+   "region": "nile_delta",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.25 degC per decade over 2001-01..2024-12 (p = 0.00977)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 36.5,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.10515253244825118,
+    0.3926021199735976
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.009767883909588049,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.24979203304093767,
+   "variable": "t2m",
+   "id": "finding:t2m:sahara_margin:2001-01_2024-12",
+   "region": "sahara_margin",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "summary": "Air temperature at 2 m increased by 0.407 degC per decade over 2001-01..2024-12 (p = 0.0109)",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "kind": "trend",
+   "pct_sig_up_area": 67.0,
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:51+00:00",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "significant": true,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "ci95": [
+    0.20862674580490187,
+    0.6053298454910856
+   ],
+   "pct_sig_down_area": 0.0,
+   "created_by": "code",
+   "p": 0.010874145631694088,
+   "synthetic": false,
+   "unit": "degC per decade",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "slope_per_decade": 0.4066225656098581,
+   "variable": "t2m",
+   "id": "finding:t2m:tunisia:2001-01_2024-12",
+   "region": "tunisia",
+   "status": "verified",
+   "direction": "up",
+   "label": "Finding"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "name": "MODIS",
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "id": "instrument:modis",
+   "source": "NASA CMR C2565788914-LPCLOUD Instruments",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Instrument"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Subtract the average of each calendar month so summer/winter is not mistaken for a trend.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Remove the seasons (monthly anomalies)",
+   "id": "method:anomalies",
+   "parameters": "{}",
+   "status": "verified",
+   "order": 1,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Testing hundreds of cells makes some look significant by chance; FDR corrects for it.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Benjamini-Hochberg false discovery rate",
+   "id": "method:bh_fdr",
+   "parameters": "{\"q\": 0.1}",
+   "status": "verified",
+   "order": 4,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Group cells that changed in a similar way. Clusters suggest, statistics decide.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "discovery",
+   "name": "Trend-signature clusters (k-means, silhouette)",
+   "id": "method:kmeans_clusters",
+   "parameters": "{\"k_min\": 3, \"k_max\": 6}",
+   "status": "verified",
+   "order": 9,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Is the trend real or luck? Corrected because each month resembles the previous one.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Mann-Kendall test with Hamed-Rao correction",
+   "id": "method:mk_hamed_rao",
+   "parameters": "{}",
+   "status": "verified",
+   "order": 3,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Find places moving in opposite directions that a regional average would hide.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "discovery",
+   "name": "Opposite-trend map and sub-region contrasts",
+   "id": "method:opposite_trends",
+   "parameters": "{\"min_area_percent\": 10}",
+   "status": "verified",
+   "order": 8,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "Which variable changes over the largest share of the area.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "discovery",
+   "name": "Rank variables by significant area",
+   "id": "method:radar_ranking",
+   "parameters": "{}",
+   "status": "verified",
+   "order": 7,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "One series for the whole area, then the same slope and test.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Regional average weighted by cos(latitude)",
+   "id": "method:regional_mean",
+   "parameters": "{}",
+   "status": "verified",
+   "order": 5,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "A robust slope - the median of the slopes between all pairs of months.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Theil-Sen slope with 95% confidence interval",
+   "id": "method:theil_sen",
+   "parameters": "{\"per\": \"decade\", \"ci\": 0.95}",
+   "status": "verified",
+   "order": 2,
+   "label": "Method"
+  },
+  {
+   "confidence": 1.0,
+   "created_at": "2026-11-15T04:25:01+00:00",
+   "description": "For non-significant trends, how many years of data would be needed to be sure.",
+   "source": "graph/strategy.yaml (team)",
+   "applies_to_kind": [
+    "state",
+    "flux",
+    "index"
+   ],
+   "created_by": "curator",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "stage": "statistics",
+   "name": "Years needed to detect the trend (Weatherhead 1998)",
+   "id": "method:years_needed",
+   "parameters": "{}",
+   "status": "verified",
+   "order": 6,
+   "label": "Method"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "name": "IMERG",
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "id": "mission:imerg",
+   "source": "NASA CMR C2723754851-GES_DISC Platforms",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Mission"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "name": "MERRA-2",
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "id": "mission:merra_2",
+   "source": "NASA CMR C1276812859-GES_DISC Platforms",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Mission"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "name": "Noah-LSM",
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "id": "mission:noah_lsm",
+   "source": "NASA CMR C1342986036-GES_DISC Platforms",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Mission"
+  },
+  {
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "name": "Terra",
+   "created_at": "2026-11-15T04:24:08+00:00",
+   "id": "mission:terra",
+   "source": "NASA CMR C2565788914-LPCLOUD Platforms",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "Mission"
+  },
+  {
+   "year": 2006,
+   "read_by": "chedi_kouissi",
+   "confidence": 1.0,
+   "abstract_source": "Crossref",
+   "created_at": "2026-11-15T04:25:21+00:00",
+   "source": "Crossref DOI 10.1029/2006gl025734",
+   "abstract": "A Regional Climate Change Index (RCCI), is developed based on regional mean precipitation change, mean surface air temperature change, and change in precipitation and temperature interannual variability. The RCCI is a comparative index designed to identify the most responsive regions to climate change, or Hot‐Spots. The RCCI is calculated for 26 land regions from the latest set of climate change projections by 20 global climate models for the A1B, A2 and B1 IPCC emission scenarios. The Mediterranean and North Eastern European regions emerge as the primary Hot‐Spots, followed by high latitude northern hemisphere regions and by Central America, the most prominent tropical Hot‐Spot. The main African Hot‐Spots are Southern Equatorial Africa and the Sahara. Eastern North America is the prominent Hot‐Spot over the continental U.S. Different factors over different regions contribute to the magnitude of the RCCI, which is in fact greater than 0 for all regions.",
+   "title": "Climate change hot‐spots",
+   "created_by": "curator",
+   "journal": "Geophysical Research Letters",
+   "updated_at": "2026-11-15T04:25:21+00:00",
+   "id": "paper:10.1029/2006gl025734",
+   "doi": "10.1029/2006gl025734",
+   "status": "from_paper",
+   "label": "Paper"
+  },
+  {
+   "year": 2014,
+   "read_by": "chedi_kouissi",
+   "confidence": 1.0,
+   "abstract_source": "OpenAlex",
+   "created_at": "2026-11-15T04:25:25+00:00",
+   "source": "Crossref DOI 10.1088/1748-9326/9/4/044001",
+   "abstract": "We use high quality climate data from ground meteorological stations in the Iberian Peninsula (IP) and robust drought indices to confirm that drought severity has increased in the past five decades, as a consequence of greater atmospheric evaporative demand resulting from temperature rise. Increased drought severity is independent of the model used to quantify the reference evapotranspiration. We have also focused on drought impacts to drought-sensitive systems, such as river discharge, by analyzing streamflow data for 287 rivers in the IP, and found that hydrological drought frequency and severity have also increased in the past five decades in natural, regulated and highly regulated basins. Recent positive trend in the atmospheric water demand has had a direct influence on the temporal evolution of streamflows, clearly identified during the warm season, in which higher evapotranspiration rates are recorded. This pattern of increase in evaporative demand and greater drought severity is probably applicable to other semiarid regions of the world, including other Mediterranean areas, the Sahel, southern Australia and South Africa, and can be expected to increasingly compromise water supplies and cause political, social and economic tensions among regions in the near future.",
+   "title": "Evidence of increasing drought severity caused by temperature rise in southern Europe",
+   "created_by": "curator",
+   "journal": "Environmental Research Letters",
+   "updated_at": "2026-11-15T04:25:25+00:00",
+   "id": "paper:10.1088/1748-9326/9/4/044001",
+   "doi": "10.1088/1748-9326/9/4/044001",
+   "status": "from_paper",
+   "label": "Paper"
+  },
+  {
+   "year": 2020,
+   "read_by": "chedi_kouissi",
+   "confidence": 1.0,
+   "abstract_source": "Crossref",
+   "created_at": "2026-11-15T04:25:22+00:00",
+   "source": "Crossref DOI 10.1175/jcli-d-19-0910.1",
+   "abstract": "Abstract Higher precipitation is expected over most of the world’s continents under climate change, except for a few specific regions where models project robust declines. Among these, the Mediterranean stands out as a result of the magnitude and significance of its winter precipitation decline. Locally, up to 40% of winter precipitation could be lost, setting strong limits on water resources that will constrain the ability of the region to develop and grow food, affecting millions of already water-stressed people and threatening the stability of this tense and complex area. To this day, however, a theory explaining the special nature of this region as a climate change hot spot is still lacking. Regional circulation changes, dominated by the development of a strong anomalous ridge, are thought to drive the winter precipitation decline, but their origins and potential contributions to regional hydroclimate change remain elusive. Here, we show how wintertime Mediterranean circulation trends can be seen as the combined response to two independent forcings: robust changes in large-scale, upper-tropospheric flow and the reduction in the regional land–sea temperature gradient that is characteristic of this region. In addition, we discuss how the circulation change can account for the magnitude and spatial structure of the drying. Our findings pave the way for better understanding and improved modeling of the future Mediterranean hydroclimate.",
+   "title": "Why Is the Mediterranean a Climate Change Hot Spot?",
+   "created_by": "curator",
+   "journal": "Journal of Climate",
+   "updated_at": "2026-11-15T04:25:22+00:00",
+   "id": "paper:10.1175/jcli-d-19-0910.1",
+   "doi": "10.1175/jcli-d-19-0910.1",
+   "status": "from_paper",
+   "label": "Paper"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:16+00:00",
+   "cypher": "MATCH (fa:Finding)-[:ABOUT]->(a:Variable)-[i:INFLUENCES]->(b:Variable)<-[:ABOUT]-(fb:Finding) WHERE fa.region = fb.region AND fa.period = fb.period RETURN fa, fb, i",
+   "confidence": 1.0,
+   "name": "Co-trend + literature link",
+   "created_at": "2026-11-15T04:25:16+00:00",
+   "description": "Two findings in the same region whose variables are linked by a literature INFLUENCES edge, with directions consistent with the sign of that link -> \"A may be contributing to the change in B here\". Status: unverified.",
+   "id": "pattern:co_trend_literature",
+   "source": "graph/strategy.yaml (team)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "HypothesisPattern"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:16+00:00",
+   "cypher": "MATCH (f:Finding {kind: 'cluster'}) WHERE f.cluster_label CONTAINS 'warming' AND f.cluster_label CONTAINS 'drying' RETURN f",
+   "confidence": 1.0,
+   "name": "Compound warming-drying cluster",
+   "created_at": "2026-11-15T04:25:16+00:00",
+   "description": "A cluster where air temperature rises while water variables fall -> a possible compound heat-and-drought hot spot worth watching.",
+   "id": "pattern:compound_cluster",
+   "source": "graph/strategy.yaml (team)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "HypothesisPattern"
+  },
+  {
+   "updated_at": "2026-11-15T04:25:16+00:00",
+   "cypher": "MATCH (f1:Finding)-[:OPPOSITE_OF]-(f2:Finding)-[:ABOUT]->(v:Variable) RETURN f1, f2, v",
+   "confidence": 1.0,
+   "name": "Opposite trends between sub-regions",
+   "created_at": "2026-11-15T04:25:16+00:00",
+   "description": "The same variable goes up in one sub-region and down in another -> the regional average hides two different stories; different processes may dominate in each place.",
+   "id": "pattern:opposite_regions",
+   "source": "graph/strategy.yaml (team)",
+   "created_by": "curator",
+   "status": "verified",
+   "label": "HypothesisPattern"
+  },
+  {
+   "n_land_cells": 67,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    26.0,
+    36.0,
+    40.0,
+    42.0
+   ],
+   "name": "Anatolia",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:anatolia",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "anatolia",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 72,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    -10.0,
+    36.0,
+    3.0,
+    44.0
+   ],
+   "name": "Iberian Peninsula",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:iberia",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "iberia",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 129,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    7.0,
+    37.0,
+    28.0,
+    47.0
+   ],
+   "name": "Italy and the Balkans",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:italy_balkans",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "italy_balkans",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 40,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    34.0,
+    29.0,
+    40.0,
+    37.0
+   ],
+   "name": "Levant",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:levant",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "levant",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 170,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    -10.0,
+    28.0,
+    12.0,
+    37.0
+   ],
+   "name": "Maghreb",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:maghreb",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "maghreb",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 743,
+   "updated_at": "2026-11-15T04:24:47+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    -10.0,
+    25.0,
+    40.0,
+    47.0
+   ],
+   "name": "Mediterranean + North Africa",
+   "created_at": "2026-11-15T04:24:47+00:00",
+   "id": "region:mediterranean_north_africa",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "mediterranean_north_africa",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 25,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    28.0,
+    27.0,
+    34.0,
+    32.0
+   ],
+   "name": "Nile Delta and Lower Egypt",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:nile_delta",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "nile_delta",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 200,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    -10.0,
+    25.0,
+    30.0,
+    30.0
+   ],
+   "name": "Sahara margin",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:sahara_margin",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "sahara_margin",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "n_land_cells": 31,
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "bbox": [
+    7.0,
+    30.0,
+    12.0,
+    38.0
+   ],
+   "name": "Tunisia",
+   "created_at": "2026-11-15T04:24:54+00:00",
+   "id": "region:tunisia",
+   "source": "curator box + land cells counted from series.nc",
+   "created_by": "curator",
+   "code_id": "tunisia",
+   "status": "verified",
+   "label": "Region"
+  },
+  {
+   "definition_for_students": "The amount of water that evaporates from the soil and is released by plants into the air.",
+   "kind": "flux",
+   "confidence": 1.0,
+   "fill_value": -9999.0,
+   "created_at": "2026-11-15T04:24:17+00:00",
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "cf_standard_name": "water_evapotranspiration_flux",
+   "recipe_source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "display_name": "Evapotranspiration",
+   "created_by": "curator",
+   "code_id": "et",
+   "long_name": "Evapotranspiration",
+   "unit_target": "mm/day",
+   "unit_native": "kg m-2 s-1",
+   "updated_at": "2026-11-15T04:24:17+00:00",
+   "id": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "name_in_file": "Evap_tavg",
+   "status": "verified",
+   "conversion": "value * 86400",
+   "label": "Variable"
+  },
+  {
+   "definition_for_students": "The amount of water held in the top layer of the soil.",
+   "kind": "state",
+   "confidence": 1.0,
+   "fill_value": -9999.0,
+   "created_at": "2026-11-15T04:24:18+00:00",
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "cf_standard_name": "mass_content_of_water_in_soil_layer",
+   "recipe_source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "display_name": "Soil moisture (0-10 cm)",
+   "created_by": "curator",
+   "code_id": "soil_moisture",
+   "long_name": "Soil moisture",
+   "unit_target": "kg m-2",
+   "unit_native": "kg m-2",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "id": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "name_in_file": "SoilMoi0_10cm_inst",
+   "status": "verified",
+   "conversion": "none (1 kg/m2 = 1 mm of water)",
+   "label": "Variable"
+  },
+  {
+   "definition_for_students": "The amount of rain or snow that falls to the ground.",
+   "kind": "flux",
+   "confidence": 1.0,
+   "fill_value": -9999.900390625,
+   "created_at": "2026-11-15T04:24:18+00:00",
+   "source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5",
+   "cf_standard_name": "precipitation_flux",
+   "recipe_source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5",
+   "display_name": "Precipitation",
+   "created_by": "curator",
+   "code_id": "precip",
+   "long_name": "Merged microwave-infrared-gauge precipitation estimate",
+   "unit_target": "mm/month",
+   "unit_native": "mm/hr",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "id": "var:GPM_3IMERGM/precipitation",
+   "name_in_file": "precipitation",
+   "status": "verified",
+   "conversion": "value * 24 * days_in_month",
+   "group": "Grid",
+   "label": "Variable"
+  },
+  {
+   "definition_for_students": "The temperature of the air near the surface of the Earth.",
+   "kind": "state",
+   "confidence": 1.0,
+   "fill_value": 999999986991104.0,
+   "created_at": "2026-11-15T04:24:18+00:00",
+   "source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4",
+   "cf_standard_name": "air_temperature",
+   "recipe_source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4",
+   "display_name": "Air temperature at 2 m",
+   "created_by": "curator",
+   "code_id": "t2m",
+   "long_name": "2-meter_air_temperature",
+   "unit_target": "degC",
+   "unit_native": "K",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "id": "var:M2TMNXSLV/T2M",
+   "name_in_file": "T2M",
+   "status": "verified",
+   "conversion": "value - 273.15",
+   "label": "Variable"
+  },
+  {
+   "definition_for_students": "A measure of how green and healthy plants are, based on how they reflect light.",
+   "kind": "index",
+   "confidence": 1.0,
+   "fill_value": -3000,
+   "created_at": "2026-11-15T04:24:18+00:00",
+   "source": "file header MOD13C2.A2001001.061.2020061230446.hdf",
+   "cf_standard_name": "normalized_difference_vegetation_index",
+   "recipe_source": "file header MOD13C2.A2001001.061.2020061230446.hdf",
+   "display_name": "Vegetation greenness (NDVI)",
+   "created_by": "curator",
+   "code_id": "ndvi",
+   "long_name": "CMG 0.05 Deg Monthly NDVI",
+   "scale_factor": 10000.0,
+   "unit_target": "NDVI units",
+   "unit_native": "NDVI",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "id": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "name_in_file": "CMG 0.05 Deg Monthly NDVI",
+   "add_offset": 0.0,
+   "status": "verified",
+   "conversion": "value * 0.0001",
+   "label": "Variable"
+  }
+ ],
+ "relationships": [
+  {
+   "src": "region:nile_delta",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:levant",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:sahara_margin",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:italy_balkans",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:anatolia",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:anomalies",
+   "type": "NEXT",
+   "dst": "method:theil_sen",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:theil_sen",
+   "type": "NEXT",
+   "dst": "method:mk_hamed_rao",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:mk_hamed_rao",
+   "type": "NEXT",
+   "dst": "method:bh_fdr",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:bh_fdr",
+   "type": "NEXT",
+   "dst": "method:regional_mean",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:regional_mean",
+   "type": "NEXT",
+   "dst": "method:years_needed",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:years_needed",
+   "type": "NEXT",
+   "dst": "method:radar_ranking",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:radar_ranking",
+   "type": "NEXT",
+   "dst": "method:opposite_trends",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "method:opposite_trends",
+   "type": "NEXT",
+   "dst": "method:kmeans_clusters",
+   "updated_at": "2026-11-15T04:25:01+00:00",
+   "confidence": 1.0,
+   "source": "graph/strategy.yaml",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:anomalies",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:theil_sen",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:mk_hamed_rao",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:bh_fdr",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:regional_mean",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:years_needed",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:radar_ranking",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:opposite_trends",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "type": "USED_METHOD",
+   "dst": "method:kmeans_clusters",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "type": "CO_OCCURS_WITH",
+   "dst": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "overlap": 0.83,
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "shared_cells": 412
+  },
+  {
+   "src": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "type": "CO_OCCURS_WITH",
+   "dst": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "overlap": 0.91,
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "shared_cells": 349
+  },
+  {
+   "src": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "type": "CO_OCCURS_WITH",
+   "dst": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "overlap": 0.58,
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "shared_cells": 221
+  },
+  {
+   "src": "finding:t2m:iberia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:iberia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:iberia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:iberia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:iberia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:iberia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:iberia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:iberia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:iberia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:maghreb:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:maghreb",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:maghreb:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:maghreb:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:maghreb:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:maghreb",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:maghreb:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:maghreb:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GPM_3IMERGM/precipitation",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:maghreb",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:tunisia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:tunisia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:tunisia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:tunisia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:tunisia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:tunisia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:tunisia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:precip:tunisia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GPM_3IMERGM/precipitation",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:tunisia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:nile_delta:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:nile_delta",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:nile_delta:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:nile_delta:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:nile_delta",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:levant:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "type": "OPPOSITE_OF",
+   "dst": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "variable": "soil_moisture",
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:et:nile_delta:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:nile_delta",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:et:nile_delta:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:et:nile_delta:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:nile_delta:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:nile_delta",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:nile_delta:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:nile_delta:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:levant:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:levant",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:levant:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:levant:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:levant:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:levant",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:levant:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:levant:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:levant:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:levant",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:levant:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:levant:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:sahara_margin:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:sahara_margin",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:sahara_margin:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:sahara_margin:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:sahara_margin",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:italy_balkans:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:italy_balkans",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:italy_balkans:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:italy_balkans:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:italy_balkans",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:italy_balkans:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:italy_balkans",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:italy_balkans:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:italy_balkans:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:anatolia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:anatolia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:anatolia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:t2m:anatolia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:anatolia:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:anatolia",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:anatolia:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:ndvi:anatolia:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "down"
+  },
+  {
+   "src": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "up"
+  },
+  {
+   "src": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "down"
+  },
+  {
+   "src": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "up"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "IN_REGION",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "FROM_ANALYSIS",
+   "dst": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "up"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "up"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "down"
+  },
+  {
+   "src": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "type": "ABOUT",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:25:51+00:00",
+   "confidence": 1.0,
+   "source": "EarthSleuth engine run 2026-11-15T04:08Z-42df9ed",
+   "created_by": "code",
+   "status": "verified",
+   "direction": "up"
+  },
+  {
+   "src": "dataset:M2TMNXSLV_v5.12.4",
+   "type": "HAS_VARIABLE",
+   "dst": "var:M2TMNXSLV/T2M",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "mission:merra_2",
+   "type": "PROVIDES",
+   "dst": "dataset:M2TMNXSLV_v5.12.4",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "source": "NASA CMR",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "dataset:GPM_3IMERGM_v07",
+   "type": "HAS_VARIABLE",
+   "dst": "var:GPM_3IMERGM/precipitation",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "mission:imerg",
+   "type": "PROVIDES",
+   "dst": "dataset:GPM_3IMERGM_v07",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "source": "NASA CMR",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "dataset:GLDAS_NOAH025_M_v2.1",
+   "type": "HAS_VARIABLE",
+   "dst": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "updated_at": "2026-11-15T04:24:17+00:00",
+   "confidence": 1.0,
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "dataset:GLDAS_NOAH025_M_v2.1",
+   "type": "HAS_VARIABLE",
+   "dst": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "mission:noah_lsm",
+   "type": "PROVIDES",
+   "dst": "dataset:GLDAS_NOAH025_M_v2.1",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "source": "NASA CMR",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "dataset:MOD13C2_v061",
+   "type": "HAS_VARIABLE",
+   "dst": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header MOD13C2.A2001001.061.2020061230446.hdf",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "mission:terra",
+   "type": "CARRIES",
+   "dst": "instrument:modis",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "source": "NASA CMR",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "instrument:modis",
+   "type": "PROVIDES",
+   "dst": "dataset:MOD13C2_v061",
+   "updated_at": "2026-11-15T04:24:08+00:00",
+   "confidence": 1.0,
+   "source": "NASA CMR",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "type": "IN_DATASET",
+   "dst": "dataset:GLDAS_NOAH025_M_v2.1",
+   "updated_at": "2026-11-15T04:24:17+00:00",
+   "confidence": 1.0,
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "type": "INDICATOR_OF",
+   "dst": "concept:evaporative_demand",
+   "reason": "Evapotranspiration shows how much water the atmosphere is pulling from the surface.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "type": "INDICATOR_OF",
+   "dst": "concept:water_cycle",
+   "reason": "Evapotranspiration is a key part of the water cycle, returning water to the air.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "type": "DRAWN_AS",
+   "dst": "chart:diverging_trend_map",
+   "updated_at": "2026-11-15T04:25:10+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "type": "IN_DATASET",
+   "dst": "dataset:MOD13C2_v061",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header MOD13C2.A2001001.061.2020061230446.hdf",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "type": "INDICATOR_OF",
+   "dst": "concept:drought",
+   "reason": "A decrease in NDVI can indicate that plants are suffering from drought.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "type": "INDICATOR_OF",
+   "dst": "concept:vegetation_health",
+   "reason": "NDVI directly measures the greenness and health of plants.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+   "type": "DRAWN_AS",
+   "dst": "chart:diverging_trend_map",
+   "updated_at": "2026-11-15T04:25:10+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GPM_3IMERGM/precipitation",
+   "type": "IN_DATASET",
+   "dst": "dataset:GPM_3IMERGM_v07",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GPM_3IMERGM/precipitation",
+   "type": "INDICATOR_OF",
+   "dst": "concept:water_availability",
+   "reason": "More precipitation means more water is available for ecosystems and human use.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GPM_3IMERGM/precipitation",
+   "type": "INDICATOR_OF",
+   "dst": "concept:drought",
+   "reason": "A lack of precipitation is the primary cause of drought.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GPM_3IMERGM/precipitation",
+   "type": "INDICATOR_OF",
+   "dst": "concept:water_cycle",
+   "reason": "Precipitation is the main way water returns to the Earth's surface in the water cycle.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GPM_3IMERGM/precipitation",
+   "type": "DRAWN_AS",
+   "dst": "chart:diverging_trend_map",
+   "updated_at": "2026-11-15T04:25:10+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "type": "IN_DATASET",
+   "dst": "dataset:GLDAS_NOAH025_M_v2.1",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header GLDAS_NOAH025_M.A200101.021.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "type": "INDICATOR_OF",
+   "dst": "concept:water_availability",
+   "reason": "Soil moisture indicates how much water is available in the ground for plants.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "type": "INDICATOR_OF",
+   "dst": "concept:drought",
+   "reason": "Low soil moisture is a direct indicator of agricultural drought.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+   "type": "DRAWN_AS",
+   "dst": "chart:diverging_trend_map",
+   "updated_at": "2026-11-15T04:25:10+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "IN_DATASET",
+   "dst": "dataset:M2TMNXSLV_v5.12.4",
+   "updated_at": "2026-11-15T04:24:18+00:00",
+   "confidence": 1.0,
+   "source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "INDICATOR_OF",
+   "dst": "concept:surface_heating",
+   "reason": "Air temperature at 2 meters directly measures how much the surface is heating up.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "INDICATOR_OF",
+   "dst": "concept:drought",
+   "reason": "Higher temperatures can worsen drought by increasing evaporation.",
+   "updated_at": "2026-11-15T04:24:38+00:00",
+   "confidence": 0.9,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "DRAWN_AS",
+   "dst": "chart:diverging_trend_map",
+   "updated_at": "2026-11-15T04:25:10+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "INFLUENCES",
+   "dst": "var:GLDAS_NOAH025_M/Evap_tavg",
+   "quote": "greater atmospheric evaporative demand resulting from temperature rise.",
+   "updated_at": "2026-11-15T04:25:32+00:00",
+   "confidence": 0.8,
+   "sign": "+",
+   "source": "DOI 10.1088/1748-9326/9/4/044001",
+   "created_by": "curator",
+   "paper_id": "paper:10.1088/1748-9326/9/4/044001",
+   "status": "from_paper"
+  },
+  {
+   "src": "var:M2TMNXSLV/T2M",
+   "type": "SUPPORTED_BY",
+   "dst": "paper:10.1088/1748-9326/9/4/044001",
+   "updated_at": "2026-11-15T04:25:32+00:00",
+   "confidence": 1.0,
+   "about": "INFLUENCES var:GLDAS_NOAH025_M/Evap_tavg",
+   "source": "DOI 10.1088/1748-9326/9/4/044001",
+   "created_by": "curator",
+   "status": "from_paper"
+  },
+  {
+   "src": "region:iberia",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:maghreb",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  },
+  {
+   "src": "region:tunisia",
+   "type": "PART_OF",
+   "dst": "region:mediterranean_north_africa",
+   "updated_at": "2026-11-15T04:24:54+00:00",
+   "confidence": 1.0,
+   "source": "curator",
+   "created_by": "curator",
+   "status": "verified"
+  }
+ ]
+}

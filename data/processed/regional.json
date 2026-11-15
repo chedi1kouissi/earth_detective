@@ -1,0 +1,1726 @@
+{
+  "results": {
+    "t2m": {
+      "variable": "t2m",
+      "display_name": "Air temperature at 2 m",
+      "unit": "degC per decade",
+      "region": "mediterranean_north_africa",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "regional": {
+        "slope_per_decade": 0.48761659660261386,
+        "ci95": [
+          0.36873532705691725,
+          0.6087019464876052
+        ],
+        "p": 1.1572786509095323e-06,
+        "significant": true,
+        "tau": 0.29287650019357336,
+        "n_months": 288,
+        "years_needed": null
+      },
+      "cells": {
+        "n": 743,
+        "n_tested": 743,
+        "sig_up": 618,
+        "sig_down": 0,
+        "pct_sig_area": 81.8,
+        "pct_sig_up_area": 81.8,
+        "pct_sig_down_area": 0.0
+      },
+      "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+      "datasets": [
+        "M2TMNXSLV v5.12.4"
+      ],
+      "run_id": "2026-11-15T04:08Z-42df9ed",
+      "warnings": [],
+      "synthetic": false
+    },
+    "precip": {
+      "variable": "precip",
+      "display_name": "Precipitation",
+      "unit": "mm/month per decade",
+      "region": "mediterranean_north_africa",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "regional": {
+        "slope_per_decade": -1.1813048716823535,
+        "ci95": [
+          -2.3677824460012076,
+          -0.016049273797607084
+        ],
+        "p": 0.11680616132477528,
+        "significant": false,
+        "tau": -0.07863917924893535,
+        "n_months": 288,
+        "years_needed": 39.817778128585
+      },
+      "cells": {
+        "n": 743,
+        "n_tested": 740,
+        "sig_up": 18,
+        "sig_down": 46,
+        "pct_sig_area": 9.0,
+        "pct_sig_up_area": 2.6,
+        "pct_sig_down_area": 6.4
+      },
+      "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+      "datasets": [
+        "GPM_3IMERGM v07"
+      ],
+      "run_id": "2026-11-15T04:08Z-42df9ed",
+      "warnings": [],
+      "synthetic": false
+    },
+    "soil_moisture": {
+      "variable": "soil_moisture",
+      "display_name": "Soil moisture (0-10 cm)",
+      "unit": "kg m-2 per decade",
+      "region": "mediterranean_north_africa",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "regional": {
+        "slope_per_decade": -0.5847745682218568,
+        "ci95": [
+          -0.7332858433339058,
+          -0.44487261234559794
+        ],
+        "p": 5.465251202263488e-06,
+        "significant": true,
+        "tau": -0.30129694154084397,
+        "n_months": 288,
+        "years_needed": null
+      },
+      "cells": {
+        "n": 743,
+        "n_tested": 740,
+        "sig_up": 62,
+        "sig_down": 432,
+        "pct_sig_area": 67.3,
+        "pct_sig_up_area": 8.9,
+        "pct_sig_down_area": 58.3
+      },
+      "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+      "datasets": [
+        "GLDAS_NOAH025_M v2.1"
+      ],
+      "run_id": "2026-11-15T04:08Z-42df9ed",
+      "warnings": [],
+      "synthetic": false
+    },
+    "et": {
+      "variable": "et",
+      "display_name": "Evapotranspiration",
+      "unit": "mm/day per decade",
+      "region": "mediterranean_north_africa",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "regional": {
+        "slope_per_decade": -0.0007951988176121175,
+        "ci95": [
+          -0.011578105223653547,
+          0.009608361248321791
+        ],
+        "p": 0.9451096366396974,
+        "significant": false,
+        "tau": -0.005807200929152149,
+        "n_months": 288,
+        "years_needed": 279.4148935329326
+      },
+      "cells": {
+        "n": 743,
+        "n_tested": 743,
+        "sig_up": 194,
+        "sig_down": 146,
+        "pct_sig_area": 45.8,
+        "pct_sig_up_area": 25.6,
+        "pct_sig_down_area": 20.2
+      },
+      "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+      "datasets": [
+        "GLDAS_NOAH025_M v2.1"
+      ],
+      "run_id": "2026-11-15T04:08Z-42df9ed",
+      "warnings": [],
+      "synthetic": false
+    },
+    "ndvi": {
+      "variable": "ndvi",
+      "display_name": "Vegetation greenness (NDVI)",
+      "unit": "NDVI units per decade",
+      "region": "mediterranean_north_africa",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "regional": {
+        "slope_per_decade": 0.00616674573960305,
+        "ci95": [
+          0.004885680665652849,
+          0.007446286494724324
+        ],
+        "p": 5.860667132040476e-06,
+        "significant": true,
+        "tau": 0.3536101432442896,
+        "n_months": 288,
+        "years_needed": null
+      },
+      "cells": {
+        "n": 743,
+        "n_tested": 740,
+        "sig_up": 329,
+        "sig_down": 53,
+        "pct_sig_area": 50.1,
+        "pct_sig_up_area": 42.5,
+        "pct_sig_down_area": 7.6
+      },
+      "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+      "datasets": [
+        "MOD13C2 v061"
+      ],
+      "run_id": "2026-11-15T04:08Z-42df9ed",
+      "warnings": [],
+      "synthetic": false
+    }
+  },
+  "sub_results": {
+    "t2m": {
+      "iberia": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "iberia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.5866101923991905,
+          "ci95": [
+            0.3835903179439788,
+            0.7892770456040425
+          ],
+          "p": 0.0,
+          "significant": true,
+          "tau": 0.21738288811459544,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 72,
+          "n_tested": 72,
+          "sig_up": 72,
+          "sig_down": 0,
+          "pct_sig_area": 100.0,
+          "pct_sig_up_area": 100.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "maghreb": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "maghreb",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.4444066521838875,
+          "ci95": [
+            0.2535002708914539,
+            0.6341380032508577
+          ],
+          "p": 0.022718524221531977,
+          "significant": true,
+          "tau": 0.17905536198219124,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 170,
+          "n_tested": 170,
+          "sig_up": 146,
+          "sig_down": 0,
+          "pct_sig_area": 85.6,
+          "pct_sig_up_area": 85.6,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "tunisia": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "tunisia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.4066225656098581,
+          "ci95": [
+            0.20862674580490187,
+            0.6053298454910856
+          ],
+          "p": 0.010874145631694088,
+          "significant": true,
+          "tau": 0.15752032520325204,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 31,
+          "n_tested": 31,
+          "sig_up": 21,
+          "sig_down": 0,
+          "pct_sig_area": 67.0,
+          "pct_sig_up_area": 67.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "nile_delta": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "nile_delta",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.2972312727112561,
+          "ci95": [
+            0.11618053344284444,
+            0.47391784240437484
+          ],
+          "p": 0.0023444348479353394,
+          "significant": true,
+          "tau": 0.1251451800232288,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 25,
+          "n_tested": 25,
+          "sig_up": 25,
+          "sig_down": 0,
+          "pct_sig_area": 100.0,
+          "pct_sig_up_area": 100.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "levant": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "levant",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.4533652915915192,
+          "ci95": [
+            0.26442774855031104,
+            0.641846914193332
+          ],
+          "p": 9.197359858492682e-05,
+          "significant": true,
+          "tau": 0.17842624854819977,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 40,
+          "n_tested": 40,
+          "sig_up": 40,
+          "sig_down": 0,
+          "pct_sig_area": 100.0,
+          "pct_sig_up_area": 100.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "sahara_margin": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "sahara_margin",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.24979203304093767,
+          "ci95": [
+            0.10515253244825118,
+            0.3926021199735976
+          ],
+          "p": 0.009767883909588049,
+          "significant": true,
+          "tau": 0.13109756097560976,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 200,
+          "n_tested": 200,
+          "sig_up": 73,
+          "sig_down": 0,
+          "pct_sig_area": 36.5,
+          "pct_sig_up_area": 36.5,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "italy_balkans": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "italy_balkans",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.7819378377193273,
+          "ci95": [
+            0.5594445166570955,
+            0.9984054454683526
+          ],
+          "p": 6.869519617591635e-07,
+          "significant": true,
+          "tau": 0.2619047619047619,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 129,
+          "n_tested": 129,
+          "sig_up": 129,
+          "sig_down": 0,
+          "pct_sig_area": 100.0,
+          "pct_sig_up_area": 100.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "anatolia": {
+        "variable": "t2m",
+        "display_name": "Air temperature at 2 m",
+        "unit": "degC per decade",
+        "region": "anatolia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.6022998629815355,
+          "ci95": [
+            0.3630889600078646,
+            0.8571689398936835
+          ],
+          "p": 8.106416516562298e-05,
+          "significant": true,
+          "tau": 0.18902439024390244,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 67,
+          "n_tested": 67,
+          "sig_up": 67,
+          "sig_down": 0,
+          "pct_sig_area": 100.0,
+          "pct_sig_up_area": 100.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "M2TMNXSLV v5.12.4"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      }
+    },
+    "precip": {
+      "iberia": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "iberia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.34428340674836677,
+          "ci95": [
+            -4.234194841646278,
+            3.5158597603398656
+          ],
+          "p": 0.8917941444154367,
+          "significant": false,
+          "tau": -0.006533101045296167,
+          "n_months": 288,
+          "years_needed": 221.52524518953942
+        },
+        "cells": {
+          "n": 72,
+          "n_tested": 72,
+          "sig_up": 0,
+          "sig_down": 0,
+          "pct_sig_area": 0.0,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "maghreb": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "maghreb",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -1.997147655637959,
+          "ci95": [
+            -3.3082372155050876,
+            -0.7483383828844725
+          ],
+          "p": 0.023325621457927825,
+          "significant": true,
+          "tau": -0.12659698025551683,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 170,
+          "n_tested": 168,
+          "sig_up": 0,
+          "sig_down": 66,
+          "pct_sig_area": 39.1,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 39.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "tunisia": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "tunisia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -1.8900313515202916,
+          "ci95": [
+            -3.6383869578797605,
+            -0.23747256559350421
+          ],
+          "p": 0.008239479079193313,
+          "significant": true,
+          "tau": -0.08943089430894309,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 31,
+          "n_tested": 31,
+          "sig_up": 0,
+          "sig_down": 14,
+          "pct_sig_area": 44.5,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 44.5
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "nile_delta": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "nile_delta",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.00679407349819972,
+          "ci95": [
+            -0.077484186855003,
+            0.14395668068556405
+          ],
+          "p": 0.7238205489589886,
+          "significant": false,
+          "tau": 0.014034068912117692,
+          "n_months": 288,
+          "years_needed": 637.4056476083824
+        },
+        "cells": {
+          "n": 25,
+          "n_tested": 24,
+          "sig_up": 2,
+          "sig_down": 0,
+          "pct_sig_area": 8.4,
+          "pct_sig_up_area": 8.4,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "levant": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "levant",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.45355501517321534,
+          "ci95": [
+            -1.5598217578006408,
+            0.3475665641810105
+          ],
+          "p": 0.28707996848161943,
+          "significant": false,
+          "tau": -0.04229578010065815,
+          "n_months": 288,
+          "years_needed": 87.80762273246934
+        },
+        "cells": {
+          "n": 40,
+          "n_tested": 40,
+          "sig_up": 0,
+          "sig_down": 2,
+          "pct_sig_area": 4.9,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 4.9
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "sahara_margin": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "sahara_margin",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.2528804407134149,
+          "ci95": [
+            -0.5742654506015272,
+            0.038293497684276465
+          ],
+          "p": 0.18445748828833297,
+          "significant": false,
+          "tau": -0.06547619047619048,
+          "n_months": 288,
+          "years_needed": 54.138059746391384
+        },
+        "cells": {
+          "n": 200,
+          "n_tested": 198,
+          "sig_up": 9,
+          "sig_down": 22,
+          "pct_sig_area": 15.6,
+          "pct_sig_up_area": 4.5,
+          "pct_sig_down_area": 11.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "italy_balkans": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "italy_balkans",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.7262207657151343,
+          "ci95": [
+            -5.066813180851434,
+            3.5647323634129755
+          ],
+          "p": 0.6808420188694335,
+          "significant": false,
+          "tau": -0.013453348819202477,
+          "n_months": 288,
+          "years_needed": 117.97548785893194
+        },
+        "cells": {
+          "n": 129,
+          "n_tested": 129,
+          "sig_up": 1,
+          "sig_down": 0,
+          "pct_sig_area": 0.8,
+          "pct_sig_up_area": 0.8,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "anatolia": {
+        "variable": "precip",
+        "display_name": "Precipitation",
+        "unit": "mm/month per decade",
+        "region": "anatolia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.13123386978184826,
+          "ci95": [
+            -3.3717575178658987,
+            3.671320919634255
+          ],
+          "p": 0.9445965919627033,
+          "significant": false,
+          "tau": 0.003193960511033682,
+          "n_months": 288,
+          "years_needed": 338.0301571978695
+        },
+        "cells": {
+          "n": 67,
+          "n_tested": 67,
+          "sig_up": 0,
+          "sig_down": 0,
+          "pct_sig_area": 0.0,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GPM_3IMERGM v07"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      }
+    },
+    "soil_moisture": {
+      "iberia": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "iberia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.7550647764886824,
+          "ci95": [
+            -1.0351144807914263,
+            -0.4613205106096485
+          ],
+          "p": 0.0001652074510778423,
+          "significant": true,
+          "tau": -0.19415408439798684,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 72,
+          "n_tested": 71,
+          "sig_up": 2,
+          "sig_down": 46,
+          "pct_sig_area": 67.9,
+          "pct_sig_up_area": 2.7,
+          "pct_sig_down_area": 65.2
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "maghreb": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "maghreb",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -1.072836426282488,
+          "ci95": [
+            -1.315096761122332,
+            -0.8078352414423239
+          ],
+          "p": 0.0004486715709017819,
+          "significant": true,
+          "tau": -0.2991676345334882,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 170,
+          "n_tested": 170,
+          "sig_up": 0,
+          "sig_down": 155,
+          "pct_sig_area": 91.1,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 91.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "tunisia": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "tunisia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.9358660265381148,
+          "ci95": [
+            -1.2107943479544188,
+            -0.665918302927654
+          ],
+          "p": 0.00041916105718731167,
+          "significant": true,
+          "tau": -0.25653310104529614,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 31,
+          "n_tested": 31,
+          "sig_up": 0,
+          "sig_down": 26,
+          "pct_sig_area": 83.5,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 83.5
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "nile_delta": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "nile_delta",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.07729277626602299,
+          "ci95": [
+            -0.006288914400696279,
+            0.17309574671036254
+          ],
+          "p": 0.015847924806098757,
+          "significant": true,
+          "tau": 0.07055749128919861,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 25,
+          "n_tested": 25,
+          "sig_up": 10,
+          "sig_down": 1,
+          "pct_sig_area": 44.2,
+          "pct_sig_up_area": 40.3,
+          "pct_sig_down_area": 3.9
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "levant": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "levant",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.17355699100391608,
+          "ci95": [
+            -0.39248997863125634,
+            0.019779646634246396
+          ],
+          "p": 0.04451086253086323,
+          "significant": true,
+          "tau": -0.0689121176926055,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 40,
+          "n_tested": 40,
+          "sig_up": 3,
+          "sig_down": 16,
+          "pct_sig_area": 46.8,
+          "pct_sig_up_area": 7.7,
+          "pct_sig_down_area": 39.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "sahara_margin": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "sahara_margin",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.30069693971247996,
+          "ci95": [
+            -0.4198627511838079,
+            -0.18342839357147048
+          ],
+          "p": 0.0005287136665099723,
+          "significant": true,
+          "tau": -0.19367015098722415,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 200,
+          "n_tested": 199,
+          "sig_up": 28,
+          "sig_down": 119,
+          "pct_sig_area": 73.7,
+          "pct_sig_up_area": 14.0,
+          "pct_sig_down_area": 59.7
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "italy_balkans": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "italy_balkans",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.7317179392763047,
+          "ci95": [
+            -1.0622304838577348,
+            -0.41468846784309094
+          ],
+          "p": 0.006709514302899455,
+          "significant": true,
+          "tau": -0.17494192799070848,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 129,
+          "n_tested": 129,
+          "sig_up": 1,
+          "sig_down": 69,
+          "pct_sig_area": 54.2,
+          "pct_sig_up_area": 0.8,
+          "pct_sig_down_area": 53.4
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "anatolia": {
+        "variable": "soil_moisture",
+        "display_name": "Soil moisture (0-10 cm)",
+        "unit": "kg m-2 per decade",
+        "region": "anatolia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.37989348183940497,
+          "ci95": [
+            -0.7116815483445477,
+            -0.05503286953776248
+          ],
+          "p": 0.08614528914259623,
+          "significant": false,
+          "tau": -0.09025358110723965,
+          "n_months": 288,
+          "years_needed": 42.70260767746688
+        },
+        "cells": {
+          "n": 67,
+          "n_tested": 67,
+          "sig_up": 2,
+          "sig_down": 21,
+          "pct_sig_area": 34.5,
+          "pct_sig_up_area": 2.9,
+          "pct_sig_down_area": 31.6
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      }
+    },
+    "et": {
+      "iberia": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "iberia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.0025594770900759923,
+          "ci95": [
+            -0.027404416636472372,
+            0.022178500007244965
+          ],
+          "p": 0.8877675953077775,
+          "significant": false,
+          "tau": -0.007984901277584205,
+          "n_months": 288,
+          "years_needed": 230.89653554615953
+        },
+        "cells": {
+          "n": 72,
+          "n_tested": 72,
+          "sig_up": 14,
+          "sig_down": 13,
+          "pct_sig_area": 37.5,
+          "pct_sig_up_area": 19.3,
+          "pct_sig_down_area": 18.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "maghreb": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "maghreb",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.04562489752774958,
+          "ci95": [
+            -0.0642236349147582,
+            -0.026253188306949428
+          ],
+          "p": 0.07377006459481028,
+          "significant": false,
+          "tau": -0.17499032133178474,
+          "n_months": 288,
+          "years_needed": 31.14582612783741
+        },
+        "cells": {
+          "n": 170,
+          "n_tested": 170,
+          "sig_up": 0,
+          "sig_down": 47,
+          "pct_sig_area": 27.9,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 27.9
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "tunisia": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "tunisia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.030200804622134557,
+          "ci95": [
+            -0.05280622112560584,
+            -0.00619106232177824
+          ],
+          "p": 0.2631964020882398,
+          "significant": false,
+          "tau": -0.09644792876500194,
+          "n_months": 288,
+          "years_needed": 41.339041095716524
+        },
+        "cells": {
+          "n": 31,
+          "n_tested": 31,
+          "sig_up": 0,
+          "sig_down": 4,
+          "pct_sig_area": 12.8,
+          "pct_sig_up_area": 0.0,
+          "pct_sig_down_area": 12.8
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "nile_delta": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "nile_delta",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.011531039472767736,
+          "ci95": [
+            0.006204036717922523,
+            0.017881532690442327
+          ],
+          "p": 0.0003434487068016967,
+          "significant": true,
+          "tau": 0.1892179636082075,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 25,
+          "n_tested": 25,
+          "sig_up": 20,
+          "sig_down": 0,
+          "pct_sig_area": 80.2,
+          "pct_sig_up_area": 80.2,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "levant": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "levant",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.0016938394261088712,
+          "ci95": [
+            -0.018888524848131177,
+            0.014211289323888961
+          ],
+          "p": 0.8390684878583494,
+          "significant": false,
+          "tau": -0.008372048006194347,
+          "n_months": 288,
+          "years_needed": 206.89834420278862
+        },
+        "cells": {
+          "n": 40,
+          "n_tested": 40,
+          "sig_up": 9,
+          "sig_down": 3,
+          "pct_sig_area": 30.4,
+          "pct_sig_up_area": 23.1,
+          "pct_sig_down_area": 7.3
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "sahara_margin": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "sahara_margin",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.00684867665974078,
+          "ci95": [
+            -0.014165071945644763,
+            0.000303825966180175
+          ],
+          "p": 0.180416688165713,
+          "significant": false,
+          "tau": -0.0741869918699187,
+          "n_months": 288,
+          "years_needed": 54.441447950547854
+        },
+        "cells": {
+          "n": 200,
+          "n_tested": 200,
+          "sig_up": 40,
+          "sig_down": 67,
+          "pct_sig_area": 53.5,
+          "pct_sig_up_area": 20.0,
+          "pct_sig_down_area": 33.5
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "italy_balkans": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "italy_balkans",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.029241375582772393,
+          "ci95": [
+            0.002387924240373182,
+            0.054169577374393096
+          ],
+          "p": 0.053949234499253595,
+          "significant": false,
+          "tau": 0.08396244676732481,
+          "n_months": 288,
+          "years_needed": 45.585406751212645
+        },
+        "cells": {
+          "n": 129,
+          "n_tested": 129,
+          "sig_up": 64,
+          "sig_down": 17,
+          "pct_sig_area": 62.0,
+          "pct_sig_up_area": 48.4,
+          "pct_sig_down_area": 13.6
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "anatolia": {
+        "variable": "et",
+        "display_name": "Evapotranspiration",
+        "unit": "mm/day per decade",
+        "region": "anatolia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.022575945317002948,
+          "ci95": [
+            -0.005556865963514516,
+            0.050408509490096405
+          ],
+          "p": 0.2950439584232374,
+          "significant": false,
+          "tau": 0.06112078977932636,
+          "n_months": 288,
+          "years_needed": 51.139335169898615
+        },
+        "cells": {
+          "n": 67,
+          "n_tested": 67,
+          "sig_up": 16,
+          "sig_down": 2,
+          "pct_sig_area": 26.7,
+          "pct_sig_up_area": 23.6,
+          "pct_sig_down_area": 3.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "GLDAS_NOAH025_M v2.1"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      }
+    },
+    "ndvi": {
+      "iberia": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "iberia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.01398792365163314,
+          "ci95": [
+            0.010581723267087258,
+            0.01772732951226733
+          ],
+          "p": 1.3800960374510396e-11,
+          "significant": true,
+          "tau": 0.2918602400309717,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 72,
+          "n_tested": 69,
+          "sig_up": 58,
+          "sig_down": 0,
+          "pct_sig_area": 83.5,
+          "pct_sig_up_area": 83.5,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "maghreb": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "maghreb",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.001965992709321792,
+          "ci95": [
+            -0.003559972443281394,
+            -0.00035248860288968656
+          ],
+          "p": 0.5220256245954449,
+          "significant": false,
+          "tau": -0.09402826171118854,
+          "n_months": 288,
+          "years_needed": 73.1506935553681
+        },
+        "cells": {
+          "n": 170,
+          "n_tested": 170,
+          "sig_up": 2,
+          "sig_down": 16,
+          "pct_sig_area": 10.8,
+          "pct_sig_up_area": 1.2,
+          "pct_sig_down_area": 9.6
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "tunisia": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "tunisia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -0.0008877001700198189,
+          "ci95": [
+            -0.002603602882302658,
+            0.000868410363555894
+          ],
+          "p": 0.7038571588497495,
+          "significant": false,
+          "tau": -0.04006968641114982,
+          "n_months": 288,
+          "years_needed": 124.90361323175479
+        },
+        "cells": {
+          "n": 31,
+          "n_tested": 31,
+          "sig_up": 1,
+          "sig_down": 3,
+          "pct_sig_area": 13.2,
+          "pct_sig_up_area": 3.2,
+          "pct_sig_down_area": 9.9
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "nile_delta": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "nile_delta",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.0020497075014386237,
+          "ci95": [
+            0.0015738575469767574,
+            0.0025287806781734866
+          ],
+          "p": 4.388396224186408e-08,
+          "significant": true,
+          "tau": 0.31687959736740223,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 25,
+          "n_tested": 25,
+          "sig_up": 12,
+          "sig_down": 7,
+          "pct_sig_area": 76.1,
+          "pct_sig_up_area": 48.0,
+          "pct_sig_down_area": 28.1
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:08Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "levant": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "levant",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.004560777830581089,
+          "ci95": [
+            0.002842693449596761,
+            0.006276463045107232
+          ],
+          "p": 0.02414898780546948,
+          "significant": true,
+          "tau": 0.20668795973674023,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 40,
+          "n_tested": 40,
+          "sig_up": 26,
+          "sig_down": 0,
+          "pct_sig_area": 65.3,
+          "pct_sig_up_area": 65.3,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "sahara_margin": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "sahara_margin",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": -8.943794250135947e-05,
+          "ci95": [
+            -0.00030509878181919837,
+            0.0001299612161514874
+          ],
+          "p": 0.7145482913318355,
+          "significant": false,
+          "tau": -0.031794425087108016,
+          "n_months": 288,
+          "years_needed": 106.91429777544784
+        },
+        "cells": {
+          "n": 200,
+          "n_tested": 200,
+          "sig_up": 30,
+          "sig_down": 20,
+          "pct_sig_area": 25.0,
+          "pct_sig_up_area": 15.0,
+          "pct_sig_down_area": 9.9
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "italy_balkans": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "italy_balkans",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.01640202335761422,
+          "ci95": [
+            0.012409023590029752,
+            0.02075597156123976
+          ],
+          "p": 3.6820610005428023e-07,
+          "significant": true,
+          "tau": 0.2866337591947348,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 129,
+          "n_tested": 129,
+          "sig_up": 111,
+          "sig_down": 0,
+          "pct_sig_area": 86.2,
+          "pct_sig_up_area": 86.2,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      },
+      "anatolia": {
+        "variable": "ndvi",
+        "display_name": "Vegetation greenness (NDVI)",
+        "unit": "NDVI units per decade",
+        "region": "anatolia",
+        "period": [
+          "2001-01",
+          "2024-12"
+        ],
+        "regional": {
+          "slope_per_decade": 0.021752125964207357,
+          "ci95": [
+            0.01772647873861162,
+            0.025811647325843276
+          ],
+          "p": 8.495684566289796e-06,
+          "significant": true,
+          "tau": 0.3464479287650019,
+          "n_months": 288,
+          "years_needed": null
+        },
+        "cells": {
+          "n": 67,
+          "n_tested": 67,
+          "sig_up": 62,
+          "sig_down": 0,
+          "pct_sig_area": 92.4,
+          "pct_sig_up_area": 92.4,
+          "pct_sig_down_area": 0.0
+        },
+        "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+        "datasets": [
+          "MOD13C2 v061"
+        ],
+        "run_id": "2026-11-15T04:09Z-42df9ed",
+        "warnings": [],
+        "synthetic": false
+      }
+    }
+  }
+}

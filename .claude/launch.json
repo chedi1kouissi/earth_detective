@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "earthsleuth-app",
+      "runtimeExecutable": "C:\\Users\\ASUS\\OneDrive\\Bureau\\earth_detective\\detective\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "streamlit", "run", "app/Home.py", "--server.headless", "true", "--server.port", "8501"],
+      "port": 8501
+    }
+  ]
+}

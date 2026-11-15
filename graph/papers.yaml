@@ -1,0 +1,31 @@
+# Papers the curator may add to the graph (Document 2, section 8.1: "do not add a paper nobody
+# has opened"). All DOIs below were checked against Crossref on 2026-11-14.
+#
+# BEFORE the curator can use a paper, a team member must:
+#   1. read it (at least the abstract),
+#   2. write their name in `read_by`,
+#   3. if `abstract` is empty and Crossref/OpenAlex do not provide it, paste the abstract here
+#      (the curator only accepts INFLUENCES quotes that really appear in the abstract).
+# Papers with an empty read_by are refused by the add_paper tool.
+
+papers:
+  - doi: 10.1029/2006GL025734
+    note: Giorgi (2006), Climate change hot-spots - the Mediterranean as a hot spot.
+    read_by: "chedi_kouissi"
+    abstract: ""
+  - doi: 10.1175/JCLI-D-19-0910.1
+    note: Tuel & Eltahir (2020), Why is the Mediterranean a climate change hot spot?
+    read_by: "chedi_kouissi"
+    abstract: ""
+  - doi: 10.1038/s41558-018-0299-2
+    note: Cramer et al. (2018), Climate change and interconnected risks in the Mediterranean.
+    read_by: "chedi_kouissi"
+    abstract: ""
+  - doi: 10.1016/j.earscirev.2010.02.004
+    note: Seneviratne et al. (2010), Soil moisture-climate interactions (review).
+    read_by: "chedi_kouissi"
+    abstract: ""
+  - doi: 10.1088/1748-9326/9/4/044001
+    note: Vicente-Serrano et al. (2014), Increasing drought severity from temperature rise in southern Europe.
+    read_by: "chedi_kouissi"
+    abstract: ""

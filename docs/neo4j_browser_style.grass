@@ -1,0 +1,137 @@
+/* EarthSleuth - Neo4j Browser style: one colour per node type (same colours as the app's Graph page).
+   Every node also carries the shared label :Entity. Its rule comes first so the
+   node-type rules below override it.
+   Load it: in Neo4j Browser run  :style  then drag this file onto the style panel. */
+
+node {
+  diameter: 50px;
+  color: #A5ABB6;
+  border-color: #9AA1AC;
+  border-width: 2px;
+  text-color-internal: #FFFFFF;
+  font-size: 10px;
+}
+
+relationship {
+  color: #9AA3AF;
+  shaft-width: 1px;
+  font-size: 8px;
+  padding: 3px;
+  text-color-external: #000000;
+  text-color-internal: #FFFFFF;
+  caption: "<type>";
+}
+
+node.Entity {
+  color: #A5ABB6;
+  border-color: #9AA1AC;
+  text-color-internal: #FFFFFF;
+  caption: "{id}";
+}
+
+/* ---- Layer A: knowledge (built by the curator agent) ---- */
+node.Mission {
+  color: #5B8DEF;
+  border-color: #3F6FCC;
+  text-color-internal: #FFFFFF;
+  diameter: 55px;
+  caption: "{name}";
+}
+
+node.Instrument {
+  color: #7FA7F5;
+  border-color: #5B8DEF;
+  text-color-internal: #FFFFFF;
+  caption: "{name}";
+}
+
+node.Dataset {
+  color: #1F5FA8;
+  border-color: #164679;
+  text-color-internal: #FFFFFF;
+  diameter: 65px;
+  caption: "{short_name}";
+}
+
+node.Variable {
+  color: #138A7E;
+  border-color: #0D6158;
+  text-color-internal: #FFFFFF;
+  diameter: 65px;
+  caption: "{display_name}";
+}
+
+node.Concept {
+  color: #E58A2B;
+  border-color: #B86A1C;
+  text-color-internal: #FFFFFF;
+  diameter: 65px;
+  caption: "{name}";
+}
+
+node.Region {
+  color: #8C6D46;
+  border-color: #6A5234;
+  text-color-internal: #FFFFFF;
+  diameter: 55px;
+  caption: "{name}";
+}
+
+node.Method {
+  color: #6A4FA0;
+  border-color: #4E3A77;
+  text-color-internal: #FFFFFF;
+  caption: "{name}";
+}
+
+node.ChartStyle {
+  color: #A08BC9;
+  border-color: #7E68AC;
+  text-color-internal: #FFFFFF;
+  caption: "{chart_type}";
+}
+
+node.Paper {
+  color: #C8423B;
+  border-color: #9A302B;
+  text-color-internal: #FFFFFF;
+  caption: "{title}";
+}
+
+node.HypothesisPattern {
+  color: #9C5BB5;
+  border-color: #7A448E;
+  text-color-internal: #FFFFFF;
+  caption: "{name}";
+}
+
+/* ---- Layer B: evidence (written by code and the investigator) ---- */
+node.Analysis {
+  color: #7A7F87;
+  border-color: #5B5F66;
+  text-color-internal: #FFFFFF;
+  caption: "{region}";
+}
+
+node.Finding {
+  color: #2E3440;
+  border-color: #1B1F26;
+  text-color-internal: #FFFFFF;
+  diameter: 40px;
+  caption: "{variable}";
+}
+
+node.Hypothesis {
+  color: #B04FC2;
+  border-color: #873C95;
+  text-color-internal: #FFFFFF;
+  caption: "{pattern}";
+}
+
+node.Investigation {
+  color: #D4A72C;
+  border-color: #A6821F;
+  text-color-internal: #2E3440;
+  diameter: 60px;
+  caption: "{question}";
+}

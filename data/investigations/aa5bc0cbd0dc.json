@@ -1,0 +1,712 @@
+{
+ "id": "investigation:aa5bc0cbd0dc",
+ "question": "Is Tunisia getting drier?",
+ "created": "2026-11-15T04:46:52+00:00",
+ "synthetic": false,
+ "steps": {
+  "Understand": {
+   "concepts": [
+    {
+     "id": "concept:drought",
+     "name": "drought",
+     "matched": [
+      "drier"
+     ]
+    }
+   ],
+   "region": "tunisia",
+   "region_name": "Tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "method": "Gemini (constrained to graph concepts) + graph synonyms",
+   "out_of_scope_reason": ""
+  },
+  "Plan": {
+   "question": "Is Tunisia getting drier?",
+   "concepts": [
+    "concept:drought"
+   ],
+   "variables": [
+    "ndvi",
+    "precip",
+    "soil_moisture",
+    "t2m"
+   ],
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "methods": [
+    "method:anomalies",
+    "method:theil_sen",
+    "method:mk_hamed_rao",
+    "method:bh_fdr",
+    "method:regional_mean",
+    "method:years_needed",
+    "method:radar_ranking",
+    "method:opposite_trends",
+    "method:kmeans_clusters"
+   ],
+   "outputs": [
+    "trend_maps",
+    "opposite_map",
+    "clusters",
+    "regional_series",
+    "explanation"
+   ],
+   "variable_details": [
+    {
+     "id": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+     "code_id": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+     "unit": "NDVI units",
+     "recipe": {
+      "name_in_file": "CMG 0.05 Deg Monthly NDVI",
+      "group": null,
+      "unit_native": "NDVI",
+      "conversion": "value * 0.0001",
+      "fill_value": -3000,
+      "scale_factor": 10000.0,
+      "source": "file header MOD13C2.A2001001.061.2020061230446.hdf"
+     },
+     "dataset": {
+      "id": "dataset:MOD13C2_v061",
+      "short_name": "MOD13C2",
+      "version": "061",
+      "title": "MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061",
+      "doi": "10.5067/MODIS/MOD13C2.061",
+      "cmr_concept_id": "C2565788914-LPCLOUD"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "index",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "A decrease in NDVI can indicate that plants are suffering from drought."
+      }
+     ]
+    },
+    {
+     "id": "var:GPM_3IMERGM/precipitation",
+     "code_id": "precip",
+     "display_name": "Precipitation",
+     "definition": "The amount of rain or snow that falls to the ground.",
+     "unit": "mm/month",
+     "recipe": {
+      "name_in_file": "precipitation",
+      "group": "Grid",
+      "unit_native": "mm/hr",
+      "conversion": "value * 24 * days_in_month",
+      "fill_value": -9999.900390625,
+      "scale_factor": null,
+      "source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5"
+     },
+     "dataset": {
+      "id": "dataset:GPM_3IMERGM_v07",
+      "short_name": "GPM_3IMERGM",
+      "version": "07",
+      "title": "GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07 (GPM_3IMERGM)",
+      "doi": "10.5067/GPM/IMERG/3B-MONTH/07",
+      "cmr_concept_id": "C2723754851-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "flux",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "A lack of precipitation is the primary cause of drought."
+      }
+     ]
+    },
+    {
+     "id": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+     "code_id": "soil_moisture",
+     "display_name": "Soil moisture (0-10 cm)",
+     "definition": "The amount of water held in the top layer of the soil.",
+     "unit": "kg m-2",
+     "recipe": {
+      "name_in_file": "SoilMoi0_10cm_inst",
+      "group": null,
+      "unit_native": "kg m-2",
+      "conversion": "none (1 kg/m2 = 1 mm of water)",
+      "fill_value": -9999.0,
+      "scale_factor": null,
+      "source": "file header GLDAS_NOAH025_M.A200101.021.nc4"
+     },
+     "dataset": {
+      "id": "dataset:GLDAS_NOAH025_M_v2.1",
+      "short_name": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "title": "GLDAS Noah Land Surface Model L4 monthly 0.25 x 0.25 degree V2.1 (GLDAS_NOAH025_M)",
+      "doi": "10.5067/SXAVCZFAQLNO",
+      "cmr_concept_id": "C1342986036-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "state",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "Low soil moisture is a direct indicator of agricultural drought."
+      }
+     ]
+    },
+    {
+     "id": "var:M2TMNXSLV/T2M",
+     "code_id": "t2m",
+     "display_name": "Air temperature at 2 m",
+     "definition": "The temperature of the air near the surface of the Earth.",
+     "unit": "degC",
+     "recipe": {
+      "name_in_file": "T2M",
+      "group": null,
+      "unit_native": "K",
+      "conversion": "value - 273.15",
+      "fill_value": 999999986991104.0,
+      "scale_factor": null,
+      "source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4"
+     },
+     "dataset": {
+      "id": "dataset:M2TMNXSLV_v5.12.4",
+      "short_name": "M2TMNXSLV",
+      "version": "5.12.4",
+      "title": "MERRA-2 tavgM_2d_slv_Nx: 2d,Monthly mean,Time-Averaged,Single-Level,Assimilation,Single-Level Diagnostics 0.625 x 0.5 degree V5.12.4 (M2TMNXSLV) ",
+      "doi": "10.5067/AP1B0BA5PD2K",
+      "cmr_concept_id": "C1276812859-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "state",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "Higher temperatures can worsen drought by increasing evaporation."
+      }
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  "Analyse": {
+   "results": {
+    "ndvi": {
+     "variable": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "unit": "NDVI units per decade",
+     "region": "tunisia",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -0.0008877001700198189,
+      "ci95": [
+       -0.002603602882302658,
+       0.000868410363555894
+      ],
+      "p": 0.7038571588497495,
+      "significant": false,
+      "tau": -0.04006968641114982,
+      "n_months": 288,
+      "years_needed": 124.90361323175479
+     },
+     "cells": {
+      "n": 31,
+      "n_tested": 31,
+      "sig_up": 1,
+      "sig_down": 3,
+      "pct_sig_area": 13.2,
+      "pct_sig_up_area": 3.2,
+      "pct_sig_down_area": 9.9
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "MOD13C2 v061"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "precip": {
+     "variable": "precip",
+     "display_name": "Precipitation",
+     "unit": "mm/month per decade",
+     "region": "tunisia",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -1.8900313515202916,
+      "ci95": [
+       -3.6383869578797605,
+       -0.23747256559350421
+      ],
+      "p": 0.008239479079193313,
+      "significant": true,
+      "tau": -0.08943089430894309,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 31,
+      "n_tested": 31,
+      "sig_up": 0,
+      "sig_down": 14,
+      "pct_sig_area": 44.5,
+      "pct_sig_up_area": 0.0,
+      "pct_sig_down_area": 44.5
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "GPM_3IMERGM v07"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "soil_moisture": {
+     "variable": "soil_moisture",
+     "display_name": "Soil moisture (0-10 cm)",
+     "unit": "kg m-2 per decade",
+     "region": "tunisia",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -0.9358660265381148,
+      "ci95": [
+       -1.2107943479544188,
+       -0.665918302927654
+      ],
+      "p": 0.00041916105718731167,
+      "significant": true,
+      "tau": -0.25653310104529614,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 31,
+      "n_tested": 31,
+      "sig_up": 0,
+      "sig_down": 26,
+      "pct_sig_area": 83.5,
+      "pct_sig_up_area": 0.0,
+      "pct_sig_down_area": 83.5
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "GLDAS_NOAH025_M v2.1"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "t2m": {
+     "variable": "t2m",
+     "display_name": "Air temperature at 2 m",
+     "unit": "degC per decade",
+     "region": "tunisia",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": 0.4066225656098581,
+      "ci95": [
+       0.20862674580490187,
+       0.6053298454910856
+      ],
+      "p": 0.010874145631694088,
+      "significant": true,
+      "tau": 0.15752032520325204,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 31,
+      "n_tested": 31,
+      "sig_up": 21,
+      "sig_down": 0,
+      "pct_sig_area": 67.0,
+      "pct_sig_up_area": 67.0,
+      "pct_sig_down_area": 0.0
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "M2TMNXSLV v5.12.4"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    }
+   },
+   "errors": {},
+   "opposite_patterns": [],
+   "opposite_pairs": [],
+   "co_occurs": [
+    {
+     "finding_a": "finding:precip:tunisia:2001-01_2024-12",
+     "finding_b": "finding:soil_moisture:tunisia:2001-01_2024-12",
+     "var_a": "precip",
+     "var_b": "soil_moisture",
+     "shared_cells": 14,
+     "overlap": 1.0
+    },
+    {
+     "finding_a": "finding:precip:tunisia:2001-01_2024-12",
+     "finding_b": "finding:t2m:tunisia:2001-01_2024-12",
+     "var_a": "precip",
+     "var_b": "t2m",
+     "shared_cells": 14,
+     "overlap": 1.0
+    },
+    {
+     "finding_a": "finding:soil_moisture:tunisia:2001-01_2024-12",
+     "finding_b": "finding:t2m:tunisia:2001-01_2024-12",
+     "var_a": "soil_moisture",
+     "var_b": "t2m",
+     "shared_cells": 19,
+     "overlap": 0.9
+    }
+   ]
+  },
+  "Record": {
+   "analysis": "analysis:2026-11-15T04:08Z-42df9ed:tunisia",
+   "findings": [
+    "finding:precip:tunisia:2001-01_2024-12",
+    "finding:soil_moisture:tunisia:2001-01_2024-12",
+    "finding:t2m:tunisia:2001-01_2024-12"
+   ],
+   "skipped": []
+  },
+  "Why?": {
+   "literature": [
+    {
+     "source_variable": "var:M2TMNXSLV/T2M",
+     "target_variable": "var:GLDAS_NOAH025_M/Evap_tavg",
+     "sign": "+",
+     "quote": "greater atmospheric evaporative demand resulting from temperature rise.",
+     "paper_id": "paper:10.1088/1748-9326/9/4/044001",
+     "paper_title": "Evidence of increasing drought severity caused by temperature rise in southern Europe",
+     "paper_year": 2014,
+     "doi": "10.1088/1748-9326/9/4/044001",
+     "status": "from_paper"
+    }
+   ],
+   "hypotheses": []
+  },
+  "Check": {
+   "attempts": [
+    {
+     "attempt": 1,
+     "unknown_numbers": [],
+     "seconds": 22.2
+    }
+   ],
+   "passed": true,
+   "mode": "gemini"
+  }
+ },
+ "llm_used": true,
+ "store": "neo4j",
+ "timings_s": {
+  "Understand": 3.84,
+  "Plan": 0.08,
+  "Analyse": 0.07,
+  "Record": 0.36,
+  "Why?": 0.06,
+  "Check": 22.18,
+  "Explain": 0.0
+ },
+ "methods": [
+  {
+   "id": "method:anomalies",
+   "name": "Remove the seasons (monthly anomalies)",
+   "stage": "statistics",
+   "order": 1,
+   "description": "Subtract the average of each calendar month so summer/winter is not mistaken for a trend.",
+   "parameters": {}
+  },
+  {
+   "id": "method:theil_sen",
+   "name": "Theil-Sen slope with 95% confidence interval",
+   "stage": "statistics",
+   "order": 2,
+   "description": "A robust slope - the median of the slopes between all pairs of months.",
+   "parameters": {
+    "per": "decade",
+    "ci": 0.95
+   }
+  },
+  {
+   "id": "method:mk_hamed_rao",
+   "name": "Mann-Kendall test with Hamed-Rao correction",
+   "stage": "statistics",
+   "order": 3,
+   "description": "Is the trend real or luck? Corrected because each month resembles the previous one.",
+   "parameters": {}
+  },
+  {
+   "id": "method:bh_fdr",
+   "name": "Benjamini-Hochberg false discovery rate",
+   "stage": "statistics",
+   "order": 4,
+   "description": "Testing hundreds of cells makes some look significant by chance; FDR corrects for it.",
+   "parameters": {
+    "q": 0.1
+   }
+  },
+  {
+   "id": "method:regional_mean",
+   "name": "Regional average weighted by cos(latitude)",
+   "stage": "statistics",
+   "order": 5,
+   "description": "One series for the whole area, then the same slope and test.",
+   "parameters": {}
+  },
+  {
+   "id": "method:years_needed",
+   "name": "Years needed to detect the trend (Weatherhead 1998)",
+   "stage": "statistics",
+   "order": 6,
+   "description": "For non-significant trends, how many years of data would be needed to be sure.",
+   "parameters": {}
+  },
+  {
+   "id": "method:radar_ranking",
+   "name": "Rank variables by significant area",
+   "stage": "discovery",
+   "order": 7,
+   "description": "Which variable changes over the largest share of the area.",
+   "parameters": {}
+  },
+  {
+   "id": "method:opposite_trends",
+   "name": "Opposite-trend map and sub-region contrasts",
+   "stage": "discovery",
+   "order": 8,
+   "description": "Find places moving in opposite directions that a regional average would hide.",
+   "parameters": {
+    "min_area_percent": 10
+   }
+  },
+  {
+   "id": "method:kmeans_clusters",
+   "name": "Trend-signature clusters (k-means, silhouette)",
+   "stage": "discovery",
+   "order": 9,
+   "description": "Group cells that changed in a similar way. Clusters suggest, statistics decide.",
+   "parameters": {
+    "k_min": 3,
+    "k_max": 6
+   }
+  }
+ ],
+ "clusters": [],
+ "cluster_cells": [],
+ "sub_results": {},
+ "findings": [
+  {
+   "id": "finding:precip:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "precip",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "mm/month per decade",
+   "slope_per_decade": -1.8900313515202916,
+   "ci95": [
+    -3.6383869578797605,
+    -0.23747256559350421
+   ],
+   "p": 0.008239479079193313,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 44.5,
+   "datasets": [
+    "GPM_3IMERGM v07"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Precipitation decreased by 1.89 mm/month per decade over 2001-01..2024-12 (p = 0.00824)"
+  },
+  {
+   "id": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.9358660265381148,
+   "ci95": [
+    -1.2107943479544188,
+    -0.665918302927654
+   ],
+   "p": 0.00041916105718731167,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 83.5,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.936 kg m-2 per decade over 2001-01..2024-12 (p = 0.000419)"
+  },
+  {
+   "id": "finding:t2m:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.4066225656098581,
+   "ci95": [
+    0.20862674580490187,
+    0.6053298454910856
+   ],
+   "p": 0.010874145631694088,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 67.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.407 degC per decade over 2001-01..2024-12 (p = 0.0109)"
+  }
+ ],
+ "evidence_pack": {
+  "question": "Is Tunisia getting drier?",
+  "region": "Tunisia",
+  "period": "2001-01 to 2024-12",
+  "synthetic": false,
+  "method": "seasons removed (monthly anomalies); Theil-Sen slope per decade with 95% confidence interval; Mann-Kendall test with Hamed-Rao correction; false discovery rate correction (q = 0.10) across grid cells; regional average weighted by cos(latitude); significance of the regional trend at p <= 0.05",
+  "trends": [
+   {
+    "variable": "Vegetation greenness (NDVI)",
+    "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+    "dataset": "MOD13C2 v061",
+    "slope_per_decade": "-0.000888",
+    "unit": "NDVI units per decade",
+    "ci95": [
+     "-0.0026",
+     "0.000868"
+    ],
+    "p_value": "0.7",
+    "significant": false,
+    "direction": "decrease",
+    "percent_area_significant_increase": "3.2",
+    "percent_area_significant_decrease": "9.9",
+    "cells_tested": 31,
+    "years_needed_if_not_significant": "125"
+   },
+   {
+    "variable": "Precipitation",
+    "definition": "The amount of rain or snow that falls to the ground.",
+    "dataset": "GPM_3IMERGM v07",
+    "slope_per_decade": "-1.89",
+    "unit": "mm/month per decade",
+    "ci95": [
+     "-3.64",
+     "-0.237"
+    ],
+    "p_value": "0.0082",
+    "significant": true,
+    "direction": "decrease",
+    "percent_area_significant_increase": "0",
+    "percent_area_significant_decrease": "44.5",
+    "cells_tested": 31,
+    "years_needed_if_not_significant": "n/a"
+   },
+   {
+    "variable": "Soil moisture (0-10 cm)",
+    "definition": "The amount of water held in the top layer of the soil.",
+    "dataset": "GLDAS_NOAH025_M v2.1",
+    "slope_per_decade": "-0.936",
+    "unit": "kg m-2 per decade",
+    "ci95": [
+     "-1.21",
+     "-0.666"
+    ],
+    "p_value": "< 0.001",
+    "significant": true,
+    "direction": "decrease",
+    "percent_area_significant_increase": "0",
+    "percent_area_significant_decrease": "83.5",
+    "cells_tested": 31,
+    "years_needed_if_not_significant": "n/a"
+   },
+   {
+    "variable": "Air temperature at 2 m",
+    "definition": "The temperature of the air near the surface of the Earth.",
+    "dataset": "M2TMNXSLV v5.12.4",
+    "slope_per_decade": "0.407",
+    "unit": "degC per decade",
+    "ci95": [
+     "0.209",
+     "0.605"
+    ],
+    "p_value": "0.011",
+    "significant": true,
+    "direction": "increase",
+    "percent_area_significant_increase": "67",
+    "percent_area_significant_decrease": "0",
+    "cells_tested": 31,
+    "years_needed_if_not_significant": "n/a"
+   }
+  ],
+  "opposite_trends_between_subregions": [],
+  "opposite_patterns_inside_region": [],
+  "clusters": [],
+  "literature": [
+   {
+    "statement": "T2M influences Evap_tavg (sign +)",
+    "quote": "greater atmospheric evaporative demand resulting from temperature rise.",
+    "title": "Evidence of increasing drought severity caused by temperature rise in southern Europe",
+    "year": 2014
+   }
+  ],
+  "hypotheses": [],
+  "warnings": [],
+  "errors": {}
+ },
+ "status": "done",
+ "answer": "## Short answer\n\nTunisia is showing strong signs of getting drier. Over the last two decades, rainfall and upper-soil moisture have both dropped significantly, while air temperatures have risen significantly.\n\n## What the data shows\n\nBefore looking at the numbers, here are a few key terms. A trend is the general direction of change over time. An anomaly is the difference from normal conditions after removing seasonal effects. A p-value tells you the probability that a pattern happened purely by random chance. A trend is called significant when the p-value is low enough (here, p <= 0.05) to be confident the change is real.\n\n* For the period 2001-01 to 2024-12, precipitation had a slope of -1.89 mm/month per decade with a p-value of 0.0082, which is significant [observed]. A significant decrease occurred across 44.5 percent of the tested area, and 0 percent showed a significant increase [observed].\n* For the period 2001-01 to 2024-12, soil moisture (0-10 cm) had a slope of -0.936 kg m-2 per decade with a p-value of < 0.001, which is significant [observed]. A significant decrease occurred across 83.5 percent of the tested area, and 0 percent showed a significant increase [observed].\n* For the period 2001-01 to 2024-12, air temperature at 2 m had a slope of 0.407 degC per decade with a p-value of 0.011, which is significant [observed]. A significant increase occurred across 67 percent of the tested area, and 0 percent showed a significant decrease [observed].\n* For the period 2001-01 to 2024-12, vegetation greenness (NDVI) had a slope of -0.000888 NDVI units per decade with a p-value of 0.7, which is not significant [observed]. Across the region, 9.9 percent of the area showed a significant decrease, while 3.2 percent showed a significant increase [observed].\n\n## What scientists have written\n\n* Research notes that higher temperatures lead to greater atmospheric evaporative demand [literature] (Evidence of increasing drought severity caused by temperature rise in southern Europe, 2014).\n\n## Possible explanations\n\nNo specific hypotheses were provided in the evidence pack.\n\n## Limits of this investigation\n\n* The analysis relies on 31 grid cells across Tunisia.\n* The regional trend for vegetation greenness was not statistically significant. At the current rate of change, it would require 125 years of data to determine if that trend is real.\n* Correlation is not causation. These records show that temperatures rose while moisture dropped, but statistics alone do not prove that one caused the other."
+}

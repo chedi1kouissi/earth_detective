@@ -1,0 +1,8037 @@
+{
+ "id": "investigation:f662d022d6ae",
+ "question": "Is it getting hotter and drier around the Mediterranean?",
+ "created": "2026-11-15T04:45:40+00:00",
+ "synthetic": false,
+ "steps": {
+  "Understand": {
+   "concepts": [
+    {
+     "id": "concept:drought",
+     "name": "drought",
+     "matched": [
+      "drier"
+     ]
+    },
+    {
+     "id": "concept:surface_heating",
+     "name": "surface heating",
+     "matched": [
+      "hotter"
+     ]
+    }
+   ],
+   "region": "mediterranean_north_africa",
+   "region_name": "Mediterranean + North Africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "method": "Gemini (constrained to graph concepts) + graph synonyms",
+   "out_of_scope_reason": ""
+  },
+  "Plan": {
+   "question": "Is it getting hotter and drier around the Mediterranean?",
+   "concepts": [
+    "concept:drought",
+    "concept:surface_heating"
+   ],
+   "variables": [
+    "ndvi",
+    "precip",
+    "soil_moisture",
+    "t2m"
+   ],
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "methods": [
+    "method:anomalies",
+    "method:theil_sen",
+    "method:mk_hamed_rao",
+    "method:bh_fdr",
+    "method:regional_mean",
+    "method:years_needed",
+    "method:radar_ranking",
+    "method:opposite_trends",
+    "method:kmeans_clusters"
+   ],
+   "outputs": [
+    "trend_maps",
+    "opposite_map",
+    "clusters",
+    "regional_series",
+    "explanation"
+   ],
+   "variable_details": [
+    {
+     "id": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+     "code_id": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+     "unit": "NDVI units",
+     "recipe": {
+      "name_in_file": "CMG 0.05 Deg Monthly NDVI",
+      "group": null,
+      "unit_native": "NDVI",
+      "conversion": "value * 0.0001",
+      "fill_value": -3000,
+      "scale_factor": 10000.0,
+      "source": "file header MOD13C2.A2001001.061.2020061230446.hdf"
+     },
+     "dataset": {
+      "id": "dataset:MOD13C2_v061",
+      "short_name": "MOD13C2",
+      "version": "061",
+      "title": "MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061",
+      "doi": "10.5067/MODIS/MOD13C2.061",
+      "cmr_concept_id": "C2565788914-LPCLOUD"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "index",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "A decrease in NDVI can indicate that plants are suffering from drought."
+      }
+     ]
+    },
+    {
+     "id": "var:GPM_3IMERGM/precipitation",
+     "code_id": "precip",
+     "display_name": "Precipitation",
+     "definition": "The amount of rain or snow that falls to the ground.",
+     "unit": "mm/month",
+     "recipe": {
+      "name_in_file": "precipitation",
+      "group": "Grid",
+      "unit_native": "mm/hr",
+      "conversion": "value * 24 * days_in_month",
+      "fill_value": -9999.900390625,
+      "scale_factor": null,
+      "source": "file header 3B-MO.MS.MRG.3IMERG.20010101-S000000-E235959.01.V07B.HDF5"
+     },
+     "dataset": {
+      "id": "dataset:GPM_3IMERGM_v07",
+      "short_name": "GPM_3IMERGM",
+      "version": "07",
+      "title": "GPM IMERG Final Precipitation L3 1 month 0.1 degree x 0.1 degree V07 (GPM_3IMERGM)",
+      "doi": "10.5067/GPM/IMERG/3B-MONTH/07",
+      "cmr_concept_id": "C2723754851-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "flux",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "A lack of precipitation is the primary cause of drought."
+      }
+     ]
+    },
+    {
+     "id": "var:GLDAS_NOAH025_M/SoilMoi0_10cm_inst",
+     "code_id": "soil_moisture",
+     "display_name": "Soil moisture (0-10 cm)",
+     "definition": "The amount of water held in the top layer of the soil.",
+     "unit": "kg m-2",
+     "recipe": {
+      "name_in_file": "SoilMoi0_10cm_inst",
+      "group": null,
+      "unit_native": "kg m-2",
+      "conversion": "none (1 kg/m2 = 1 mm of water)",
+      "fill_value": -9999.0,
+      "scale_factor": null,
+      "source": "file header GLDAS_NOAH025_M.A200101.021.nc4"
+     },
+     "dataset": {
+      "id": "dataset:GLDAS_NOAH025_M_v2.1",
+      "short_name": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "title": "GLDAS Noah Land Surface Model L4 monthly 0.25 x 0.25 degree V2.1 (GLDAS_NOAH025_M)",
+      "doi": "10.5067/SXAVCZFAQLNO",
+      "cmr_concept_id": "C1342986036-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "state",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "Low soil moisture is a direct indicator of agricultural drought."
+      }
+     ]
+    },
+    {
+     "id": "var:M2TMNXSLV/T2M",
+     "code_id": "t2m",
+     "display_name": "Air temperature at 2 m",
+     "definition": "The temperature of the air near the surface of the Earth.",
+     "unit": "degC",
+     "recipe": {
+      "name_in_file": "T2M",
+      "group": null,
+      "unit_native": "K",
+      "conversion": "value - 273.15",
+      "fill_value": 999999986991104.0,
+      "scale_factor": null,
+      "source": "file header MERRA2_300.tavgM_2d_slv_Nx.200101.nc4"
+     },
+     "dataset": {
+      "id": "dataset:M2TMNXSLV_v5.12.4",
+      "short_name": "M2TMNXSLV",
+      "version": "5.12.4",
+      "title": "MERRA-2 tavgM_2d_slv_Nx: 2d,Monthly mean,Time-Averaged,Single-Level,Assimilation,Single-Level Diagnostics 0.625 x 0.5 degree V5.12.4 (M2TMNXSLV) ",
+      "doi": "10.5067/AP1B0BA5PD2K",
+      "cmr_concept_id": "C1276812859-GES_DISC"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "state",
+     "because": [
+      {
+       "concept": "concept:drought",
+       "reason": "Higher temperatures can worsen drought by increasing evaporation."
+      },
+      {
+       "concept": "concept:surface_heating",
+       "reason": "Air temperature at 2 meters directly measures how much the surface is heating up."
+      }
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  "Analyse": {
+   "results": {
+    "ndvi": {
+     "variable": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "unit": "NDVI units per decade",
+     "region": "mediterranean_north_africa",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": 0.00616674573960305,
+      "ci95": [
+       0.004885680665652849,
+       0.007446286494724324
+      ],
+      "p": 5.860667132040476e-06,
+      "significant": true,
+      "tau": 0.3536101432442896,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 743,
+      "n_tested": 740,
+      "sig_up": 329,
+      "sig_down": 53,
+      "pct_sig_area": 50.1,
+      "pct_sig_up_area": 42.5,
+      "pct_sig_down_area": 7.6
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "MOD13C2 v061"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "precip": {
+     "variable": "precip",
+     "display_name": "Precipitation",
+     "unit": "mm/month per decade",
+     "region": "mediterranean_north_africa",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -1.1813048716823535,
+      "ci95": [
+       -2.3677824460012076,
+       -0.016049273797607084
+      ],
+      "p": 0.11680616132477528,
+      "significant": false,
+      "tau": -0.07863917924893535,
+      "n_months": 288,
+      "years_needed": 39.817778128585
+     },
+     "cells": {
+      "n": 743,
+      "n_tested": 740,
+      "sig_up": 18,
+      "sig_down": 46,
+      "pct_sig_area": 9.0,
+      "pct_sig_up_area": 2.6,
+      "pct_sig_down_area": 6.4
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "GPM_3IMERGM v07"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "soil_moisture": {
+     "variable": "soil_moisture",
+     "display_name": "Soil moisture (0-10 cm)",
+     "unit": "kg m-2 per decade",
+     "region": "mediterranean_north_africa",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -0.5847745682218568,
+      "ci95": [
+       -0.7332858433339058,
+       -0.44487261234559794
+      ],
+      "p": 5.465251202263488e-06,
+      "significant": true,
+      "tau": -0.30129694154084397,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 743,
+      "n_tested": 740,
+      "sig_up": 62,
+      "sig_down": 432,
+      "pct_sig_area": 67.3,
+      "pct_sig_up_area": 8.9,
+      "pct_sig_down_area": 58.3
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "GLDAS_NOAH025_M v2.1"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    },
+    "t2m": {
+     "variable": "t2m",
+     "display_name": "Air temperature at 2 m",
+     "unit": "degC per decade",
+     "region": "mediterranean_north_africa",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": 0.48761659660261386,
+      "ci95": [
+       0.36873532705691725,
+       0.6087019464876052
+      ],
+      "p": 1.1572786509095323e-06,
+      "significant": true,
+      "tau": 0.29287650019357336,
+      "n_months": 288,
+      "years_needed": null
+     },
+     "cells": {
+      "n": 743,
+      "n_tested": 743,
+      "sig_up": 618,
+      "sig_down": 0,
+      "pct_sig_area": 81.8,
+      "pct_sig_up_area": 81.8,
+      "pct_sig_down_area": 0.0
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "M2TMNXSLV v5.12.4"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    }
+   },
+   "errors": {},
+   "opposite_patterns": [],
+   "opposite_pairs": [
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:iberia:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "iberia",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -0.7550647764886824
+    },
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "italy_balkans",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -0.7317179392763047
+    },
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:levant:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "levant",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -0.17355699100391608
+    },
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:maghreb:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "maghreb",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -1.072836426282488
+    },
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "sahara_margin",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -0.30069693971247996
+    },
+    {
+     "variable": "soil_moisture",
+     "finding_up": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+     "finding_down": "finding:soil_moisture:tunisia:2001-01_2024-12",
+     "region_up": "nile_delta",
+     "region_down": "tunisia",
+     "slope_up": 0.07729277626602299,
+     "slope_down": -0.9358660265381148
+    }
+   ],
+   "co_occurs": [
+    {
+     "finding_a": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+     "finding_b": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+     "var_a": "ndvi",
+     "var_b": "soil_moisture",
+     "shared_cells": 221,
+     "overlap": 0.58
+    },
+    {
+     "finding_a": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+     "finding_b": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+     "var_a": "ndvi",
+     "var_b": "t2m",
+     "shared_cells": 349,
+     "overlap": 0.91
+    },
+    {
+     "finding_a": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+     "finding_b": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+     "var_a": "soil_moisture",
+     "var_b": "t2m",
+     "shared_cells": 412,
+     "overlap": 0.83
+    }
+   ]
+  },
+  "Record": {
+   "analysis": "analysis:2026-11-15T04:08Z-42df9ed:mediterranean_north_africa",
+   "findings": [
+    "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+    "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+    "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+    "finding:ndvi:anatolia:2001-01_2024-12",
+    "finding:t2m:anatolia:2001-01_2024-12",
+    "finding:ndvi:iberia:2001-01_2024-12",
+    "finding:soil_moisture:iberia:2001-01_2024-12",
+    "finding:t2m:iberia:2001-01_2024-12",
+    "finding:ndvi:italy_balkans:2001-01_2024-12",
+    "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+    "finding:t2m:italy_balkans:2001-01_2024-12",
+    "finding:ndvi:levant:2001-01_2024-12",
+    "finding:soil_moisture:levant:2001-01_2024-12",
+    "finding:t2m:levant:2001-01_2024-12",
+    "finding:precip:maghreb:2001-01_2024-12",
+    "finding:soil_moisture:maghreb:2001-01_2024-12",
+    "finding:t2m:maghreb:2001-01_2024-12",
+    "finding:ndvi:nile_delta:2001-01_2024-12",
+    "finding:soil_moisture:nile_delta:2001-01_2024-12",
+    "finding:t2m:nile_delta:2001-01_2024-12",
+    "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+    "finding:t2m:sahara_margin:2001-01_2024-12",
+    "finding:precip:tunisia:2001-01_2024-12",
+    "finding:soil_moisture:tunisia:2001-01_2024-12",
+    "finding:t2m:tunisia:2001-01_2024-12",
+    "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+    "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+    "finding:cluster2:mediterranean_north_africa:2001-01_2024-12"
+   ],
+   "skipped": []
+  },
+  "Why?": {
+   "literature": [
+    {
+     "source_variable": "var:M2TMNXSLV/T2M",
+     "target_variable": "var:GLDAS_NOAH025_M/Evap_tavg",
+     "sign": "+",
+     "quote": "greater atmospheric evaporative demand resulting from temperature rise.",
+     "paper_id": "paper:10.1088/1748-9326/9/4/044001",
+     "paper_title": "Evidence of increasing drought severity caused by temperature rise in southern Europe",
+     "paper_year": 2014,
+     "doi": "10.1088/1748-9326/9/4/044001",
+     "status": "from_paper"
+    }
+   ],
+   "hypotheses": [
+    {
+     "pattern": "pattern:opposite_regions",
+     "based_on": [
+      "finding:soil_moisture:nile_delta:2001-01_2024-12",
+      "finding:soil_moisture:iberia:2001-01_2024-12",
+      "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+      "finding:soil_moisture:levant:2001-01_2024-12",
+      "finding:soil_moisture:maghreb:2001-01_2024-12",
+      "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+      "finding:soil_moisture:tunisia:2001-01_2024-12"
+     ],
+     "about": [
+      "soil_moisture"
+     ],
+     "text": "Soil moisture (0-10 cm) increases in Nile Delta and Lower Egypt but decreases in Iberian Peninsula, Italy and the Balkans, Levant, Maghreb, Sahara margin, Tunisia: different processes may dominate in each place, and a single regional average hides this.",
+     "id": "hypothesis:f8e3b9f4ff46",
+     "status": "unverified"
+    },
+    {
+     "pattern": "pattern:compound_cluster",
+     "based_on": [
+      "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+      "finding:cluster2:mediterranean_north_africa:2001-01_2024-12"
+     ],
+     "about": [
+      "soil_moisture",
+      "t2m"
+     ],
+     "text": "The places in the 'warming + drying' group(s) could be compound heat-and-drought hot spots worth watching; the clustering only shows that these places changed in a similar way.",
+     "id": "hypothesis:4684d9057060",
+     "status": "unverified"
+    }
+   ]
+  },
+  "Check": {
+   "attempts": [
+    {
+     "attempt": 1,
+     "unknown_numbers": [],
+     "seconds": 24.7
+    }
+   ],
+   "passed": true,
+   "mode": "gemini"
+  }
+ },
+ "llm_used": true,
+ "store": "neo4j",
+ "timings_s": {
+  "Understand": 4.15,
+  "Plan": 0.08,
+  "Analyse": 0.46,
+  "Record": 1.33,
+  "Why?": 0.31,
+  "Check": 24.73,
+  "Explain": 0.0
+ },
+ "methods": [
+  {
+   "id": "method:anomalies",
+   "name": "Remove the seasons (monthly anomalies)",
+   "stage": "statistics",
+   "order": 1,
+   "description": "Subtract the average of each calendar month so summer/winter is not mistaken for a trend.",
+   "parameters": {}
+  },
+  {
+   "id": "method:theil_sen",
+   "name": "Theil-Sen slope with 95% confidence interval",
+   "stage": "statistics",
+   "order": 2,
+   "description": "A robust slope - the median of the slopes between all pairs of months.",
+   "parameters": {
+    "per": "decade",
+    "ci": 0.95
+   }
+  },
+  {
+   "id": "method:mk_hamed_rao",
+   "name": "Mann-Kendall test with Hamed-Rao correction",
+   "stage": "statistics",
+   "order": 3,
+   "description": "Is the trend real or luck? Corrected because each month resembles the previous one.",
+   "parameters": {}
+  },
+  {
+   "id": "method:bh_fdr",
+   "name": "Benjamini-Hochberg false discovery rate",
+   "stage": "statistics",
+   "order": 4,
+   "description": "Testing hundreds of cells makes some look significant by chance; FDR corrects for it.",
+   "parameters": {
+    "q": 0.1
+   }
+  },
+  {
+   "id": "method:regional_mean",
+   "name": "Regional average weighted by cos(latitude)",
+   "stage": "statistics",
+   "order": 5,
+   "description": "One series for the whole area, then the same slope and test.",
+   "parameters": {}
+  },
+  {
+   "id": "method:years_needed",
+   "name": "Years needed to detect the trend (Weatherhead 1998)",
+   "stage": "statistics",
+   "order": 6,
+   "description": "For non-significant trends, how many years of data would be needed to be sure.",
+   "parameters": {}
+  },
+  {
+   "id": "method:radar_ranking",
+   "name": "Rank variables by significant area",
+   "stage": "discovery",
+   "order": 7,
+   "description": "Which variable changes over the largest share of the area.",
+   "parameters": {}
+  },
+  {
+   "id": "method:opposite_trends",
+   "name": "Opposite-trend map and sub-region contrasts",
+   "stage": "discovery",
+   "order": 8,
+   "description": "Find places moving in opposite directions that a regional average would hide.",
+   "parameters": {
+    "min_area_percent": 10
+   }
+  },
+  {
+   "id": "method:kmeans_clusters",
+   "name": "Trend-signature clusters (k-means, silhouette)",
+   "stage": "discovery",
+   "order": 9,
+   "description": "Group cells that changed in a similar way. Clusters suggest, statistics decide.",
+   "parameters": {
+    "k_min": 3,
+    "k_max": 6
+   }
+  }
+ ],
+ "clusters": [
+  {
+   "id": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + drying",
+   "signature": "Soil moisture ↓, Air temperature at 2 m ↑",
+   "n_cells": 198,
+   "directions": {
+    "soil_moisture": "down",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.0043,
+    "precip": -2.8343,
+    "soil_moisture": -1.2028,
+    "t2m": 0.651
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + drying' (198 cells): Soil moisture ↓, Air temperature at 2 m ↑"
+  },
+  {
+   "id": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + greening",
+   "signature": "Vegetation greenness ↑, Air temperature at 2 m ↑",
+   "n_cells": 200,
+   "directions": {
+    "ndvi": "up",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.019,
+    "precip": 0.3993,
+    "soil_moisture": -0.4636,
+    "t2m": 0.6668
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + greening' (200 cells): Vegetation greenness ↑, Air temperature at 2 m ↑"
+  },
+  {
+   "id": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + drying",
+   "signature": "Soil moisture ↓, Air temperature at 2 m ↑",
+   "n_cells": 344,
+   "directions": {
+    "soil_moisture": "down",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.0004,
+    "precip": -0.1664,
+    "soil_moisture": -0.2672,
+    "t2m": 0.2696
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + drying' (344 cells): Soil moisture ↓, Air temperature at 2 m ↑"
+  }
+ ],
+ "cluster_cells": [
+  {
+   "cell_id": "lat25.5_lon-9.5",
+   "lat": 25.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-8.5",
+   "lat": 25.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-7.5",
+   "lat": 25.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-6.5",
+   "lat": 25.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-5.5",
+   "lat": 25.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-4.5",
+   "lat": 25.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-3.5",
+   "lat": 25.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-2.5",
+   "lat": 25.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-1.5",
+   "lat": 25.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon-0.5",
+   "lat": 25.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon0.5",
+   "lat": 25.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon1.5",
+   "lat": 25.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon2.5",
+   "lat": 25.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon3.5",
+   "lat": 25.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon4.5",
+   "lat": 25.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon5.5",
+   "lat": 25.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon6.5",
+   "lat": 25.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon7.5",
+   "lat": 25.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon8.5",
+   "lat": 25.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon9.5",
+   "lat": 25.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon10.5",
+   "lat": 25.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon11.5",
+   "lat": 25.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon12.5",
+   "lat": 25.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon13.5",
+   "lat": 25.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon14.5",
+   "lat": 25.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon15.5",
+   "lat": 25.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon16.5",
+   "lat": 25.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon17.5",
+   "lat": 25.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon18.5",
+   "lat": 25.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon19.5",
+   "lat": 25.5,
+   "lon": 19.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon20.5",
+   "lat": 25.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon21.5",
+   "lat": 25.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon22.5",
+   "lat": 25.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon23.5",
+   "lat": 25.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon24.5",
+   "lat": 25.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon25.5",
+   "lat": 25.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon26.5",
+   "lat": 25.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon27.5",
+   "lat": 25.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon28.5",
+   "lat": 25.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon29.5",
+   "lat": 25.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon30.5",
+   "lat": 25.5,
+   "lon": 30.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon31.5",
+   "lat": 25.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon32.5",
+   "lat": 25.5,
+   "lon": 32.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon33.5",
+   "lat": 25.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon34.5",
+   "lat": 25.5,
+   "lon": 34.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon37.5",
+   "lat": 25.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon38.5",
+   "lat": 25.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat25.5_lon39.5",
+   "lat": 25.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-9.5",
+   "lat": 26.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-8.5",
+   "lat": 26.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-7.5",
+   "lat": 26.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-6.5",
+   "lat": 26.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-5.5",
+   "lat": 26.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-4.5",
+   "lat": 26.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-3.5",
+   "lat": 26.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-2.5",
+   "lat": 26.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-1.5",
+   "lat": 26.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon-0.5",
+   "lat": 26.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon0.5",
+   "lat": 26.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon1.5",
+   "lat": 26.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon2.5",
+   "lat": 26.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon3.5",
+   "lat": 26.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon4.5",
+   "lat": 26.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon5.5",
+   "lat": 26.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon6.5",
+   "lat": 26.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon7.5",
+   "lat": 26.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon8.5",
+   "lat": 26.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon9.5",
+   "lat": 26.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon10.5",
+   "lat": 26.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon11.5",
+   "lat": 26.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon12.5",
+   "lat": 26.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon13.5",
+   "lat": 26.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon14.5",
+   "lat": 26.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon15.5",
+   "lat": 26.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon16.5",
+   "lat": 26.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon17.5",
+   "lat": 26.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon18.5",
+   "lat": 26.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon19.5",
+   "lat": 26.5,
+   "lon": 19.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon20.5",
+   "lat": 26.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon21.5",
+   "lat": 26.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon22.5",
+   "lat": 26.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon23.5",
+   "lat": 26.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon24.5",
+   "lat": 26.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon25.5",
+   "lat": 26.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon26.5",
+   "lat": 26.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon27.5",
+   "lat": 26.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon28.5",
+   "lat": 26.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon29.5",
+   "lat": 26.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon30.5",
+   "lat": 26.5,
+   "lon": 30.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon31.5",
+   "lat": 26.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon32.5",
+   "lat": 26.5,
+   "lon": 32.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon33.5",
+   "lat": 26.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon36.5",
+   "lat": 26.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon37.5",
+   "lat": 26.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon38.5",
+   "lat": 26.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat26.5_lon39.5",
+   "lat": 26.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-9.5",
+   "lat": 27.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-8.5",
+   "lat": 27.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-7.5",
+   "lat": 27.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-6.5",
+   "lat": 27.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-5.5",
+   "lat": 27.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-4.5",
+   "lat": 27.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-3.5",
+   "lat": 27.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-2.5",
+   "lat": 27.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-1.5",
+   "lat": 27.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon-0.5",
+   "lat": 27.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon0.5",
+   "lat": 27.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon1.5",
+   "lat": 27.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon2.5",
+   "lat": 27.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon3.5",
+   "lat": 27.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon4.5",
+   "lat": 27.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon5.5",
+   "lat": 27.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon6.5",
+   "lat": 27.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon7.5",
+   "lat": 27.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon8.5",
+   "lat": 27.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon9.5",
+   "lat": 27.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon10.5",
+   "lat": 27.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon11.5",
+   "lat": 27.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon12.5",
+   "lat": 27.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon13.5",
+   "lat": 27.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon14.5",
+   "lat": 27.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon15.5",
+   "lat": 27.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon16.5",
+   "lat": 27.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon17.5",
+   "lat": 27.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon18.5",
+   "lat": 27.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon19.5",
+   "lat": 27.5,
+   "lon": 19.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon20.5",
+   "lat": 27.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon21.5",
+   "lat": 27.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon22.5",
+   "lat": 27.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon23.5",
+   "lat": 27.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon24.5",
+   "lat": 27.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon25.5",
+   "lat": 27.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon26.5",
+   "lat": 27.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon27.5",
+   "lat": 27.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon28.5",
+   "lat": 27.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon29.5",
+   "lat": 27.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon30.5",
+   "lat": 27.5,
+   "lon": 30.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon31.5",
+   "lat": 27.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon32.5",
+   "lat": 27.5,
+   "lon": 32.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon33.5",
+   "lat": 27.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon36.5",
+   "lat": 27.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon37.5",
+   "lat": 27.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon38.5",
+   "lat": 27.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat27.5_lon39.5",
+   "lat": 27.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-9.5",
+   "lat": 28.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-8.5",
+   "lat": 28.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-7.5",
+   "lat": 28.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-6.5",
+   "lat": 28.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-5.5",
+   "lat": 28.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-4.5",
+   "lat": 28.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-3.5",
+   "lat": 28.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-2.5",
+   "lat": 28.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-1.5",
+   "lat": 28.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon-0.5",
+   "lat": 28.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon0.5",
+   "lat": 28.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon1.5",
+   "lat": 28.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon2.5",
+   "lat": 28.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon3.5",
+   "lat": 28.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon4.5",
+   "lat": 28.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon5.5",
+   "lat": 28.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon6.5",
+   "lat": 28.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon7.5",
+   "lat": 28.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon8.5",
+   "lat": 28.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon9.5",
+   "lat": 28.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon10.5",
+   "lat": 28.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon11.5",
+   "lat": 28.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon12.5",
+   "lat": 28.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon13.5",
+   "lat": 28.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon14.5",
+   "lat": 28.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon15.5",
+   "lat": 28.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon16.5",
+   "lat": 28.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon17.5",
+   "lat": 28.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon18.5",
+   "lat": 28.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon19.5",
+   "lat": 28.5,
+   "lon": 19.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon20.5",
+   "lat": 28.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon21.5",
+   "lat": 28.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon22.5",
+   "lat": 28.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon23.5",
+   "lat": 28.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon24.5",
+   "lat": 28.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon25.5",
+   "lat": 28.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon26.5",
+   "lat": 28.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon27.5",
+   "lat": 28.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon28.5",
+   "lat": 28.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon29.5",
+   "lat": 28.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon30.5",
+   "lat": 28.5,
+   "lon": 30.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon31.5",
+   "lat": 28.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon32.5",
+   "lat": 28.5,
+   "lon": 32.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon33.5",
+   "lat": 28.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon34.5",
+   "lat": 28.5,
+   "lon": 34.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon35.5",
+   "lat": 28.5,
+   "lon": 35.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon36.5",
+   "lat": 28.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon37.5",
+   "lat": 28.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon38.5",
+   "lat": 28.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat28.5_lon39.5",
+   "lat": 28.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-9.5",
+   "lat": 29.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-8.5",
+   "lat": 29.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-7.5",
+   "lat": 29.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-6.5",
+   "lat": 29.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-5.5",
+   "lat": 29.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-4.5",
+   "lat": 29.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-3.5",
+   "lat": 29.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-2.5",
+   "lat": 29.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-1.5",
+   "lat": 29.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon-0.5",
+   "lat": 29.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon0.5",
+   "lat": 29.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon1.5",
+   "lat": 29.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon2.5",
+   "lat": 29.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon3.5",
+   "lat": 29.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon4.5",
+   "lat": 29.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon5.5",
+   "lat": 29.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon6.5",
+   "lat": 29.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon7.5",
+   "lat": 29.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon8.5",
+   "lat": 29.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon9.5",
+   "lat": 29.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon10.5",
+   "lat": 29.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon11.5",
+   "lat": 29.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon12.5",
+   "lat": 29.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon13.5",
+   "lat": 29.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon14.5",
+   "lat": 29.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon15.5",
+   "lat": 29.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon16.5",
+   "lat": 29.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon17.5",
+   "lat": 29.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon18.5",
+   "lat": 29.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon19.5",
+   "lat": 29.5,
+   "lon": 19.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon20.5",
+   "lat": 29.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon21.5",
+   "lat": 29.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon22.5",
+   "lat": 29.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon23.5",
+   "lat": 29.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon24.5",
+   "lat": 29.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon25.5",
+   "lat": 29.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon26.5",
+   "lat": 29.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon27.5",
+   "lat": 29.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon28.5",
+   "lat": 29.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon29.5",
+   "lat": 29.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon30.5",
+   "lat": 29.5,
+   "lon": 30.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon31.5",
+   "lat": 29.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon32.5",
+   "lat": 29.5,
+   "lon": 32.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon33.5",
+   "lat": 29.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon34.5",
+   "lat": 29.5,
+   "lon": 34.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon35.5",
+   "lat": 29.5,
+   "lon": 35.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon36.5",
+   "lat": 29.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon37.5",
+   "lat": 29.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon38.5",
+   "lat": 29.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat29.5_lon39.5",
+   "lat": 29.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-9.5",
+   "lat": 30.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-8.5",
+   "lat": 30.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-7.5",
+   "lat": 30.5,
+   "lon": -7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-6.5",
+   "lat": 30.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-5.5",
+   "lat": 30.5,
+   "lon": -5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-4.5",
+   "lat": 30.5,
+   "lon": -4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-3.5",
+   "lat": 30.5,
+   "lon": -3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-2.5",
+   "lat": 30.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-1.5",
+   "lat": 30.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon-0.5",
+   "lat": 30.5,
+   "lon": -0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon0.5",
+   "lat": 30.5,
+   "lon": 0.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon1.5",
+   "lat": 30.5,
+   "lon": 1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon2.5",
+   "lat": 30.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon3.5",
+   "lat": 30.5,
+   "lon": 3.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon4.5",
+   "lat": 30.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon5.5",
+   "lat": 30.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon6.5",
+   "lat": 30.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon7.5",
+   "lat": 30.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon8.5",
+   "lat": 30.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon9.5",
+   "lat": 30.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon10.5",
+   "lat": 30.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon11.5",
+   "lat": 30.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon12.5",
+   "lat": 30.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon13.5",
+   "lat": 30.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon14.5",
+   "lat": 30.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon15.5",
+   "lat": 30.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon16.5",
+   "lat": 30.5,
+   "lon": 16.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon17.5",
+   "lat": 30.5,
+   "lon": 17.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon18.5",
+   "lat": 30.5,
+   "lon": 18.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon20.5",
+   "lat": 30.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon21.5",
+   "lat": 30.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon22.5",
+   "lat": 30.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon23.5",
+   "lat": 30.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon24.5",
+   "lat": 30.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon25.5",
+   "lat": 30.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon26.5",
+   "lat": 30.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon27.5",
+   "lat": 30.5,
+   "lon": 27.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon28.5",
+   "lat": 30.5,
+   "lon": 28.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon29.5",
+   "lat": 30.5,
+   "lon": 29.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon30.5",
+   "lat": 30.5,
+   "lon": 30.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat30.5_lon31.5",
+   "lat": 30.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon32.5",
+   "lat": 30.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat30.5_lon33.5",
+   "lat": 30.5,
+   "lon": 33.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon34.5",
+   "lat": 30.5,
+   "lon": 34.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon35.5",
+   "lat": 30.5,
+   "lon": 35.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon36.5",
+   "lat": 30.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon37.5",
+   "lat": 30.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat30.5_lon38.5",
+   "lat": 30.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat30.5_lon39.5",
+   "lat": 30.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-9.5",
+   "lat": 31.5,
+   "lon": -9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-8.5",
+   "lat": 31.5,
+   "lon": -8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-7.5",
+   "lat": 31.5,
+   "lon": -7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-6.5",
+   "lat": 31.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-5.5",
+   "lat": 31.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-4.5",
+   "lat": 31.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-3.5",
+   "lat": 31.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-2.5",
+   "lat": 31.5,
+   "lon": -2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-1.5",
+   "lat": 31.5,
+   "lon": -1.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon-0.5",
+   "lat": 31.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon0.5",
+   "lat": 31.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon1.5",
+   "lat": 31.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon2.5",
+   "lat": 31.5,
+   "lon": 2.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon3.5",
+   "lat": 31.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon4.5",
+   "lat": 31.5,
+   "lon": 4.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon5.5",
+   "lat": 31.5,
+   "lon": 5.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon6.5",
+   "lat": 31.5,
+   "lon": 6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon7.5",
+   "lat": 31.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon8.5",
+   "lat": 31.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon9.5",
+   "lat": 31.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon10.5",
+   "lat": 31.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon11.5",
+   "lat": 31.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon12.5",
+   "lat": 31.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon13.5",
+   "lat": 31.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon14.5",
+   "lat": 31.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon15.5",
+   "lat": 31.5,
+   "lon": 15.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon20.5",
+   "lat": 31.5,
+   "lon": 20.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon21.5",
+   "lat": 31.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon22.5",
+   "lat": 31.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon23.5",
+   "lat": 31.5,
+   "lon": 23.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon24.5",
+   "lat": 31.5,
+   "lon": 24.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon25.5",
+   "lat": 31.5,
+   "lon": 25.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon26.5",
+   "lat": 31.5,
+   "lon": 26.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon31.5",
+   "lat": 31.5,
+   "lon": 31.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon34.5",
+   "lat": 31.5,
+   "lon": 34.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon35.5",
+   "lat": 31.5,
+   "lon": 35.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon36.5",
+   "lat": 31.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon37.5",
+   "lat": 31.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon38.5",
+   "lat": 31.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat31.5_lon39.5",
+   "lat": 31.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-8.5",
+   "lat": 32.5,
+   "lon": -8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-7.5",
+   "lat": 32.5,
+   "lon": -7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-6.5",
+   "lat": 32.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-5.5",
+   "lat": 32.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-4.5",
+   "lat": 32.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-3.5",
+   "lat": 32.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-2.5",
+   "lat": 32.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-1.5",
+   "lat": 32.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon-0.5",
+   "lat": 32.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon0.5",
+   "lat": 32.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon1.5",
+   "lat": 32.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon2.5",
+   "lat": 32.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon3.5",
+   "lat": 32.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon4.5",
+   "lat": 32.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon5.5",
+   "lat": 32.5,
+   "lon": 5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon6.5",
+   "lat": 32.5,
+   "lon": 6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon7.5",
+   "lat": 32.5,
+   "lon": 7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon8.5",
+   "lat": 32.5,
+   "lon": 8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon9.5",
+   "lat": 32.5,
+   "lon": 9.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon10.5",
+   "lat": 32.5,
+   "lon": 10.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon11.5",
+   "lat": 32.5,
+   "lon": 11.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon12.5",
+   "lat": 32.5,
+   "lon": 12.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon13.5",
+   "lat": 32.5,
+   "lon": 13.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon14.5",
+   "lat": 32.5,
+   "lon": 14.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon20.5",
+   "lat": 32.5,
+   "lon": 20.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon21.5",
+   "lat": 32.5,
+   "lon": 21.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon22.5",
+   "lat": 32.5,
+   "lon": 22.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon35.5",
+   "lat": 32.5,
+   "lon": 35.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon36.5",
+   "lat": 32.5,
+   "lon": 36.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon37.5",
+   "lat": 32.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon38.5",
+   "lat": 32.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat32.5_lon39.5",
+   "lat": 32.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-7.5",
+   "lat": 33.5,
+   "lon": -7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-6.5",
+   "lat": 33.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-5.5",
+   "lat": 33.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-4.5",
+   "lat": 33.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-3.5",
+   "lat": 33.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-2.5",
+   "lat": 33.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-1.5",
+   "lat": 33.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon-0.5",
+   "lat": 33.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon0.5",
+   "lat": 33.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon1.5",
+   "lat": 33.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon2.5",
+   "lat": 33.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon3.5",
+   "lat": 33.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon4.5",
+   "lat": 33.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon5.5",
+   "lat": 33.5,
+   "lon": 5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon6.5",
+   "lat": 33.5,
+   "lon": 6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon7.5",
+   "lat": 33.5,
+   "lon": 7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon8.5",
+   "lat": 33.5,
+   "lon": 8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon9.5",
+   "lat": 33.5,
+   "lon": 9.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon10.5",
+   "lat": 33.5,
+   "lon": 10.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon35.5",
+   "lat": 33.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat33.5_lon36.5",
+   "lat": 33.5,
+   "lon": 36.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon37.5",
+   "lat": 33.5,
+   "lon": 37.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon38.5",
+   "lat": 33.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat33.5_lon39.5",
+   "lat": 33.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-6.5",
+   "lat": 34.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-5.5",
+   "lat": 34.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-4.5",
+   "lat": 34.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-3.5",
+   "lat": 34.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-2.5",
+   "lat": 34.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-1.5",
+   "lat": 34.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon-0.5",
+   "lat": 34.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon0.5",
+   "lat": 34.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon1.5",
+   "lat": 34.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon2.5",
+   "lat": 34.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon3.5",
+   "lat": 34.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon4.5",
+   "lat": 34.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon5.5",
+   "lat": 34.5,
+   "lon": 5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon6.5",
+   "lat": 34.5,
+   "lon": 6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon7.5",
+   "lat": 34.5,
+   "lon": 7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon8.5",
+   "lat": 34.5,
+   "lon": 8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon9.5",
+   "lat": 34.5,
+   "lon": 9.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon10.5",
+   "lat": 34.5,
+   "lon": 10.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon36.5",
+   "lat": 34.5,
+   "lon": 36.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon37.5",
+   "lat": 34.5,
+   "lon": 37.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon38.5",
+   "lat": 34.5,
+   "lon": 38.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat34.5_lon39.5",
+   "lat": 34.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon-5.5",
+   "lat": 35.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon-0.5",
+   "lat": 35.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon0.5",
+   "lat": 35.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon1.5",
+   "lat": 35.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon2.5",
+   "lat": 35.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon3.5",
+   "lat": 35.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon4.5",
+   "lat": 35.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon5.5",
+   "lat": 35.5,
+   "lon": 5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon6.5",
+   "lat": 35.5,
+   "lon": 6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon7.5",
+   "lat": 35.5,
+   "lon": 7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon8.5",
+   "lat": 35.5,
+   "lon": 8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon9.5",
+   "lat": 35.5,
+   "lon": 9.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon10.5",
+   "lat": 35.5,
+   "lon": 10.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon36.5",
+   "lat": 35.5,
+   "lon": 36.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon37.5",
+   "lat": 35.5,
+   "lon": 37.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon38.5",
+   "lat": 35.5,
+   "lon": 38.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat35.5_lon39.5",
+   "lat": 35.5,
+   "lon": 39.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon-5.5",
+   "lat": 36.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon1.5",
+   "lat": 36.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon2.5",
+   "lat": 36.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon3.5",
+   "lat": 36.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon4.5",
+   "lat": 36.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon5.5",
+   "lat": 36.5,
+   "lon": 5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon6.5",
+   "lat": 36.5,
+   "lon": 6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon7.5",
+   "lat": 36.5,
+   "lon": 7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon8.5",
+   "lat": 36.5,
+   "lon": 8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon9.5",
+   "lat": 36.5,
+   "lon": 9.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon10.5",
+   "lat": 36.5,
+   "lon": 10.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon29.5",
+   "lat": 36.5,
+   "lon": 29.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat36.5_lon30.5",
+   "lat": 36.5,
+   "lon": 30.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon32.5",
+   "lat": 36.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat36.5_lon33.5",
+   "lat": 36.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat36.5_lon36.5",
+   "lat": 36.5,
+   "lon": 36.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon37.5",
+   "lat": 36.5,
+   "lon": 37.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon38.5",
+   "lat": 36.5,
+   "lon": 38.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat36.5_lon39.5",
+   "lat": 36.5,
+   "lon": 39.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon-8.5",
+   "lat": 37.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-7.5",
+   "lat": 37.5,
+   "lon": -7.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-6.5",
+   "lat": 37.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-5.5",
+   "lat": 37.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-4.5",
+   "lat": 37.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-3.5",
+   "lat": 37.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-2.5",
+   "lat": 37.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon-1.5",
+   "lat": 37.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon13.5",
+   "lat": 37.5,
+   "lon": 13.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon14.5",
+   "lat": 37.5,
+   "lon": 14.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat37.5_lon21.5",
+   "lat": 37.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon22.5",
+   "lat": 37.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon27.5",
+   "lat": 37.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon28.5",
+   "lat": 37.5,
+   "lon": 28.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon29.5",
+   "lat": 37.5,
+   "lon": 29.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon30.5",
+   "lat": 37.5,
+   "lon": 30.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon31.5",
+   "lat": 37.5,
+   "lon": 31.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon32.5",
+   "lat": 37.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon33.5",
+   "lat": 37.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon34.5",
+   "lat": 37.5,
+   "lon": 34.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon35.5",
+   "lat": 37.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon36.5",
+   "lat": 37.5,
+   "lon": 36.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon37.5",
+   "lat": 37.5,
+   "lon": 37.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon38.5",
+   "lat": 37.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat37.5_lon39.5",
+   "lat": 37.5,
+   "lon": 39.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon-8.5",
+   "lat": 38.5,
+   "lon": -8.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-7.5",
+   "lat": 38.5,
+   "lon": -7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon-6.5",
+   "lat": 38.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-5.5",
+   "lat": 38.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-4.5",
+   "lat": 38.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-3.5",
+   "lat": 38.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-2.5",
+   "lat": 38.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-1.5",
+   "lat": 38.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon-0.5",
+   "lat": 38.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat38.5_lon21.5",
+   "lat": 38.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon22.5",
+   "lat": 38.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon23.5",
+   "lat": 38.5,
+   "lon": 23.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon27.5",
+   "lat": 38.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon28.5",
+   "lat": 38.5,
+   "lon": 28.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon29.5",
+   "lat": 38.5,
+   "lon": 29.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon30.5",
+   "lat": 38.5,
+   "lon": 30.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon31.5",
+   "lat": 38.5,
+   "lon": 31.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon32.5",
+   "lat": 38.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon33.5",
+   "lat": 38.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon34.5",
+   "lat": 38.5,
+   "lon": 34.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon35.5",
+   "lat": 38.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon36.5",
+   "lat": 38.5,
+   "lon": 36.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon37.5",
+   "lat": 38.5,
+   "lon": 37.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon38.5",
+   "lat": 38.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat38.5_lon39.5",
+   "lat": 38.5,
+   "lon": 39.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon-8.5",
+   "lat": 39.5,
+   "lon": -8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon-7.5",
+   "lat": 39.5,
+   "lon": -7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon-6.5",
+   "lat": 39.5,
+   "lon": -6.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-5.5",
+   "lat": 39.5,
+   "lon": -5.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-4.5",
+   "lat": 39.5,
+   "lon": -4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-3.5",
+   "lat": 39.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-2.5",
+   "lat": 39.5,
+   "lon": -2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-1.5",
+   "lat": 39.5,
+   "lon": -1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon-0.5",
+   "lat": 39.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon8.5",
+   "lat": 39.5,
+   "lon": 8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon9.5",
+   "lat": 39.5,
+   "lon": 9.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon16.5",
+   "lat": 39.5,
+   "lon": 16.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat39.5_lon20.5",
+   "lat": 39.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon21.5",
+   "lat": 39.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon22.5",
+   "lat": 39.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon26.5",
+   "lat": 39.5,
+   "lon": 26.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon27.5",
+   "lat": 39.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon28.5",
+   "lat": 39.5,
+   "lon": 28.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon29.5",
+   "lat": 39.5,
+   "lon": 29.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon30.5",
+   "lat": 39.5,
+   "lon": 30.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon31.5",
+   "lat": 39.5,
+   "lon": 31.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon32.5",
+   "lat": 39.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon33.5",
+   "lat": 39.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon34.5",
+   "lat": 39.5,
+   "lon": 34.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon35.5",
+   "lat": 39.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon36.5",
+   "lat": 39.5,
+   "lon": 36.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon37.5",
+   "lat": 39.5,
+   "lon": 37.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon38.5",
+   "lat": 39.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat39.5_lon39.5",
+   "lat": 39.5,
+   "lon": 39.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-8.5",
+   "lat": 40.5,
+   "lon": -8.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat40.5_lon-7.5",
+   "lat": 40.5,
+   "lon": -7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-6.5",
+   "lat": 40.5,
+   "lon": -6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-5.5",
+   "lat": 40.5,
+   "lon": -5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-4.5",
+   "lat": 40.5,
+   "lon": -4.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-3.5",
+   "lat": 40.5,
+   "lon": -3.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-2.5",
+   "lat": 40.5,
+   "lon": -2.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-1.5",
+   "lat": 40.5,
+   "lon": -1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon-0.5",
+   "lat": 40.5,
+   "lon": -0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat40.5_lon0.5",
+   "lat": 40.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon8.5",
+   "lat": 40.5,
+   "lon": 8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon9.5",
+   "lat": 40.5,
+   "lon": 9.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon15.5",
+   "lat": 40.5,
+   "lon": 15.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat40.5_lon16.5",
+   "lat": 40.5,
+   "lon": 16.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat40.5_lon17.5",
+   "lat": 40.5,
+   "lon": 17.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat40.5_lon20.5",
+   "lat": 40.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon21.5",
+   "lat": 40.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon22.5",
+   "lat": 40.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon23.5",
+   "lat": 40.5,
+   "lon": 23.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon26.5",
+   "lat": 40.5,
+   "lon": 26.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon27.5",
+   "lat": 40.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon29.5",
+   "lat": 40.5,
+   "lon": 29.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon30.5",
+   "lat": 40.5,
+   "lon": 30.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon31.5",
+   "lat": 40.5,
+   "lon": 31.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon32.5",
+   "lat": 40.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon33.5",
+   "lat": 40.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon34.5",
+   "lat": 40.5,
+   "lon": 34.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon35.5",
+   "lat": 40.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon36.5",
+   "lat": 40.5,
+   "lon": 36.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon37.5",
+   "lat": 40.5,
+   "lon": 37.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon38.5",
+   "lat": 40.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat40.5_lon39.5",
+   "lat": 40.5,
+   "lon": 39.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-8.5",
+   "lat": 41.5,
+   "lon": -8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-7.5",
+   "lat": 41.5,
+   "lon": -7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-6.5",
+   "lat": 41.5,
+   "lon": -6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-5.5",
+   "lat": 41.5,
+   "lon": -5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-4.5",
+   "lat": 41.5,
+   "lon": -4.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-3.5",
+   "lat": 41.5,
+   "lon": -3.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-2.5",
+   "lat": 41.5,
+   "lon": -2.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-1.5",
+   "lat": 41.5,
+   "lon": -1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon-0.5",
+   "lat": 41.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon0.5",
+   "lat": 41.5,
+   "lon": 0.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon1.5",
+   "lat": 41.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon2.5",
+   "lat": 41.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon13.5",
+   "lat": 41.5,
+   "lon": 13.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon14.5",
+   "lat": 41.5,
+   "lon": 14.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon15.5",
+   "lat": 41.5,
+   "lon": 15.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon19.5",
+   "lat": 41.5,
+   "lon": 19.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon20.5",
+   "lat": 41.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon21.5",
+   "lat": 41.5,
+   "lon": 21.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon22.5",
+   "lat": 41.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon23.5",
+   "lat": 41.5,
+   "lon": 23.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon24.5",
+   "lat": 41.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat41.5_lon25.5",
+   "lat": 41.5,
+   "lon": 25.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon26.5",
+   "lat": 41.5,
+   "lon": 26.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon27.5",
+   "lat": 41.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon32.5",
+   "lat": 41.5,
+   "lon": 32.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon33.5",
+   "lat": 41.5,
+   "lon": 33.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon34.5",
+   "lat": 41.5,
+   "lon": 34.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat41.5_lon35.5",
+   "lat": 41.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-8.5",
+   "lat": 42.5,
+   "lon": -8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-7.5",
+   "lat": 42.5,
+   "lon": -7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-6.5",
+   "lat": 42.5,
+   "lon": -6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-5.5",
+   "lat": 42.5,
+   "lon": -5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-4.5",
+   "lat": 42.5,
+   "lon": -4.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-3.5",
+   "lat": 42.5,
+   "lon": -3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon-2.5",
+   "lat": 42.5,
+   "lon": -2.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-1.5",
+   "lat": 42.5,
+   "lon": -1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon-0.5",
+   "lat": 42.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon0.5",
+   "lat": 42.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon1.5",
+   "lat": 42.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon2.5",
+   "lat": 42.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon11.5",
+   "lat": 42.5,
+   "lon": 11.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon12.5",
+   "lat": 42.5,
+   "lon": 12.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon13.5",
+   "lat": 42.5,
+   "lon": 13.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon18.5",
+   "lat": 42.5,
+   "lon": 18.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon19.5",
+   "lat": 42.5,
+   "lon": 19.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon20.5",
+   "lat": 42.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon21.5",
+   "lat": 42.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon22.5",
+   "lat": 42.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon23.5",
+   "lat": 42.5,
+   "lon": 23.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat42.5_lon24.5",
+   "lat": 42.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon25.5",
+   "lat": 42.5,
+   "lon": 25.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon26.5",
+   "lat": 42.5,
+   "lon": 26.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat42.5_lon27.5",
+   "lat": 42.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon-7.5",
+   "lat": 43.5,
+   "lon": -7.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon-6.5",
+   "lat": 43.5,
+   "lon": -6.5,
+   "cluster": 2,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon-5.5",
+   "lat": 43.5,
+   "lon": -5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon-1.5",
+   "lat": 43.5,
+   "lon": -1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon-0.5",
+   "lat": 43.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon0.5",
+   "lat": 43.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon1.5",
+   "lat": 43.5,
+   "lon": 1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon2.5",
+   "lat": 43.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon3.5",
+   "lat": 43.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon4.5",
+   "lat": 43.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon5.5",
+   "lat": 43.5,
+   "lon": 5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon6.5",
+   "lat": 43.5,
+   "lon": 6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon10.5",
+   "lat": 43.5,
+   "lon": 10.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon11.5",
+   "lat": 43.5,
+   "lon": 11.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon12.5",
+   "lat": 43.5,
+   "lon": 12.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon13.5",
+   "lat": 43.5,
+   "lon": 13.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon16.5",
+   "lat": 43.5,
+   "lon": 16.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon17.5",
+   "lat": 43.5,
+   "lon": 17.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon18.5",
+   "lat": 43.5,
+   "lon": 18.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon19.5",
+   "lat": 43.5,
+   "lon": 19.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon20.5",
+   "lat": 43.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon21.5",
+   "lat": 43.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon22.5",
+   "lat": 43.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon23.5",
+   "lat": 43.5,
+   "lon": 23.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat43.5_lon24.5",
+   "lat": 43.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon25.5",
+   "lat": 43.5,
+   "lon": 25.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon26.5",
+   "lat": 43.5,
+   "lon": 26.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat43.5_lon27.5",
+   "lat": 43.5,
+   "lon": 27.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon-0.5",
+   "lat": 44.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon0.5",
+   "lat": 44.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon1.5",
+   "lat": 44.5,
+   "lon": 1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon2.5",
+   "lat": 44.5,
+   "lon": 2.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon3.5",
+   "lat": 44.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon4.5",
+   "lat": 44.5,
+   "lon": 4.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon5.5",
+   "lat": 44.5,
+   "lon": 5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon6.5",
+   "lat": 44.5,
+   "lon": 6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon7.5",
+   "lat": 44.5,
+   "lon": 7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon8.5",
+   "lat": 44.5,
+   "lon": 8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon9.5",
+   "lat": 44.5,
+   "lon": 9.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon10.5",
+   "lat": 44.5,
+   "lon": 10.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon11.5",
+   "lat": 44.5,
+   "lon": 11.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon15.5",
+   "lat": 44.5,
+   "lon": 15.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon16.5",
+   "lat": 44.5,
+   "lon": 16.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon17.5",
+   "lat": 44.5,
+   "lon": 17.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon18.5",
+   "lat": 44.5,
+   "lon": 18.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon19.5",
+   "lat": 44.5,
+   "lon": 19.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon20.5",
+   "lat": 44.5,
+   "lon": 20.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon21.5",
+   "lat": 44.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon22.5",
+   "lat": 44.5,
+   "lon": 22.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon23.5",
+   "lat": 44.5,
+   "lon": 23.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon24.5",
+   "lat": 44.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon25.5",
+   "lat": 44.5,
+   "lon": 25.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat44.5_lon26.5",
+   "lat": 44.5,
+   "lon": 26.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon27.5",
+   "lat": 44.5,
+   "lon": 27.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon28.5",
+   "lat": 44.5,
+   "lon": 28.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon38.5",
+   "lat": 44.5,
+   "lon": 38.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat44.5_lon39.5",
+   "lat": 44.5,
+   "lon": 39.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon-0.5",
+   "lat": 45.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon0.5",
+   "lat": 45.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon1.5",
+   "lat": 45.5,
+   "lon": 1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon2.5",
+   "lat": 45.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon3.5",
+   "lat": 45.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon4.5",
+   "lat": 45.5,
+   "lon": 4.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon5.5",
+   "lat": 45.5,
+   "lon": 5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon6.5",
+   "lat": 45.5,
+   "lon": 6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon7.5",
+   "lat": 45.5,
+   "lon": 7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon8.5",
+   "lat": 45.5,
+   "lon": 8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon9.5",
+   "lat": 45.5,
+   "lon": 9.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon10.5",
+   "lat": 45.5,
+   "lon": 10.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon11.5",
+   "lat": 45.5,
+   "lon": 11.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon12.5",
+   "lat": 45.5,
+   "lon": 12.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon13.5",
+   "lat": 45.5,
+   "lon": 13.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon14.5",
+   "lat": 45.5,
+   "lon": 14.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon15.5",
+   "lat": 45.5,
+   "lon": 15.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon16.5",
+   "lat": 45.5,
+   "lon": 16.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon17.5",
+   "lat": 45.5,
+   "lon": 17.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon18.5",
+   "lat": 45.5,
+   "lon": 18.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon19.5",
+   "lat": 45.5,
+   "lon": 19.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon20.5",
+   "lat": 45.5,
+   "lon": 20.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon21.5",
+   "lat": 45.5,
+   "lon": 21.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon22.5",
+   "lat": 45.5,
+   "lon": 22.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon23.5",
+   "lat": 45.5,
+   "lon": 23.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon24.5",
+   "lat": 45.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon25.5",
+   "lat": 45.5,
+   "lon": 25.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat45.5_lon26.5",
+   "lat": 45.5,
+   "lon": 26.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon27.5",
+   "lat": 45.5,
+   "lon": 27.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon28.5",
+   "lat": 45.5,
+   "lon": 28.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon29.5",
+   "lat": 45.5,
+   "lon": 29.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon33.5",
+   "lat": 45.5,
+   "lon": 33.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon34.5",
+   "lat": 45.5,
+   "lon": 34.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon38.5",
+   "lat": 45.5,
+   "lon": 38.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat45.5_lon39.5",
+   "lat": 45.5,
+   "lon": 39.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon-1.5",
+   "lat": 46.5,
+   "lon": -1.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon-0.5",
+   "lat": 46.5,
+   "lon": -0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon0.5",
+   "lat": 46.5,
+   "lon": 0.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon1.5",
+   "lat": 46.5,
+   "lon": 1.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon2.5",
+   "lat": 46.5,
+   "lon": 2.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon3.5",
+   "lat": 46.5,
+   "lon": 3.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon4.5",
+   "lat": 46.5,
+   "lon": 4.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon5.5",
+   "lat": 46.5,
+   "lon": 5.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon6.5",
+   "lat": 46.5,
+   "lon": 6.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon7.5",
+   "lat": 46.5,
+   "lon": 7.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon8.5",
+   "lat": 46.5,
+   "lon": 8.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon9.5",
+   "lat": 46.5,
+   "lon": 9.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon10.5",
+   "lat": 46.5,
+   "lon": 10.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon11.5",
+   "lat": 46.5,
+   "lon": 11.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon12.5",
+   "lat": 46.5,
+   "lon": 12.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon13.5",
+   "lat": 46.5,
+   "lon": 13.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon14.5",
+   "lat": 46.5,
+   "lon": 14.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon15.5",
+   "lat": 46.5,
+   "lon": 15.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon16.5",
+   "lat": 46.5,
+   "lon": 16.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon17.5",
+   "lat": 46.5,
+   "lon": 17.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon18.5",
+   "lat": 46.5,
+   "lon": 18.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon19.5",
+   "lat": 46.5,
+   "lon": 19.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon20.5",
+   "lat": 46.5,
+   "lon": 20.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon21.5",
+   "lat": 46.5,
+   "lon": 21.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon22.5",
+   "lat": 46.5,
+   "lon": 22.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon23.5",
+   "lat": 46.5,
+   "lon": 23.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon24.5",
+   "lat": 46.5,
+   "lon": 24.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon25.5",
+   "lat": 46.5,
+   "lon": 25.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon26.5",
+   "lat": 46.5,
+   "lon": 26.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon27.5",
+   "lat": 46.5,
+   "lon": 27.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon28.5",
+   "lat": 46.5,
+   "lon": 28.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon29.5",
+   "lat": 46.5,
+   "lon": 29.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon30.5",
+   "lat": 46.5,
+   "lon": 30.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon32.5",
+   "lat": 46.5,
+   "lon": 32.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon33.5",
+   "lat": 46.5,
+   "lon": 33.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon34.5",
+   "lat": 46.5,
+   "lon": 34.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon35.5",
+   "lat": 46.5,
+   "lon": 35.5,
+   "cluster": 1,
+   "cluster_label": "warming + greening"
+  },
+  {
+   "cell_id": "lat46.5_lon38.5",
+   "lat": 46.5,
+   "lon": 38.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  },
+  {
+   "cell_id": "lat46.5_lon39.5",
+   "lat": 46.5,
+   "lon": 39.5,
+   "cluster": 0,
+   "cluster_label": "warming + drying"
+  }
+ ],
+ "sub_results": {
+  "ndvi": {
+   "anatolia": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "anatolia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.021752125964207357,
+     "ci95": [
+      0.01772647873861162,
+      0.025811647325843276
+     ],
+     "p": 8.495684566289796e-06,
+     "significant": true,
+     "tau": 0.3464479287650019,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 67,
+     "n_tested": 67,
+     "sig_up": 62,
+     "sig_down": 0,
+     "pct_sig_area": 92.4,
+     "pct_sig_up_area": 92.4,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "iberia": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "iberia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.01398792365163314,
+     "ci95": [
+      0.010581723267087258,
+      0.01772732951226733
+     ],
+     "p": 1.3800960374510396e-11,
+     "significant": true,
+     "tau": 0.2918602400309717,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 72,
+     "n_tested": 69,
+     "sig_up": 58,
+     "sig_down": 0,
+     "pct_sig_area": 83.5,
+     "pct_sig_up_area": 83.5,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "italy_balkans": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "italy_balkans",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.01640202335761422,
+     "ci95": [
+      0.012409023590029752,
+      0.02075597156123976
+     ],
+     "p": 3.6820610005428023e-07,
+     "significant": true,
+     "tau": 0.2866337591947348,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 129,
+     "n_tested": 129,
+     "sig_up": 111,
+     "sig_down": 0,
+     "pct_sig_area": 86.2,
+     "pct_sig_up_area": 86.2,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "levant": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "levant",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.004560777830581089,
+     "ci95": [
+      0.002842693449596761,
+      0.006276463045107232
+     ],
+     "p": 0.02414898780546948,
+     "significant": true,
+     "tau": 0.20668795973674023,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 40,
+     "n_tested": 40,
+     "sig_up": 26,
+     "sig_down": 0,
+     "pct_sig_area": 65.3,
+     "pct_sig_up_area": 65.3,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "maghreb": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "maghreb",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.001965992709321792,
+     "ci95": [
+      -0.003559972443281394,
+      -0.00035248860288968656
+     ],
+     "p": 0.5220256245954449,
+     "significant": false,
+     "tau": -0.09402826171118854,
+     "n_months": 288,
+     "years_needed": 73.1506935553681
+    },
+    "cells": {
+     "n": 170,
+     "n_tested": 170,
+     "sig_up": 2,
+     "sig_down": 16,
+     "pct_sig_area": 10.8,
+     "pct_sig_up_area": 1.2,
+     "pct_sig_down_area": 9.6
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "nile_delta": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "nile_delta",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.0020497075014386237,
+     "ci95": [
+      0.0015738575469767574,
+      0.0025287806781734866
+     ],
+     "p": 4.388396224186408e-08,
+     "significant": true,
+     "tau": 0.31687959736740223,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 25,
+     "n_tested": 25,
+     "sig_up": 12,
+     "sig_down": 7,
+     "pct_sig_area": 76.1,
+     "pct_sig_up_area": 48.0,
+     "pct_sig_down_area": 28.1
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "sahara_margin": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "sahara_margin",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -8.943794250135947e-05,
+     "ci95": [
+      -0.00030509878181919837,
+      0.0001299612161514874
+     ],
+     "p": 0.7145482913318355,
+     "significant": false,
+     "tau": -0.031794425087108016,
+     "n_months": 288,
+     "years_needed": 106.91429777544784
+    },
+    "cells": {
+     "n": 200,
+     "n_tested": 200,
+     "sig_up": 30,
+     "sig_down": 20,
+     "pct_sig_area": 25.0,
+     "pct_sig_up_area": 15.0,
+     "pct_sig_down_area": 9.9
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "tunisia": {
+    "variable": "ndvi",
+    "display_name": "Vegetation greenness (NDVI)",
+    "unit": "NDVI units per decade",
+    "region": "tunisia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.0008877001700198189,
+     "ci95": [
+      -0.002603602882302658,
+      0.000868410363555894
+     ],
+     "p": 0.7038571588497495,
+     "significant": false,
+     "tau": -0.04006968641114982,
+     "n_months": 288,
+     "years_needed": 124.90361323175479
+    },
+    "cells": {
+     "n": 31,
+     "n_tested": 31,
+     "sig_up": 1,
+     "sig_down": 3,
+     "pct_sig_area": 13.2,
+     "pct_sig_up_area": 3.2,
+     "pct_sig_down_area": 9.9
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "MOD13C2 v061"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   }
+  },
+  "precip": {
+   "anatolia": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "anatolia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.13123386978184826,
+     "ci95": [
+      -3.3717575178658987,
+      3.671320919634255
+     ],
+     "p": 0.9445965919627033,
+     "significant": false,
+     "tau": 0.003193960511033682,
+     "n_months": 288,
+     "years_needed": 338.0301571978695
+    },
+    "cells": {
+     "n": 67,
+     "n_tested": 67,
+     "sig_up": 0,
+     "sig_down": 0,
+     "pct_sig_area": 0.0,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "iberia": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "iberia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.34428340674836677,
+     "ci95": [
+      -4.234194841646278,
+      3.5158597603398656
+     ],
+     "p": 0.8917941444154367,
+     "significant": false,
+     "tau": -0.006533101045296167,
+     "n_months": 288,
+     "years_needed": 221.52524518953942
+    },
+    "cells": {
+     "n": 72,
+     "n_tested": 72,
+     "sig_up": 0,
+     "sig_down": 0,
+     "pct_sig_area": 0.0,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "italy_balkans": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "italy_balkans",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.7262207657151343,
+     "ci95": [
+      -5.066813180851434,
+      3.5647323634129755
+     ],
+     "p": 0.6808420188694335,
+     "significant": false,
+     "tau": -0.013453348819202477,
+     "n_months": 288,
+     "years_needed": 117.97548785893194
+    },
+    "cells": {
+     "n": 129,
+     "n_tested": 129,
+     "sig_up": 1,
+     "sig_down": 0,
+     "pct_sig_area": 0.8,
+     "pct_sig_up_area": 0.8,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "levant": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "levant",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.45355501517321534,
+     "ci95": [
+      -1.5598217578006408,
+      0.3475665641810105
+     ],
+     "p": 0.28707996848161943,
+     "significant": false,
+     "tau": -0.04229578010065815,
+     "n_months": 288,
+     "years_needed": 87.80762273246934
+    },
+    "cells": {
+     "n": 40,
+     "n_tested": 40,
+     "sig_up": 0,
+     "sig_down": 2,
+     "pct_sig_area": 4.9,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 4.9
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "maghreb": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "maghreb",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -1.997147655637959,
+     "ci95": [
+      -3.3082372155050876,
+      -0.7483383828844725
+     ],
+     "p": 0.023325621457927825,
+     "significant": true,
+     "tau": -0.12659698025551683,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 170,
+     "n_tested": 168,
+     "sig_up": 0,
+     "sig_down": 66,
+     "pct_sig_area": 39.1,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 39.1
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "nile_delta": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "nile_delta",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.00679407349819972,
+     "ci95": [
+      -0.077484186855003,
+      0.14395668068556405
+     ],
+     "p": 0.7238205489589886,
+     "significant": false,
+     "tau": 0.014034068912117692,
+     "n_months": 288,
+     "years_needed": 637.4056476083824
+    },
+    "cells": {
+     "n": 25,
+     "n_tested": 24,
+     "sig_up": 2,
+     "sig_down": 0,
+     "pct_sig_area": 8.4,
+     "pct_sig_up_area": 8.4,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "sahara_margin": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "sahara_margin",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.2528804407134149,
+     "ci95": [
+      -0.5742654506015272,
+      0.038293497684276465
+     ],
+     "p": 0.18445748828833297,
+     "significant": false,
+     "tau": -0.06547619047619048,
+     "n_months": 288,
+     "years_needed": 54.138059746391384
+    },
+    "cells": {
+     "n": 200,
+     "n_tested": 198,
+     "sig_up": 9,
+     "sig_down": 22,
+     "pct_sig_area": 15.6,
+     "pct_sig_up_area": 4.5,
+     "pct_sig_down_area": 11.1
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "tunisia": {
+    "variable": "precip",
+    "display_name": "Precipitation",
+    "unit": "mm/month per decade",
+    "region": "tunisia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -1.8900313515202916,
+     "ci95": [
+      -3.6383869578797605,
+      -0.23747256559350421
+     ],
+     "p": 0.008239479079193313,
+     "significant": true,
+     "tau": -0.08943089430894309,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 31,
+     "n_tested": 31,
+     "sig_up": 0,
+     "sig_down": 14,
+     "pct_sig_area": 44.5,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 44.5
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GPM_3IMERGM v07"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   }
+  },
+  "soil_moisture": {
+   "anatolia": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "anatolia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.37989348183940497,
+     "ci95": [
+      -0.7116815483445477,
+      -0.05503286953776248
+     ],
+     "p": 0.08614528914259623,
+     "significant": false,
+     "tau": -0.09025358110723965,
+     "n_months": 288,
+     "years_needed": 42.70260767746688
+    },
+    "cells": {
+     "n": 67,
+     "n_tested": 67,
+     "sig_up": 2,
+     "sig_down": 21,
+     "pct_sig_area": 34.5,
+     "pct_sig_up_area": 2.9,
+     "pct_sig_down_area": 31.6
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "iberia": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "iberia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.7550647764886824,
+     "ci95": [
+      -1.0351144807914263,
+      -0.4613205106096485
+     ],
+     "p": 0.0001652074510778423,
+     "significant": true,
+     "tau": -0.19415408439798684,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 72,
+     "n_tested": 71,
+     "sig_up": 2,
+     "sig_down": 46,
+     "pct_sig_area": 67.9,
+     "pct_sig_up_area": 2.7,
+     "pct_sig_down_area": 65.2
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "italy_balkans": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "italy_balkans",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.7317179392763047,
+     "ci95": [
+      -1.0622304838577348,
+      -0.41468846784309094
+     ],
+     "p": 0.006709514302899455,
+     "significant": true,
+     "tau": -0.17494192799070848,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 129,
+     "n_tested": 129,
+     "sig_up": 1,
+     "sig_down": 69,
+     "pct_sig_area": 54.2,
+     "pct_sig_up_area": 0.8,
+     "pct_sig_down_area": 53.4
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "levant": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "levant",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.17355699100391608,
+     "ci95": [
+      -0.39248997863125634,
+      0.019779646634246396
+     ],
+     "p": 0.04451086253086323,
+     "significant": true,
+     "tau": -0.0689121176926055,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 40,
+     "n_tested": 40,
+     "sig_up": 3,
+     "sig_down": 16,
+     "pct_sig_area": 46.8,
+     "pct_sig_up_area": 7.7,
+     "pct_sig_down_area": 39.1
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "maghreb": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "maghreb",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -1.072836426282488,
+     "ci95": [
+      -1.315096761122332,
+      -0.8078352414423239
+     ],
+     "p": 0.0004486715709017819,
+     "significant": true,
+     "tau": -0.2991676345334882,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 170,
+     "n_tested": 170,
+     "sig_up": 0,
+     "sig_down": 155,
+     "pct_sig_area": 91.1,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 91.1
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "nile_delta": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "nile_delta",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.07729277626602299,
+     "ci95": [
+      -0.006288914400696279,
+      0.17309574671036254
+     ],
+     "p": 0.015847924806098757,
+     "significant": true,
+     "tau": 0.07055749128919861,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 25,
+     "n_tested": 25,
+     "sig_up": 10,
+     "sig_down": 1,
+     "pct_sig_area": 44.2,
+     "pct_sig_up_area": 40.3,
+     "pct_sig_down_area": 3.9
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "sahara_margin": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "sahara_margin",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.30069693971247996,
+     "ci95": [
+      -0.4198627511838079,
+      -0.18342839357147048
+     ],
+     "p": 0.0005287136665099723,
+     "significant": true,
+     "tau": -0.19367015098722415,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 200,
+     "n_tested": 199,
+     "sig_up": 28,
+     "sig_down": 119,
+     "pct_sig_area": 73.7,
+     "pct_sig_up_area": 14.0,
+     "pct_sig_down_area": 59.7
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "tunisia": {
+    "variable": "soil_moisture",
+    "display_name": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "region": "tunisia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": -0.9358660265381148,
+     "ci95": [
+      -1.2107943479544188,
+      -0.665918302927654
+     ],
+     "p": 0.00041916105718731167,
+     "significant": true,
+     "tau": -0.25653310104529614,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 31,
+     "n_tested": 31,
+     "sig_up": 0,
+     "sig_down": 26,
+     "pct_sig_area": 83.5,
+     "pct_sig_up_area": 0.0,
+     "pct_sig_down_area": 83.5
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "GLDAS_NOAH025_M v2.1"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   }
+  },
+  "t2m": {
+   "anatolia": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "anatolia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.6022998629815355,
+     "ci95": [
+      0.3630889600078646,
+      0.8571689398936835
+     ],
+     "p": 8.106416516562298e-05,
+     "significant": true,
+     "tau": 0.18902439024390244,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 67,
+     "n_tested": 67,
+     "sig_up": 67,
+     "sig_down": 0,
+     "pct_sig_area": 100.0,
+     "pct_sig_up_area": 100.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "iberia": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "iberia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.5866101923991905,
+     "ci95": [
+      0.3835903179439788,
+      0.7892770456040425
+     ],
+     "p": 0.0,
+     "significant": true,
+     "tau": 0.21738288811459544,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 72,
+     "n_tested": 72,
+     "sig_up": 72,
+     "sig_down": 0,
+     "pct_sig_area": 100.0,
+     "pct_sig_up_area": 100.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "italy_balkans": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "italy_balkans",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.7819378377193273,
+     "ci95": [
+      0.5594445166570955,
+      0.9984054454683526
+     ],
+     "p": 6.869519617591635e-07,
+     "significant": true,
+     "tau": 0.2619047619047619,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 129,
+     "n_tested": 129,
+     "sig_up": 129,
+     "sig_down": 0,
+     "pct_sig_area": 100.0,
+     "pct_sig_up_area": 100.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "levant": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "levant",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.4533652915915192,
+     "ci95": [
+      0.26442774855031104,
+      0.641846914193332
+     ],
+     "p": 9.197359858492682e-05,
+     "significant": true,
+     "tau": 0.17842624854819977,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 40,
+     "n_tested": 40,
+     "sig_up": 40,
+     "sig_down": 0,
+     "pct_sig_area": 100.0,
+     "pct_sig_up_area": 100.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "maghreb": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "maghreb",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.4444066521838875,
+     "ci95": [
+      0.2535002708914539,
+      0.6341380032508577
+     ],
+     "p": 0.022718524221531977,
+     "significant": true,
+     "tau": 0.17905536198219124,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 170,
+     "n_tested": 170,
+     "sig_up": 146,
+     "sig_down": 0,
+     "pct_sig_area": 85.6,
+     "pct_sig_up_area": 85.6,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "nile_delta": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "nile_delta",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.2972312727112561,
+     "ci95": [
+      0.11618053344284444,
+      0.47391784240437484
+     ],
+     "p": 0.0023444348479353394,
+     "significant": true,
+     "tau": 0.1251451800232288,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 25,
+     "n_tested": 25,
+     "sig_up": 25,
+     "sig_down": 0,
+     "pct_sig_area": 100.0,
+     "pct_sig_up_area": 100.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "sahara_margin": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "sahara_margin",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.24979203304093767,
+     "ci95": [
+      0.10515253244825118,
+      0.3926021199735976
+     ],
+     "p": 0.009767883909588049,
+     "significant": true,
+     "tau": 0.13109756097560976,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 200,
+     "n_tested": 200,
+     "sig_up": 73,
+     "sig_down": 0,
+     "pct_sig_area": 36.5,
+     "pct_sig_up_area": 36.5,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:09Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   },
+   "tunisia": {
+    "variable": "t2m",
+    "display_name": "Air temperature at 2 m",
+    "unit": "degC per decade",
+    "region": "tunisia",
+    "period": [
+     "2001-01",
+     "2024-12"
+    ],
+    "regional": {
+     "slope_per_decade": 0.4066225656098581,
+     "ci95": [
+      0.20862674580490187,
+      0.6053298454910856
+     ],
+     "p": 0.010874145631694088,
+     "significant": true,
+     "tau": 0.15752032520325204,
+     "n_months": 288,
+     "years_needed": null
+    },
+    "cells": {
+     "n": 31,
+     "n_tested": 31,
+     "sig_up": 21,
+     "sig_down": 0,
+     "pct_sig_area": 67.0,
+     "pct_sig_up_area": 67.0,
+     "pct_sig_down_area": 0.0
+    },
+    "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+    "datasets": [
+     "M2TMNXSLV v5.12.4"
+    ],
+    "run_id": "2026-11-15T04:08Z-42df9ed",
+    "warnings": [],
+    "synthetic": false
+   }
+  }
+ },
+ "findings": [
+  {
+   "id": "finding:ndvi:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.00616674573960305,
+   "ci95": [
+    0.004885680665652849,
+    0.007446286494724324
+   ],
+   "p": 5.860667132040476e-06,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 42.5,
+   "pct_sig_down_area": 7.6,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.00617 NDVI units per decade over 2001-01..2024-12 (p = 5.86e-06)"
+  },
+  {
+   "id": "finding:soil_moisture:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.5847745682218568,
+   "ci95": [
+    -0.7332858433339058,
+    -0.44487261234559794
+   ],
+   "p": 5.465251202263488e-06,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 8.9,
+   "pct_sig_down_area": 58.3,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.585 kg m-2 per decade over 2001-01..2024-12 (p = 5.47e-06)"
+  },
+  {
+   "id": "finding:t2m:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.48761659660261386,
+   "ci95": [
+    0.36873532705691725,
+    0.6087019464876052
+   ],
+   "p": 1.1572786509095323e-06,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 81.8,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.488 degC per decade over 2001-01..2024-12 (p = 1.16e-06)"
+  },
+  {
+   "id": "finding:ndvi:anatolia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "anatolia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.021752125964207357,
+   "ci95": [
+    0.01772647873861162,
+    0.025811647325843276
+   ],
+   "p": 8.495684566289796e-06,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 92.4,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.0218 NDVI units per decade over 2001-01..2024-12 (p = 8.5e-06)"
+  },
+  {
+   "id": "finding:t2m:anatolia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "anatolia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.6022998629815355,
+   "ci95": [
+    0.3630889600078646,
+    0.8571689398936835
+   ],
+   "p": 8.106416516562298e-05,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 100.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.602 degC per decade over 2001-01..2024-12 (p = 8.11e-05)"
+  },
+  {
+   "id": "finding:ndvi:iberia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "iberia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.01398792365163314,
+   "ci95": [
+    0.010581723267087258,
+    0.01772732951226733
+   ],
+   "p": 1.3800960374510396e-11,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 83.5,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.014 NDVI units per decade over 2001-01..2024-12 (p = 1.38e-11)"
+  },
+  {
+   "id": "finding:soil_moisture:iberia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "iberia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.7550647764886824,
+   "ci95": [
+    -1.0351144807914263,
+    -0.4613205106096485
+   ],
+   "p": 0.0001652074510778423,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 2.7,
+   "pct_sig_down_area": 65.2,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.755 kg m-2 per decade over 2001-01..2024-12 (p = 0.000165)"
+  },
+  {
+   "id": "finding:t2m:iberia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "iberia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.5866101923991905,
+   "ci95": [
+    0.3835903179439788,
+    0.7892770456040425
+   ],
+   "p": 0.0,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 100.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.587 degC per decade over 2001-01..2024-12 (p = 0)"
+  },
+  {
+   "id": "finding:ndvi:italy_balkans:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "italy_balkans",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.01640202335761422,
+   "ci95": [
+    0.012409023590029752,
+    0.02075597156123976
+   ],
+   "p": 3.6820610005428023e-07,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 86.2,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.0164 NDVI units per decade over 2001-01..2024-12 (p = 3.68e-07)"
+  },
+  {
+   "id": "finding:soil_moisture:italy_balkans:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "italy_balkans",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.7317179392763047,
+   "ci95": [
+    -1.0622304838577348,
+    -0.41468846784309094
+   ],
+   "p": 0.006709514302899455,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.8,
+   "pct_sig_down_area": 53.4,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.732 kg m-2 per decade over 2001-01..2024-12 (p = 0.00671)"
+  },
+  {
+   "id": "finding:t2m:italy_balkans:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "italy_balkans",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.7819378377193273,
+   "ci95": [
+    0.5594445166570955,
+    0.9984054454683526
+   ],
+   "p": 6.869519617591635e-07,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 100.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.782 degC per decade over 2001-01..2024-12 (p = 6.87e-07)"
+  },
+  {
+   "id": "finding:ndvi:levant:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "levant",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.004560777830581089,
+   "ci95": [
+    0.002842693449596761,
+    0.006276463045107232
+   ],
+   "p": 0.02414898780546948,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 65.3,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.00456 NDVI units per decade over 2001-01..2024-12 (p = 0.0241)"
+  },
+  {
+   "id": "finding:soil_moisture:levant:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "levant",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.17355699100391608,
+   "ci95": [
+    -0.39248997863125634,
+    0.019779646634246396
+   ],
+   "p": 0.04451086253086323,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 7.7,
+   "pct_sig_down_area": 39.1,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.174 kg m-2 per decade over 2001-01..2024-12 (p = 0.0445)"
+  },
+  {
+   "id": "finding:t2m:levant:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "levant",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.4533652915915192,
+   "ci95": [
+    0.26442774855031104,
+    0.641846914193332
+   ],
+   "p": 9.197359858492682e-05,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 100.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.453 degC per decade over 2001-01..2024-12 (p = 9.2e-05)"
+  },
+  {
+   "id": "finding:precip:maghreb:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "precip",
+   "region": "maghreb",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "mm/month per decade",
+   "slope_per_decade": -1.997147655637959,
+   "ci95": [
+    -3.3082372155050876,
+    -0.7483383828844725
+   ],
+   "p": 0.023325621457927825,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 39.1,
+   "datasets": [
+    "GPM_3IMERGM v07"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Precipitation decreased by 2 mm/month per decade over 2001-01..2024-12 (p = 0.0233)"
+  },
+  {
+   "id": "finding:soil_moisture:maghreb:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "maghreb",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -1.072836426282488,
+   "ci95": [
+    -1.315096761122332,
+    -0.8078352414423239
+   ],
+   "p": 0.0004486715709017819,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 91.1,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 1.07 kg m-2 per decade over 2001-01..2024-12 (p = 0.000449)"
+  },
+  {
+   "id": "finding:t2m:maghreb:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "maghreb",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.4444066521838875,
+   "ci95": [
+    0.2535002708914539,
+    0.6341380032508577
+   ],
+   "p": 0.022718524221531977,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 85.6,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.444 degC per decade over 2001-01..2024-12 (p = 0.0227)"
+  },
+  {
+   "id": "finding:ndvi:nile_delta:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "ndvi",
+   "region": "nile_delta",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "NDVI units per decade",
+   "slope_per_decade": 0.0020497075014386237,
+   "ci95": [
+    0.0015738575469767574,
+    0.0025287806781734866
+   ],
+   "p": 4.388396224186408e-08,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 48.0,
+   "pct_sig_down_area": 28.1,
+   "datasets": [
+    "MOD13C2 v061"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Vegetation greenness (NDVI) increased by 0.00205 NDVI units per decade over 2001-01..2024-12 (p = 4.39e-08)"
+  },
+  {
+   "id": "finding:soil_moisture:nile_delta:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "nile_delta",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": 0.07729277626602299,
+   "ci95": [
+    -0.006288914400696279,
+    0.17309574671036254
+   ],
+   "p": 0.015847924806098757,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 40.3,
+   "pct_sig_down_area": 3.9,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) increased by 0.0773 kg m-2 per decade over 2001-01..2024-12 (p = 0.0158)"
+  },
+  {
+   "id": "finding:t2m:nile_delta:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "nile_delta",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.2972312727112561,
+   "ci95": [
+    0.11618053344284444,
+    0.47391784240437484
+   ],
+   "p": 0.0023444348479353394,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 100.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.297 degC per decade over 2001-01..2024-12 (p = 0.00234)"
+  },
+  {
+   "id": "finding:soil_moisture:sahara_margin:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "sahara_margin",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.30069693971247996,
+   "ci95": [
+    -0.4198627511838079,
+    -0.18342839357147048
+   ],
+   "p": 0.0005287136665099723,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 14.0,
+   "pct_sig_down_area": 59.7,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.301 kg m-2 per decade over 2001-01..2024-12 (p = 0.000529)"
+  },
+  {
+   "id": "finding:t2m:sahara_margin:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "sahara_margin",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.24979203304093767,
+   "ci95": [
+    0.10515253244825118,
+    0.3926021199735976
+   ],
+   "p": 0.009767883909588049,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 36.5,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:09Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.25 degC per decade over 2001-01..2024-12 (p = 0.00977)"
+  },
+  {
+   "id": "finding:precip:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "precip",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "mm/month per decade",
+   "slope_per_decade": -1.8900313515202916,
+   "ci95": [
+    -3.6383869578797605,
+    -0.23747256559350421
+   ],
+   "p": 0.008239479079193313,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 44.5,
+   "datasets": [
+    "GPM_3IMERGM v07"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Precipitation decreased by 1.89 mm/month per decade over 2001-01..2024-12 (p = 0.00824)"
+  },
+  {
+   "id": "finding:soil_moisture:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "soil_moisture",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "kg m-2 per decade",
+   "slope_per_decade": -0.9358660265381148,
+   "ci95": [
+    -1.2107943479544188,
+    -0.665918302927654
+   ],
+   "p": 0.00041916105718731167,
+   "significant": true,
+   "direction": "down",
+   "pct_sig_up_area": 0.0,
+   "pct_sig_down_area": 83.5,
+   "datasets": [
+    "GLDAS_NOAH025_M v2.1"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Soil moisture (0-10 cm) decreased by 0.936 kg m-2 per decade over 2001-01..2024-12 (p = 0.000419)"
+  },
+  {
+   "id": "finding:t2m:tunisia:2001-01_2024-12",
+   "kind": "trend",
+   "variable": "t2m",
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "unit": "degC per decade",
+   "slope_per_decade": 0.4066225656098581,
+   "ci95": [
+    0.20862674580490187,
+    0.6053298454910856
+   ],
+   "p": 0.010874145631694088,
+   "significant": true,
+   "direction": "up",
+   "pct_sig_up_area": 67.0,
+   "pct_sig_down_area": 0.0,
+   "datasets": [
+    "M2TMNXSLV v5.12.4"
+   ],
+   "run_id": "2026-11-15T04:08Z-42df9ed",
+   "synthetic": false,
+   "summary": "Air temperature at 2 m increased by 0.407 degC per decade over 2001-01..2024-12 (p = 0.0109)"
+  },
+  {
+   "id": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + drying",
+   "signature": "Soil moisture ↓, Air temperature at 2 m ↑",
+   "n_cells": 198,
+   "directions": {
+    "soil_moisture": "down",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.0043,
+    "precip": -2.8343,
+    "soil_moisture": -1.2028,
+    "t2m": 0.651
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + drying' (198 cells): Soil moisture ↓, Air temperature at 2 m ↑"
+  },
+  {
+   "id": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + greening",
+   "signature": "Vegetation greenness ↑, Air temperature at 2 m ↑",
+   "n_cells": 200,
+   "directions": {
+    "ndvi": "up",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.019,
+    "precip": 0.3993,
+    "soil_moisture": -0.4636,
+    "t2m": 0.6668
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + greening' (200 cells): Vegetation greenness ↑, Air temperature at 2 m ↑"
+  },
+  {
+   "id": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+   "kind": "cluster",
+   "region": "mediterranean_north_africa",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "cluster_label": "warming + drying",
+   "signature": "Soil moisture ↓, Air temperature at 2 m ↑",
+   "n_cells": 344,
+   "directions": {
+    "soil_moisture": "down",
+    "t2m": "up"
+   },
+   "mean_slope_per_decade": {
+    "ndvi": 0.0004,
+    "precip": -0.1664,
+    "soil_moisture": -0.2672,
+    "t2m": 0.2696
+   },
+   "silhouette": 0.401,
+   "k": 3,
+   "summary": "Cluster 'warming + drying' (344 cells): Soil moisture ↓, Air temperature at 2 m ↑"
+  }
+ ],
+ "evidence_pack": {
+  "question": "Is it getting hotter and drier around the Mediterranean?",
+  "region": "Mediterranean + North Africa",
+  "period": "2001-01 to 2024-12",
+  "synthetic": false,
+  "method": "seasons removed (monthly anomalies); Theil-Sen slope per decade with 95% confidence interval; Mann-Kendall test with Hamed-Rao correction; false discovery rate correction (q = 0.10) across grid cells; regional average weighted by cos(latitude); significance of the regional trend at p <= 0.05",
+  "trends": [
+   {
+    "variable": "Vegetation greenness (NDVI)",
+    "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+    "dataset": "MOD13C2 v061",
+    "slope_per_decade": "0.00617",
+    "unit": "NDVI units per decade",
+    "ci95": [
+     "0.00489",
+     "0.00745"
+    ],
+    "p_value": "< 0.001",
+    "significant": true,
+    "direction": "increase",
+    "percent_area_significant_increase": "42.5",
+    "percent_area_significant_decrease": "7.6",
+    "cells_tested": 740,
+    "years_needed_if_not_significant": "n/a"
+   },
+   {
+    "variable": "Precipitation",
+    "definition": "The amount of rain or snow that falls to the ground.",
+    "dataset": "GPM_3IMERGM v07",
+    "slope_per_decade": "-1.18",
+    "unit": "mm/month per decade",
+    "ci95": [
+     "-2.37",
+     "-0.016"
+    ],
+    "p_value": "0.12",
+    "significant": false,
+    "direction": "decrease",
+    "percent_area_significant_increase": "2.6",
+    "percent_area_significant_decrease": "6.4",
+    "cells_tested": 740,
+    "years_needed_if_not_significant": "39.8"
+   },
+   {
+    "variable": "Soil moisture (0-10 cm)",
+    "definition": "The amount of water held in the top layer of the soil.",
+    "dataset": "GLDAS_NOAH025_M v2.1",
+    "slope_per_decade": "-0.585",
+    "unit": "kg m-2 per decade",
+    "ci95": [
+     "-0.733",
+     "-0.445"
+    ],
+    "p_value": "< 0.001",
+    "significant": true,
+    "direction": "decrease",
+    "percent_area_significant_increase": "8.9",
+    "percent_area_significant_decrease": "58.3",
+    "cells_tested": 740,
+    "years_needed_if_not_significant": "n/a"
+   },
+   {
+    "variable": "Air temperature at 2 m",
+    "definition": "The temperature of the air near the surface of the Earth.",
+    "dataset": "M2TMNXSLV v5.12.4",
+    "slope_per_decade": "0.488",
+    "unit": "degC per decade",
+    "ci95": [
+     "0.369",
+     "0.609"
+    ],
+    "p_value": "< 0.001",
+    "significant": true,
+    "direction": "increase",
+    "percent_area_significant_increase": "81.8",
+    "percent_area_significant_decrease": "0",
+    "cells_tested": 743,
+    "years_needed_if_not_significant": "n/a"
+   }
+  ],
+  "opposite_trends_between_subregions": [
+   {
+    "variable": "Soil moisture (0-10 cm)",
+    "unit": "kg m-2 per decade",
+    "increases_in": {
+     "Nile Delta and Lower Egypt": "0.0773"
+    },
+    "decreases_in": {
+     "Iberian Peninsula": "-0.755",
+     "Italy and the Balkans": "-0.732",
+     "Levant": "-0.174",
+     "Maghreb": "-1.07",
+     "Sahara margin": "-0.301",
+     "Tunisia": "-0.936"
+    }
+   }
+  ],
+  "opposite_patterns_inside_region": [],
+  "clusters": [
+   {
+    "label": "warming + drying",
+    "cells": 198,
+    "signature": "Soil moisture ↓, Air temperature at 2 m ↑"
+   },
+   {
+    "label": "warming + greening",
+    "cells": 200,
+    "signature": "Vegetation greenness ↑, Air temperature at 2 m ↑"
+   },
+   {
+    "label": "warming + drying",
+    "cells": 344,
+    "signature": "Soil moisture ↓, Air temperature at 2 m ↑"
+   }
+  ],
+  "literature": [
+   {
+    "statement": "T2M influences Evap_tavg (sign +)",
+    "quote": "greater atmospheric evaporative demand resulting from temperature rise.",
+    "title": "Evidence of increasing drought severity caused by temperature rise in southern Europe",
+    "year": 2014
+   }
+  ],
+  "hypotheses": [
+   "Soil moisture (0-10 cm) increases in Nile Delta and Lower Egypt but decreases in Iberian Peninsula, Italy and the Balkans, Levant, Maghreb, Sahara margin, Tunisia: different processes may dominate in each place, and a single regional average hides this.",
+   "The places in the 'warming + drying' group(s) could be compound heat-and-drought hot spots worth watching; the clustering only shows that these places changed in a similar way."
+  ],
+  "warnings": [],
+  "errors": {}
+ },
+ "status": "done",
+ "answer": "## Short answer\n\nYes, the region is getting warmer, and its top layer of soil is drying out. Between 2001-01 and 2024-12, air temperature increased and soil moisture decreased across most of the area. Rainfall decreased slightly, but that change is not yet statistically certain.\n\n## What the data shows\n\nAn anomaly is a difference from normal seasonal conditions. A trend is the general direction of change over time. The p-value measures the probability that a pattern happened purely by random chance. When a result is statistically significant, it means the pattern is very unlikely to be an accident.\n\n- Air temperature at 2 m had a slope of 0.488 degC per decade for the period 2001-01 to 2024-12 [observed]. Its p-value is < 0.001, so this trend is significant [observed]. A significant increase occurred across 81.8 percent of the area, and 0 percent had a significant decrease [observed].\n- Soil moisture (0-10 cm) measures water in the upper ground layer. It had a slope of -0.585 kg m-2 per decade for the period 2001-01 to 2024-12 [observed]. Its p-value is < 0.001, so this drying trend is significant [observed]. About 58.3 percent of the area showed a significant decrease, while 8.9 percent showed a significant increase [observed].\n- Precipitation had a slope of -1.18 mm/month per decade for the period 2001-01 to 2024-12 [observed]. Its p-value is 0.12, so this trend is not significant [observed]. Only 6.4 percent of the area had a significant decrease, and 2.6 percent had a significant increase [observed].\n- Vegetation greenness (NDVI) tracks plant health and cover. It had a slope of 0.00617 NDVI units per decade for the period 2001-01 to 2024-12 [observed]. Its p-value is < 0.001, so this greening trend is significant [observed]. A significant increase covered 42.5 percent of the area, and 7.6 percent had a significant decrease [observed].\n\n## Places moving in opposite directions\n\nNot all subregions experienced soil drying in the same way [observed].\n\n- Soil moisture (0-10 cm) increased in Nile Delta and Lower Egypt with a slope of 0.0773 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Iberian Peninsula with a slope of -0.755 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Italy and the Balkans with a slope of -0.732 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Levant with a slope of -0.174 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Maghreb with a slope of -1.07 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Sahara margin with a slope of -0.301 kg m-2 per decade [observed].\n- Soil moisture (0-10 cm) decreased in Tunisia with a slope of -0.936 kg m-2 per decade [observed].\n\n## What scientists have written\n\nIn the paper \"Evidence of increasing drought severity caused by temperature rise in southern Europe\" (2014), researchers noted that rising temperatures increase evaporative demand, citing \"greater atmospheric evaporative demand resulting from temperature rise\" [literature].\n\n## Possible explanations\n\nThese ideas are hypotheses, meaning they are untested proposals and are not proven. Correlation does not equal causation.\n\n- Soil moisture (0-10 cm) increases in Nile Delta and Lower Egypt but decreases in Iberian Peninsula, Italy and the Balkans, Levant, Maghreb, Sahara margin, Tunisia: different processes may dominate in each place, and a single regional average hides this [hypothesis].\n- The places in the warming and drying groups could be compound heat-and-drought hot spots worth watching; clustering only shows that these places changed in a similar way [hypothesis].\n\n## Limits of this investigation\n\n- The rainfall trend has a p-value of 0.12 and is not statistically significant. Detecting a clear trend for precipitation would require 39.8 years of data.\n- The soil moisture data only reflects the shallow surface layer from 0-10 cm. It does not measure deep groundwater.\n- We cannot declare that warming caused the drying based solely on these statistics."
+}

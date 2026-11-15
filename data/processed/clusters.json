@@ -1,0 +1,82 @@
+[
+  {
+    "id": "finding:cluster0:mediterranean_north_africa:2001-01_2024-12",
+    "kind": "cluster",
+    "region": "mediterranean_north_africa",
+    "period": [
+      "2001-01",
+      "2024-12"
+    ],
+    "cluster_label": "warming + drying",
+    "signature": "Air temperature at 2 m \u2191, Soil moisture \u2193",
+    "n_cells": 346,
+    "directions": {
+      "t2m": "up",
+      "soil_moisture": "down"
+    },
+    "mean_slope_per_decade": {
+      "t2m": 0.2719,
+      "precip": -0.1141,
+      "soil_moisture": -0.259,
+      "et": -0.0045,
+      "ndvi": 0.0007
+    },
+    "silhouette": 0.385,
+    "k": 3,
+    "summary": "Cluster 'warming + drying' (346 cells): Air temperature at 2 m \u2191, Soil moisture \u2193"
+  },
+  {
+    "id": "finding:cluster1:mediterranean_north_africa:2001-01_2024-12",
+    "kind": "cluster",
+    "region": "mediterranean_north_africa",
+    "period": [
+      "2001-01",
+      "2024-12"
+    ],
+    "cluster_label": "warming + drying",
+    "signature": "Air temperature at 2 m \u2191, Soil moisture \u2193",
+    "n_cells": 168,
+    "directions": {
+      "t2m": "up",
+      "soil_moisture": "down"
+    },
+    "mean_slope_per_decade": {
+      "t2m": 0.595,
+      "precip": -2.9482,
+      "soil_moisture": -1.2272,
+      "et": -0.0528,
+      "ndvi": 0.0033
+    },
+    "silhouette": 0.385,
+    "k": 3,
+    "summary": "Cluster 'warming + drying' (168 cells): Air temperature at 2 m \u2191, Soil moisture \u2193"
+  },
+  {
+    "id": "finding:cluster2:mediterranean_north_africa:2001-01_2024-12",
+    "kind": "cluster",
+    "region": "mediterranean_north_africa",
+    "period": [
+      "2001-01",
+      "2024-12"
+    ],
+    "cluster_label": "warming + drying + greening",
+    "signature": "Air temperature at 2 m \u2191, Soil moisture \u2193, Evapotranspiration \u2191, Vegetation greenness \u2191",
+    "n_cells": 228,
+    "directions": {
+      "t2m": "up",
+      "soil_moisture": "down",
+      "et": "up",
+      "ndvi": "up"
+    },
+    "mean_slope_per_decade": {
+      "t2m": 0.7059,
+      "precip": -0.0166,
+      "soil_moisture": -0.5569,
+      "et": 0.0416,
+      "ndvi": 0.0176
+    },
+    "silhouette": 0.385,
+    "k": 3,
+    "summary": "Cluster 'warming + drying + greening' (228 cells): Air temperature at 2 m \u2191, Soil moisture \u2193, Evapotranspiration \u2191, Vegetation greenness \u2191"
+  }
+]

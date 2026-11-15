@@ -1,0 +1,23 @@
+# secrets - NEVER commit
+.env
+
+# virtual environments
+detective/
+.venv/
+venv/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# big data (raw downloads and per-month files are rebuilt by `python run.py download`)
+data/raw/
+data/small/
+data/cache/
+
+# editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

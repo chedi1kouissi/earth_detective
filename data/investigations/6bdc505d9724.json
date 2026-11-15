@@ -1,0 +1,300 @@
+{
+ "id": "investigation:6bdc505d9724",
+ "question": "Are plants in Tunisia getting greener or browner?",
+ "created": "2026-11-15T04:50:09+00:00",
+ "synthetic": false,
+ "steps": {
+  "Understand": {
+   "concepts": [
+    {
+     "id": "concept:vegetation_health",
+     "name": "vegetation health",
+     "matched": [
+      "plants"
+     ]
+    }
+   ],
+   "region": "tunisia",
+   "region_name": "Tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "method": "Gemini (constrained to graph concepts) + graph synonyms",
+   "out_of_scope_reason": ""
+  },
+  "Plan": {
+   "question": "Are plants in Tunisia getting greener or browner?",
+   "concepts": [
+    "concept:vegetation_health"
+   ],
+   "variables": [
+    "ndvi"
+   ],
+   "region": "tunisia",
+   "period": [
+    "2001-01",
+    "2024-12"
+   ],
+   "methods": [
+    "method:anomalies",
+    "method:theil_sen",
+    "method:mk_hamed_rao",
+    "method:bh_fdr",
+    "method:regional_mean",
+    "method:years_needed",
+    "method:radar_ranking",
+    "method:opposite_trends",
+    "method:kmeans_clusters"
+   ],
+   "outputs": [
+    "trend_maps",
+    "opposite_map",
+    "clusters",
+    "regional_series",
+    "explanation"
+   ],
+   "variable_details": [
+    {
+     "id": "var:MOD13C2/CMG 0.05 Deg Monthly NDVI",
+     "code_id": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+     "unit": "NDVI units",
+     "recipe": {
+      "name_in_file": "CMG 0.05 Deg Monthly NDVI",
+      "group": null,
+      "unit_native": "NDVI",
+      "conversion": "value * 0.0001",
+      "fill_value": -3000,
+      "scale_factor": 10000.0,
+      "source": "file header MOD13C2.A2001001.061.2020061230446.hdf"
+     },
+     "dataset": {
+      "id": "dataset:MOD13C2_v061",
+      "short_name": "MOD13C2",
+      "version": "061",
+      "title": "MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061",
+      "doi": "10.5067/MODIS/MOD13C2.061",
+      "cmr_concept_id": "C2565788914-LPCLOUD"
+     },
+     "chart_style": {
+      "id": "chart:diverging_trend_map",
+      "chart_type": "map",
+      "colormap": "blue (decrease) - white - red (increase); grey = not significant",
+      "label_template": "{unit} per decade"
+     },
+     "kind": "index",
+     "because": [
+      {
+       "concept": "concept:vegetation_health",
+       "reason": "NDVI directly measures the greenness and health of plants."
+      }
+     ]
+    }
+   ],
+   "warnings": []
+  },
+  "Analyse": {
+   "results": {
+    "ndvi": {
+     "variable": "ndvi",
+     "display_name": "Vegetation greenness (NDVI)",
+     "unit": "NDVI units per decade",
+     "region": "tunisia",
+     "period": [
+      "2001-01",
+      "2024-12"
+     ],
+     "regional": {
+      "slope_per_decade": -0.0008877001700198189,
+      "ci95": [
+       -0.002603602882302658,
+       0.000868410363555894
+      ],
+      "p": 0.7038571588497495,
+      "significant": false,
+      "tau": -0.04006968641114982,
+      "n_months": 288,
+      "years_needed": 124.90361323175479
+     },
+     "cells": {
+      "n": 31,
+      "n_tested": 31,
+      "sig_up": 1,
+      "sig_down": 3,
+      "pct_sig_area": 13.2,
+      "pct_sig_up_area": 3.2,
+      "pct_sig_down_area": 9.9
+     },
+     "method": "monthly anomalies (seasonal cycle removed); Theil-Sen slope with 95% CI; Mann-Kendall test with Hamed-Rao autocorrelation correction; Benjamini-Hochberg FDR q=0.1 across the cells of the area; regional mean weighted by cos(latitude)",
+     "datasets": [
+      "MOD13C2 v061"
+     ],
+     "run_id": "2026-11-15T04:08Z-42df9ed",
+     "warnings": [],
+     "synthetic": false
+    }
+   },
+   "errors": {},
+   "opposite_patterns": [],
+   "opposite_pairs": [],
+   "co_occurs": []
+  },
+  "Record": {
+   "analysis": "analysis:2026-11-15T04:08Z-42df9ed:tunisia",
+   "findings": [],
+   "skipped": []
+  },
+  "Why?": {
+   "literature": [],
+   "hypotheses": []
+  },
+  "Check": {
+   "attempts": [
+    {
+     "attempt": 1,
+     "unknown_numbers": [],
+     "seconds": 28.9
+    }
+   ],
+   "passed": true,
+   "mode": "gemini"
+  }
+ },
+ "llm_used": true,
+ "store": "neo4j",
+ "timings_s": {
+  "Understand": 3.68,
+  "Plan": 0.08,
+  "Analyse": 0.03,
+  "Record": 0.15,
+  "Why?": 0.04,
+  "Check": 28.87,
+  "Explain": 0.0
+ },
+ "methods": [
+  {
+   "id": "method:anomalies",
+   "name": "Remove the seasons (monthly anomalies)",
+   "stage": "statistics",
+   "order": 1,
+   "description": "Subtract the average of each calendar month so summer/winter is not mistaken for a trend.",
+   "parameters": {}
+  },
+  {
+   "id": "method:theil_sen",
+   "name": "Theil-Sen slope with 95% confidence interval",
+   "stage": "statistics",
+   "order": 2,
+   "description": "A robust slope - the median of the slopes between all pairs of months.",
+   "parameters": {
+    "per": "decade",
+    "ci": 0.95
+   }
+  },
+  {
+   "id": "method:mk_hamed_rao",
+   "name": "Mann-Kendall test with Hamed-Rao correction",
+   "stage": "statistics",
+   "order": 3,
+   "description": "Is the trend real or luck? Corrected because each month resembles the previous one.",
+   "parameters": {}
+  },
+  {
+   "id": "method:bh_fdr",
+   "name": "Benjamini-Hochberg false discovery rate",
+   "stage": "statistics",
+   "order": 4,
+   "description": "Testing hundreds of cells makes some look significant by chance; FDR corrects for it.",
+   "parameters": {
+    "q": 0.1
+   }
+  },
+  {
+   "id": "method:regional_mean",
+   "name": "Regional average weighted by cos(latitude)",
+   "stage": "statistics",
+   "order": 5,
+   "description": "One series for the whole area, then the same slope and test.",
+   "parameters": {}
+  },
+  {
+   "id": "method:years_needed",
+   "name": "Years needed to detect the trend (Weatherhead 1998)",
+   "stage": "statistics",
+   "order": 6,
+   "description": "For non-significant trends, how many years of data would be needed to be sure.",
+   "parameters": {}
+  },
+  {
+   "id": "method:radar_ranking",
+   "name": "Rank variables by significant area",
+   "stage": "discovery",
+   "order": 7,
+   "description": "Which variable changes over the largest share of the area.",
+   "parameters": {}
+  },
+  {
+   "id": "method:opposite_trends",
+   "name": "Opposite-trend map and sub-region contrasts",
+   "stage": "discovery",
+   "order": 8,
+   "description": "Find places moving in opposite directions that a regional average would hide.",
+   "parameters": {
+    "min_area_percent": 10
+   }
+  },
+  {
+   "id": "method:kmeans_clusters",
+   "name": "Trend-signature clusters (k-means, silhouette)",
+   "stage": "discovery",
+   "order": 9,
+   "description": "Group cells that changed in a similar way. Clusters suggest, statistics decide.",
+   "parameters": {
+    "k_min": 3,
+    "k_max": 6
+   }
+  }
+ ],
+ "clusters": [],
+ "cluster_cells": [],
+ "sub_results": {},
+ "findings": [],
+ "evidence_pack": {
+  "question": "Are plants in Tunisia getting greener or browner?",
+  "region": "Tunisia",
+  "period": "2001-01 to 2024-12",
+  "synthetic": false,
+  "method": "seasons removed (monthly anomalies); Theil-Sen slope per decade with 95% confidence interval; Mann-Kendall test with Hamed-Rao correction; false discovery rate correction (q = 0.10) across grid cells; regional average weighted by cos(latitude); significance of the regional trend at p <= 0.05",
+  "trends": [
+   {
+    "variable": "Vegetation greenness (NDVI)",
+    "definition": "A measure of how green and healthy plants are, based on how they reflect light.",
+    "dataset": "MOD13C2 v061",
+    "slope_per_decade": "-0.000888",
+    "unit": "NDVI units per decade",
+    "ci95": [
+     "-0.0026",
+     "0.000868"
+    ],
+    "p_value": "0.7",
+    "significant": false,
+    "direction": "decrease",
+    "percent_area_significant_increase": "3.2",
+    "percent_area_significant_decrease": "9.9",
+    "cells_tested": 31,
+    "years_needed_if_not_significant": "125"
+   }
+  ],
+  "opposite_trends_between_subregions": [],
+  "opposite_patterns_inside_region": [],
+  "clusters": [],
+  "literature": [],
+  "hypotheses": [],
+  "warnings": [],
+  "errors": {}
+ },
+ "status": "done",
+ "answer": "## Short answer\n\nOverall, we cannot say whether plants across Tunisia are getting greener or browner. A trend is the general direction of change over time. Between 2001-01 and 2024-12, satellite data shows a slight downward slope in vegetation greenness, but this change is not statistically significant. This means the change could simply be random natural variation. While most of the country shows no clear change, small patches showed significant browning and even smaller patches showed significant greening.\n\n## What the data shows\n\nVegetation greenness is measured using NDVI, which is a score based on how plants reflect light to show how green and healthy they are. \n\nAn anomaly is the difference between a monthly value and its long-term average for that month. A p-value is a number that shows the probability that a pattern happened by pure chance. A result is statistically significant when the p-value is small enough that the pattern is very unlikely to be caused by random chance.\n\n- Across Tunisia, satellite observations from the MOD13C2 v061 dataset show a slope of -0.000888 NDVI units per decade for the period 2001-01 to 2024-12 [observed].\n- The p-value for this regional trend is 0.7 [observed].\n- Because the p-value is greater than the standard cutoff of 0.05, the regional trend is not statistically significant [observed].\n- The 95% confidence interval for this slope ranges from -0.0026 to 0.000868 [observed].\n- Scientists tested 31 grid cells across the region [observed].\n- A statistically significant decrease in greenness occurred in 9.9 percent of the regional area [observed].\n- A statistically significant increase in greenness occurred in 3.2 percent of the regional area [observed].\n- If the current rate of change continues, it would take 125 years of data to detect a statistically significant trend for the whole region [observed].\n\n## What scientists have written\n\nNo published studies were provided in the evidence pack.\n\n## Possible explanations\n\nNo hypotheses were provided in the evidence pack.\n\n## Limits of this investigation\n\nThis study only looks at data from 2001-01 to 2024-12. It covers 31 satellite grid cells. The overall regional trend is not statistically significant, so we cannot confirm any nationwide change in plant greenness. Furthermore, correlation does not mean causation. Even where local greening or browning is observed, this data does not prove what caused those changes."
+}
